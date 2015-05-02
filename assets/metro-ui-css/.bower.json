@@ -1,0 +1,42 @@
+{
+  "author": "Sergey Pimenov",
+  "name": "metro",
+  "version": "3.0.2",
+  "description": "The front-end framework for developing responsive, mobile projects on the web in Windows Metro Style.",
+  "keywords": [
+    "css",
+    "less",
+    "mobile-first",
+    "responsive",
+    "front-end",
+    "framework",
+    "web"
+  ],
+  "homepage": "http://metroui.org.ua",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com:olton/metro.git"
+  },
+  "main": [
+    "build/css/metro.css",
+    "build/css/metro-icons.css",
+    "fonts/metro.eot",
+    "fonts/metro.svg",
+    "fonts/metro.ttf",
+    "fonts/metro.woff",
+    "build/js/metro.js"
+  ],
+  "ignore": [],
+  "dependencies": {
+    "jquery": ">= 1.9.1"
+  },
+  "_release": "3.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "3.0.2",
+    "commit": "9cc21d75abc72e4274ae5c1618e73eed79ece3bb"
+  },
+  "_source": "git://github.com/olton/Metro-UI-CSS.git",
+  "_target": "*",
+  "_originalSource": "metro-ui-css"
+}
