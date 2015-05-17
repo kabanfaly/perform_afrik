@@ -2,10 +2,10 @@
 
 $setup_info['perform_afrik']['name'] = 'perform_afrik';
 $setup_info['perform_afrik']['title'] = 'perform_afrik';
-$setup_info['perform_afrik']['version'] = '1.004';
+$setup_info['perform_afrik']['version'] = '1.003';
 $setup_info['perform_afrik']['app_order'] = 10; 
 $setup_info['pushoffres']['license']  = 'GPL';
-//$setup_info['perform_afrik']['tables'] = array('egw_pa_camion','egw_pa_dechargement','egw_pa_fournisseur','egw_pa_ville');
+//$setup_info['perform_afrik']['tables'] = array('egw_pa_camion','egw_pa_dechargement','egw_pa_fournisseur');
 $setup_info['perform_afrik']['enable'] = 1;
 
 
@@ -23,4 +23,4 @@ $setup_info['perform_afrik']['depends'][] = array(
 'versions' => Array('1.8')
 );
 
-	$setup_info['perform_afrik']['tables'] = array('egw_pa_camion','egw_pa_dechargement','egw_pa_fournisseur','egw_pa_ville');
+	$setup_info['perform_afrik']['tables'] = array('egw_pa_camion','egw_pa_dechargement','egw_pa_fournisseur');
