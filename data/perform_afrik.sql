@@ -22,7 +22,7 @@
 DROP TABLE IF EXISTS `pa_camion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `egw_pa_camion` (
+CREATE TABLE `pa_camion` (
   `id_camion` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(45) NOT NULL,
   PRIMARY KEY (`id_camion`)
@@ -34,8 +34,8 @@ CREATE TABLE `egw_pa_camion` (
 --
 
 LOCK TABLES `pa_camion` WRITE;
-/*!40000 ALTER TABLE `egw_pa_camion` DISABLE KEYS */;
-/*!40000 ALTER TABLE `egw_pa_camion` ENABLE KEYS */;
+/*!40000 ALTER TABLE `pa_camion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pa_camion` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -45,7 +45,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `pa_dechargement`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `egw_pa_dechargement` (
+CREATE TABLE `pa_dechargement` (
   `id_dechargement` int(11) NOT NULL AUTO_INCREMENT,
   `id_camion` int(11) NOT NULL,
   `id_ville` int(11) NOT NULL,
@@ -73,8 +73,8 @@ CREATE TABLE `egw_pa_dechargement` (
 --
 
 LOCK TABLES `pa_dechargement` WRITE;
-/*!40000 ALTER TABLE `egw_pa_dechargement` DISABLE KEYS */;
-/*!40000 ALTER TABLE `egw_pa_dechargement` ENABLE KEYS */;
+/*!40000 ALTER TABLE `pa_dechargement` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pa_dechargement` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -84,7 +84,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `pa_fournisseur`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `egw_pa_fournisseur` (
+CREATE TABLE `pa_fournisseur` (
   `id_fournisseur` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(45) NOT NULL,
   `prenom` varchar(45) NOT NULL,
@@ -99,8 +99,8 @@ CREATE TABLE `egw_pa_fournisseur` (
 --
 
 LOCK TABLES `pa_fournisseur` WRITE;
-/*!40000 ALTER TABLE `egw_pa_fournisseur` DISABLE KEYS */;
-/*!40000 ALTER TABLE `egw_pa_fournisseur` ENABLE KEYS */;
+/*!40000 ALTER TABLE `pa_fournisseur` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pa_fournisseur` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -110,7 +110,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `pa_ville`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `egw_pa_ville` (
+CREATE TABLE `pa_ville` (
   `id_ville` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(45) NOT NULL,
   PRIMARY KEY (`id_ville`)
@@ -122,8 +122,8 @@ CREATE TABLE `egw_pa_ville` (
 --
 
 LOCK TABLES `pa_ville` WRITE;
-/*!40000 ALTER TABLE `egw_pa_ville` DISABLE KEYS */;
-/*!40000 ALTER TABLE `egw_pa_ville` ENABLE KEYS */;
+/*!40000 ALTER TABLE `pa_ville` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pa_ville` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
