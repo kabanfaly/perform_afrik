@@ -1,3 +1,3 @@
 <?php
 
-echo 'ville';
+echo $active;

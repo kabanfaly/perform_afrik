@@ -12,5 +12,33 @@
 
 class Fournisseur extends CI_Controller
 {
-    //put your code here
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('fournisseur_model');
+    }
+    
+    /**
+     * get fournisseurs (suppliers)
+     */
+    public function index(){
+        
+        $data = array(
+            'fournisseurs' => $this->fournisseur_model->get_fournisseurs(),
+            'title' => lang('SUPPLIERS_MANAGEMENT'),
+            'active' => 'fournisseur',
+        );
+        
+        $this->load->view('templates/header', $data);
+        $this->load->view('fournisseur/index', $data);
+        $this->load->view('templates/footer');
+    }
+    
+    public function view($id_fournisseur = NULL){
+        $data = array(
+            'fournisseur' => $this->fournisseur_model->get_fournisseurs($id_fournisseur),
+            'title' => $lang['SUPPLIER_VIEW']
+        );
+        
+    }
 }

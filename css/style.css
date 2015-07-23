@@ -5,3 +5,27 @@
 @import "../assets/jquery-ui/themes/base/all.css";
 @import "../assets/bootstrap/dist/css/bootstrap.min.css";
 @import "../assets/bootstrap/dist/css/bootstrap-theme.min.css";
+@import "../assets/datatables-bootstrap3/BS3/assets/css/datatables.css";
+
+body{
+    color: #555555;
+    font-family: Arial,Helvetica,sans-serif,Vibrocentric Italic;
+    font-size: 13px;
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+#footer{
+    clear: both;
+    height: 50px;
+    /*    border-radius: 10px;
+        border-top: solid 1px #999;*/
+    margin: 50px auto 0 auto;
+}
+.fixed{
+    position: fixed;
+    top: 55px;
+}
+.content{
+    margin-top: 5px;
+}

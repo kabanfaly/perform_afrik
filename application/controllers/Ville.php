@@ -26,7 +26,8 @@ class Ville extends CI_Controller
         
         $data = array(
             'villes' => $this->ville_model->get_villes(),
-            'title' => lang('VILLE_MANAGEMENT')
+            'title' => lang('CITIES_MANAGEMENT'),
+            'active' => 'ville',
         );
         
         $this->load->view('templates/header', $data);
@@ -37,7 +38,7 @@ class Ville extends CI_Controller
     public function view($id_ville = NULL){
         $data = array(
             'ville' => $this->ville_model->get_villes($id_ville),
-            'title' => $lang['VILLE_VIEW']
+            'title' => $lang['CITY_VIEW']
         );
         
     }

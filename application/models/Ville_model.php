@@ -23,7 +23,7 @@ class Ville_model extends CI_Model
      * retreives all cities if the input parameter (id_ville) is false, or 
      * retreives the city identified by the input parameter value
      * @param type $id_ville
-     * @return type
+     * @return type array
      */
     public function get_villes($id_ville = false)
     {
