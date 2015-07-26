@@ -5,7 +5,7 @@ define(["jquery", "jquery-ui", "datatables",
         $('#tableContent').dataTable({
             "bProcessing": true,
             "language":{
-               //baseUrl is define in application/footer.php 
+               //baseUrl is define in application/views/templates/footer.php 
                "url": baseUrl+"assets/datatables-plugins/i18n/French.lang"
             }
         });

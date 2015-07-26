@@ -1,4 +1,4 @@
-//baseUrl is define in application/footer.php 
+//baseUrl is define in application/views/templates/footer.php 
 requirejs.config({
     "baseUrl": baseUrl+"assets",
     "urlArgs": "bust=" + (new Date()).getTime(),
@@ -13,5 +13,5 @@ requirejs.config({
         "datatables.bootstrap" : "datatables-bootstrap3/BS3/assets/js/datatables"
     }
 });
-require(["jquery", "jquery-ui", "angular", "datatables",
-    "bootstrap", "datatables.bootstrap", "modelView"]);
+//require(["jquery", "jquery-ui", "angular", "datatables","bootstrap", "datatables.bootstrap", "modelView"]);
+require(["angular", "modelView"]);

@@ -1,4 +1,8 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
 /**
  * Camion controller
  *
@@ -9,36 +13,50 @@
  * @subpackage perform_afrik/application/controllers
  * @filesource camion.php
  */
-
 class Camion extends CI_Controller
 {
+
     public function __construct()
     {
         parent::__construct();
         $this->load->model('camion_model');
     }
-    
+
     /**
      * get camions
      */
-    public function index(){
-        
+    public function index()
+    {
+
         $data = array(
-            'camions' => $this->camion_model->get_camions(),
-            'title' => lang('TRUCKS_MANAGEMENT'),
-            'active' => 'camion',
+            'trucks' => $this->camion_model->get_camions(),
+            'title' => lang('TRUCKS_MANAGEMENT')
         );
-        
-        $this->load->view('templates/header', $data);
-        $this->load->view('camion/index', $data);
-        $this->load->view('templates/footer');
+
+        $this->display($data, 'camion/index');
     }
-    
-    public function view($id_camion = NULL){
+
+    public function view($id_camion = NULL)
+    {
         $data = array(
-            'camion' => $this->camion_model->get_camions($id_camion),
+            'truck' => $this->camion_model->get_camions($id_camion),
             'title' => $lang['TRUCK_VIEW']
         );
-        
+
+        $this->display($data, 'camion/index');
     }
+
+    /**
+     * Render page
+     * @param array $data
+     * @param string $page concerning page
+     */
+    private function display($data, $page)
+    {
+        $data['active'] = 'camion';
+        $this->load->view('templates/header', $data);
+        $this->load->view($page, $data);
+        $this->load->view('templates/footer');
+    }
+
 }

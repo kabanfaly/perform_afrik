@@ -29,3 +29,10 @@ body{
 .content{
     margin-top: 5px;
 }
+
+.title{
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0 0 2em 0;
+}

@@ -1,4 +1,8 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
 /**
  * Fournisseur controller
  *
@@ -9,36 +13,49 @@
  * @subpackage perform_afrik/application/controllers
  * * @filesource fournisseur.php
  */
-
 class Fournisseur extends CI_Controller
 {
+
     public function __construct()
     {
         parent::__construct();
         $this->load->model('fournisseur_model');
     }
-    
+
     /**
      * get fournisseurs (suppliers)
      */
-    public function index(){
-        
+    public function index()
+    {
+
         $data = array(
-            'fournisseurs' => $this->fournisseur_model->get_fournisseurs(),
-            'title' => lang('SUPPLIERS_MANAGEMENT'),
-            'active' => 'fournisseur',
+            'suppliers' => $this->fournisseur_model->get_fournisseurs(),
+            'title' => lang('SUPPLIERS_MANAGEMENT')
         );
-        
-        $this->load->view('templates/header', $data);
-        $this->load->view('fournisseur/index', $data);
-        $this->load->view('templates/footer');
+
+        $this->display($data, 'fournisseur/index');
     }
-    
-    public function view($id_fournisseur = NULL){
+
+    public function view($id_fournisseur = NULL)
+    {
         $data = array(
-            'fournisseur' => $this->fournisseur_model->get_fournisseurs($id_fournisseur),
+            'supplier' => $this->fournisseur_model->get_fournisseurs($id_fournisseur),
             'title' => $lang['SUPPLIER_VIEW']
         );
-        
+        $this->display($data, 'fournisseur/index');
     }
+
+    /**
+     * Render page
+     * @param array $data
+     * @param string $page concerning page
+     */
+    private function display($data, $page)
+    {
+        $data['active'] = 'fournisseur';
+        $this->load->view('templates/header', $data);
+        $this->load->view($page, $data);
+        $this->load->view('templates/footer');
+    }
+
 }

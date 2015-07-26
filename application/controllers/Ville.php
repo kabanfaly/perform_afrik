@@ -1,4 +1,8 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
 /**
  * Ville controller
  *
@@ -7,39 +11,52 @@
  * @version 1.0
  * @package perform_afrik
  * @subpackage perform_afrik/application/controllers
- * * @filesource ville.php
+ * @filesource ville.php
  */
-
 class Ville extends CI_Controller
-{
-
+{  
+    
     public function __construct()
     {
         parent::__construct();
         $this->load->model('ville_model');
     }
-    
+
     /**
      * get cities
      */
-    public function index(){
-        
+    public function index()
+    {
+
         $data = array(
-            'villes' => $this->ville_model->get_villes(),
-            'title' => lang('CITIES_MANAGEMENT'),
-            'active' => 'ville',
+            'cities' => $this->ville_model->get_villes(),
+            'title' => lang('CITIES_MANAGEMENT')
         );
-        
-        $this->load->view('templates/header', $data);
-        $this->load->view('ville/index', $data);
-        $this->load->view('templates/footer');
+
+        $this->display($data, 'ville/index');
     }
-    
-    public function view($id_ville = NULL){
+
+    public function view($id_ville = NULL)
+    {
         $data = array(
-            'ville' => $this->ville_model->get_villes($id_ville),
+            'city' => $this->ville_model->get_villes($id_ville),
             'title' => $lang['CITY_VIEW']
         );
         
+        $this->display($data, 'ville/index');
     }
+   
+    /**
+     * Render page
+     * @param array $data
+     * @param string $page concerning page
+     */
+    private function display($data, $page)
+    {
+        $data['active'] = 'ville';
+        $this->load->view('templates/header', $data);
+        $this->load->view($page, $data);
+        $this->load->view('templates/footer');
+    }
+
 }

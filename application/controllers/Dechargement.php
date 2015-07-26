@@ -1,4 +1,8 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
 /**
  * Dechargement controller
  *
@@ -9,36 +13,50 @@
  * @subpackage perform_afrik/application/controllers
  * * @filesource dechargement.php
  */
-
 class Dechargement extends CI_Controller
 {
+
     public function __construct()
     {
         parent::__construct();
         $this->load->model('dechargement_model');
     }
-    
+
     /**
      * get dechargement (unloading)
      */
-    public function index(){
-        
+    public function index()
+    {
+
         $data = array(
-            'dechargements' => $this->dechargement_model->get_dechargements(),
-            'title' => lang('UNLOADING_MANAGEMENT'),
-            'active' => 'dechargement',
+            'unloading' => $this->dechargement_model->get_dechargements(),
+            'title' => lang('UNLOADING_MANAGEMENT')
         );
-        
-        $this->load->view('templates/header', $data);
-        $this->load->view('dechargement/index', $data);
-        $this->load->view('templates/footer');
+
+        $this->display($data, 'dechargement/index');
     }
-    
-    public function view($id_dechargement = NULL){
+
+    public function view($id_dechargement = NULL)
+    {
         $data = array(
-            'dechargement' => $this->dechargement_model->get_dechargements($id_dechargement),
+            'unload' => $this->dechargement_model->get_dechargements($id_dechargement),
             'title' => $lang['UNLOADING_VIEW']
         );
-        
+
+        $this->display($data, 'dechargement/index');
     }
+
+    /**
+     * Render page
+     * @param array $data
+     * @param string $page concerning page
+     */
+    private function display($data, $page)
+    {
+        $data['active'] = 'dechargement';
+        $this->load->view('templates/header', $data);
+        $this->load->view($page, $data);
+        $this->load->view('templates/footer');
+    }
+
 }
