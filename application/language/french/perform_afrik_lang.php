@@ -2,15 +2,18 @@
 $lang['TRUCKS_MANAGEMENT'] = 'Gestion des camions';
 $lang['TRUCK_VIEW'] = 'Camion';
 $lang['TRUCK'] = 'Camion';
+$lang['TRUCKS'] = 'Camions';
 
 $lang['SUPPLIERS_MANAGEMENT'] = 'Gestion des fournisseurs';
 $lang['SUPPLIER_VIEW'] = 'Fournisseur';
 $lang['SUPPLIER'] = 'Fournisseur';
+$lang['SUPPLIERS'] = 'Fournisseurs';
 
 $lang['CITIES_MANAGEMENT'] = 'Gestion des villes';
 $lang['CITY_VIEW'] = 'Ville';
 $lang['CITY_VIEW'] = 'Ville';
 $lang['CITY'] = 'Ville';
+$lang['CITIES'] = 'Villes';
 
 $lang['UNLOADING_MANAGEMENT'] = 'Gestion des déchargements';
 $lang['UNLOADING_VIEW'] = 'Déchargement';
