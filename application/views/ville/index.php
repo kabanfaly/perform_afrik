@@ -1,6 +1,6 @@
 <thead>
     <tr>
-        <th><?php echo lang('NO'); ?></th>
+        <th class="number"><?php echo lang('NO'); ?></th>
         <th><?php echo lang('CITY'); ?></th>
         <th><?php echo lang('OPTIONS'); ?></th>
     </tr>

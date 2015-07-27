@@ -30,6 +30,9 @@ body{
     margin-top: 5px;
 }
 
+.number{
+    width: 40px;
+}
 .title{
     text-align: center;
     font-size: 15px;

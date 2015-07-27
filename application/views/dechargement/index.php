@@ -1,7 +1,7 @@
 
 <thead>
     <tr>
-        <th><?php echo lang('NO'); ?></th>
+        <th class="number"><?php echo lang('NO'); ?></th>
         <th><?php echo lang('TRUCK'); ?></th>
         <th><?php echo lang('CITY'); ?></th>
         <th><?php echo lang('SUPPLIER'); ?></th>

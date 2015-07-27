@@ -31,4 +31,5 @@ $lang['GROSS_WEIGHT'] = 'Poids brut';
 $lang['NET_WEIGHT'] = 'Poids net';
 $lang['REFRACTED_WEIGHT'] = 'Poids réfracté';
 $lang['HUMIDITY'] = 'Humidité';
+$lang['ADD'] = 'Ajouter';
 
