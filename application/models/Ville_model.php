@@ -34,7 +34,7 @@ class Ville_model extends CI_Model
             return $query->result_array();
         }
 
-        $query = $this->db->get_whrere('pa_ville', array('id_ville' => $id_ville));
+        $query = $this->db->get_where('pa_ville', array('id_ville' => $id_ville));
         return $query->row_array();
     }
 

@@ -37,7 +37,7 @@ class Fournisseur_model extends CI_Model
             return $query->result_array();
         }
 
-        $query = $this->db->get_whrere('pa_fournisseur', array('id_fournisseur' => $id_fournisseur));
+        $query = $this->db->get_where('pa_fournisseur', array('id_fournisseur' => $id_fournisseur));
         return $query->row_array();
     }
 

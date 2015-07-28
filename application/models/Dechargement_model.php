@@ -33,7 +33,7 @@ class Dechargement_model extends CI_Model
             return $query->result_array();
         }
 
-        $query = $this->db->get_whrere('pa_dechargement', array('id_dechargement' => $id_dechargement));
+        $query = $this->db->get_where('pa_dechargement', array('id_dechargement' => $id_dechargement));
         return $query->row_array();
     }
 

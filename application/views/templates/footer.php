@@ -1,6 +1,8 @@
+<?php if (isset($_SESSION['admin'])) { ?>
 </table>
 </div>
 </div>
+<?php } ?>
 </div>
 </div>
 <footer id="footer" class="panel-footer">

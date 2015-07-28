@@ -32,4 +32,9 @@ $lang['NET_WEIGHT'] = 'Poids net';
 $lang['REFRACTED_WEIGHT'] = 'Poids réfracté';
 $lang['HUMIDITY'] = 'Humidité';
 $lang['ADD'] = 'Ajouter';
+$lang['LOGIN'] = 'Identifiant';
+$lang['CONNECTION'] = 'Connexion';
+$lang['PASSWORD'] = 'Mot de passe';
+$lang['LOGOUT'] = 'Déconnexion';
+$lang['INVALID_LOGIN_PASSWORD'] = 'Login ou mot de passe incorrect';
 

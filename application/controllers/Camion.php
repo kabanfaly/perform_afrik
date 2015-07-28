@@ -54,6 +54,15 @@ class Camion extends CI_Controller
     private function display($data, $page)
     {
         $data['active'] = 'camion';
+        
+       //checks admin session
+        if (!$this->session->has_userdata('admin'))
+        {
+            $data = array(
+                'title' => lang('CONNECTION')
+            );
+            $page = 'connection/index';
+        }
         $this->load->view('templates/header', $data);
         $this->load->view($page, $data);
         $this->load->view('templates/footer');

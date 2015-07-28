@@ -40,62 +40,79 @@ body{
     margin: 0 0 2em 0;
 }
 
-.navbar-default2 {
-  background-color: #1b81e9;
-  border-color: #111ce6;
+/*  Connection page */
+.form-signin
+{
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
 }
-.navbar-default2 .navbar-brand {
-  color: #363e41;
+.form-signin .form-signin-heading, .form-signin .checkbox
+{
+    margin-bottom: 10px;
 }
-.navbar-default2 .navbar-brand:hover, .navbar-default2 .navbar-brand:focus {
-  color: #ecdbff;
+.form-signin .checkbox
+{
+    font-weight: normal;
 }
-.navbar-default2 .navbar-text {
-  color: #363e41;
+.form-signin .form-control
+{
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
-.navbar-default2 .navbar-nav > li > a {
-  color: #363e41;
+.form-signin .form-control:focus
+{
+    z-index: 2;
 }
-.navbar-default2 .navbar-nav > li > a:hover, .navbar-default2 .navbar-nav > li > a:focus {
-  color: #ecdbff;
+.form-signin input[type="text"]
+{
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
-.navbar-default2 .navbar-nav > .active > a, .navbar-default2 .navbar-nav > .active > a:hover, .navbar-default2 .navbar-nav > .active > a:focus {
-  color: #ecdbff;
-  background-color: #111ce6;
+.form-signin input[type="password"]
+{
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
-.navbar-default2 .navbar-nav > .open > a, .navbar-default2 .navbar-nav > .open > a:hover, .navbar-default2 .navbar-nav > .open > a:focus {
-  color: #ecdbff;
-  background-color: #111ce6;
+.account-wall
+{
+    margin-top: 20px;
+    padding: 40px 0px 20px 0px;
+    background-color: #f7f7f7;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 }
-.navbar-default2 .navbar-toggle {
-  border-color: #111ce6;
+.login-title
+{
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    display: block;
 }
-.navbar-default2 .navbar-toggle:hover, .navbar-default2 .navbar-toggle:focus {
-  background-color: #111ce6;
+.profile-img
+{
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
 }
-.navbar-default2 .navbar-toggle .icon-bar {
-  background-color: #363e41;
+.need-help
+{
+    margin-top: 10px;
 }
-.navbar-default2 .navbar-collapse,
-.navbar-default2 .navbar-form {
-  border-color: #363e41;
-}
-.navbar-default2 .navbar-link {
-  color: #363e41;
-}
-.navbar-default2 .navbar-link:hover {
-  color: #ecdbff;
-}
-
-@media (max-width: 767px) {
-  .navbar-default2 .navbar-nav .open .dropdown-menu > li > a {
-    color: #363e41;
-  }
-  .navbar-default2 .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default2 .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: #ecdbff;
-  }
-  .navbar-default2 .navbar-nav .open .dropdown-menu > .active > a, .navbar-default2 .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default2 .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: #ecdbff;
-    background-color: #111ce6;
-  }
+.new-account
+{
+    display: block;
+    margin-top: 10px;
 }

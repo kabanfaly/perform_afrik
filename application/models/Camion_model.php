@@ -34,7 +34,7 @@ class Camion_model extends CI_Model
             return $query->result_array();
         }
 
-        $query = $this->db->get_whrere('pa_camion', array('id_camion' => $id_camion));
+        $query = $this->db->get_where('pa_camion', array('id_camion' => $id_camion));
         return $query->row_array();
     }
 
