@@ -15,24 +15,33 @@
         </tr>
     <?php endforeach; ?>
 </tbody>
-<div id="form-content" class="modal hide fade in" style="display: none;">
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal">×</a>
-        <h3>Send me a message</h3>
-    </div>
-    <div class="modal-body">
-        <form class="contact" name="contact">
-            <label class="label" for="name">Your Name</label><br>
-            <input type="text" name="name" class="input-xlarge"><br>
-            <label class="label" for="email">Your E-mail</label><br>
-            <input type="email" name="email" class="input-xlarge"><br>
-            <label class="label" for="message">Enter a Message</label><br>
-            <textarea name="message" class="input-xlarge"></textarea>
+
+<!-- Modal -->
+
+<div id="form-content" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <form class="contact" name="camion" action="<?php echo site_url('camion/save'); ?>" method="POST">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">×</a>
+                    <h3><?php echo lang('SAVE_TRUCK'); ?></h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="numero"><?php echo lang('NUMBER'); ?>*:</label>
+                        <input type="text" name="numero" class="form-control" id="numero" required placeholder="<?php echo lang('TYPE_TRUCK_NUMBER'); ?>">
+                    </div>
+                </div>
+                <div class="mandatory">* <?php echo lang('MANDATORY_FIELD'); ?> </div>
+                <div class="modal-footer">
+                    <input class="btn btn-primary" type="submit" value="<?php echo lang('SUBMIT'); ?>" id="submit">
+                    <button class="btn btn-default" data-dismiss="modal"><?php echo lang('CANCEL'); ?></button>
+                </div>
+            </div>
         </form>
-    </div>
-    <div class="modal-footer">
-        <input class="btn btn-success" type="submit" value="Send!" id="submit">
-        <a href="#" class="btn" data-dismiss="modal">Nah.</a>
     </div>
 </div>
 

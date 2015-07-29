@@ -7,6 +7,7 @@ requirejs.config({
         "modelView" : "../js/modelView",
         "jquery": "jquery/dist/jquery.min",
         "jquery-ui": "jquery-ui/jquery-ui.min",
+        "datetimepicker": "datetimepicker/jquery.datetimepicker",
         "angular": "angular/angular.min",
         "bootstrap": "bootstrap/dist/js/bootstrap.min",
         "datatables" : "datatables/media/js/jquery.dataTables.min",

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le : Mer 29 Juillet 2015 à 01:57
+-- Généré le : Mer 29 Juillet 2015 à 23:39
 -- Version du serveur: 5.5.44
 -- Version de PHP: 5.3.10-1ubuntu3.19
 
@@ -85,7 +85,6 @@ DROP TABLE IF EXISTS `pa_fournisseur`;
 CREATE TABLE IF NOT EXISTS `pa_fournisseur` (
   `id_fournisseur` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(45) NOT NULL,
-  `prenom` varchar(45) NOT NULL,
   `telephone` varchar(45) DEFAULT NULL,
   `adresse` text,
   PRIMARY KEY (`id_fournisseur`)

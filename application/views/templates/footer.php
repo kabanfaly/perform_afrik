@@ -22,6 +22,6 @@ echo <<<EOF
             </script>
 EOF;
 ?>
-<script type="text/javascript" data-main="<?php echo base_url(); ?>js/main" src="<?php echo base_url(); ?>assets/requirejs/require.js"></script>
 </body>
+<script type="text/javascript" data-main="<?php echo base_url(); ?>js/main?<?php echo time(); ?>" src="<?php echo base_url(); ?>assets/requirejs/require.js"></script>
 </html>

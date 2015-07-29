@@ -6,6 +6,7 @@
 @import "../assets/bootstrap/dist/css/bootstrap.min.css";
 @import "../assets/bootstrap/dist/css/bootstrap-theme.min.css";
 @import "../assets/datatables-bootstrap3/BS3/assets/css/datatables.css";
+@import "../assets/datetimepicker/jquery.datetimepicker.css";
 
 body{
     color: #555555;
@@ -38,6 +39,9 @@ body{
     font-size: 15px;
     font-weight: bold;
     margin: 0 0 2em 0;
+}
+.mandatory{
+    padding-left: 15px;
 }
 
 /*  Connection page */

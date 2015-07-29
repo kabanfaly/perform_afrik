@@ -7,6 +7,7 @@
         "requirejs": "latest",
         "jquery": ">=1.11.1",
         "jquery-ui-bootstrap": "latest",
+        "datetimepicker": "latest",
         "datatables": "latest",
         "datatables-plugins": "latest",
         "bootstrap": "latest",

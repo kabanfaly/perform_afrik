@@ -79,6 +79,6 @@
                     <div class=" col-lg-10 col-lg-offset-1 ">
                         <div class="content clearfix">
                             <!--<div class="title"><h3><?php echo $title; ?></h3></div>-->
-                            <div id="thanks"><p><a data-toggle="modal" href="#form-content" class="btn btn-primary btn-large"><?php echo lang('ADD'); ?></a></p></div>
+                            <p><button type="button" data-toggle="modal" data-target="#form-content" class="btn btn-primary btn-large"><?php echo lang('ADD'); ?></button></p>
                             <table id="tableContent" class="table table-striped table-bordered table-hover">
 <?php } ?>
