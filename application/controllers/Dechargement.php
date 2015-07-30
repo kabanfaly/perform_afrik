@@ -24,13 +24,17 @@ class Dechargement extends CI_Controller
 
     /**
      * get dechargement (unloading)
+     * 
+     * @param String $msg message to display
+     * @param boolean $error if $msg is an error message
      */
-    public function index()
+    public function index($msg = '', $error=FALSE)
     {
-
         $data = array(
             'unloading' => $this->dechargement_model->get_dechargements(),
-            'title' => lang('UNLOADING_MANAGEMENT')
+            'title' => lang('UNLOADING_MANAGEMENT'),
+            'msg' => $msg,
+            'error' => $error
         );
 
         $this->display($data, 'dechargement/index');

@@ -14,8 +14,8 @@ if (!defined('BASEPATH'))
  * @filesource ville.php
  */
 class Ville extends CI_Controller
-{  
-    
+{
+
     public function __construct()
     {
         parent::__construct();
@@ -24,16 +24,38 @@ class Ville extends CI_Controller
 
     /**
      * get cities
+     * 
+     * @param String $msg message to display
+     * @param boolean $error if $msg is an error message
      */
-    public function index()
-    {
-
+    public function index($msg = '', $error = FALSE)
+    {        
         $data = array(
             'cities' => $this->ville_model->get_villes(),
-            'title' => lang('CITIES_MANAGEMENT')
+            'title' => lang('CITIES_MANAGEMENT'),
+            'msg' => $msg,
+            'error' => $error
         );
 
         $this->display($data, 'ville/index');
+    }
+    
+     /**
+     * Save a city
+     */
+    public function save()
+    {
+        // get city name
+        $name = str_replace(' ', '', ucfirst(strtolower($this->input->post('nom'))));
+        
+        // save if the city number doesn't exist
+        if ($this->ville_model->save(array('nom' => $name)) !== FALSE)
+        {
+            $this->index(lang('SAVING_CITY_SUCCESS'));
+        } else
+        {
+            $this->index(lang('CITY_EXISTS'). ': '.$name, TRUE);
+        }
     }
 
     public function view($id_ville = NULL)
@@ -42,10 +64,10 @@ class Ville extends CI_Controller
             'city' => $this->ville_model->get_villes($id_ville),
             'title' => $lang['CITY_VIEW']
         );
-        
+
         $this->display($data, 'ville/index');
     }
-   
+
     /**
      * Render page
      * @param array $data
@@ -54,7 +76,7 @@ class Ville extends CI_Controller
     private function display($data, $page)
     {
         $data['active'] = 'ville';
-        
+
         //checks admin session
         if (!$this->session->has_userdata('admin'))
         {
@@ -63,7 +85,7 @@ class Ville extends CI_Controller
             );
             $page = 'connection/index';
         }
-        
+
         $this->load->view('templates/header', $data);
         $this->load->view($page, $data);
         $this->load->view('templates/footer');

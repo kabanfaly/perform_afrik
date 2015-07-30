@@ -43,7 +43,12 @@ body{
 .mandatory{
     padding-left: 15px;
 }
-
+.msg{
+    margin: 10px 0 10px 0;
+}
+.success{
+    color: green;
+}
 /*  Connection page */
 .form-signin
 {

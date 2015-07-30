@@ -16,6 +16,18 @@ if (!defined('BASEPATH'))
 class Fournisseur_model extends CI_Model
 {
 
+    /**
+     * Fournisseur (supplier) table name
+     * @var String
+     */
+    public static $table_name = 'pa_fournisseur';
+
+    /**
+     * Fournisseur (supplier) table primary key
+     * @var String
+     */
+    public static $pk = 'id_fournisseur';
+    
     public function __construct()
     {
         parent::__construct();
@@ -33,12 +45,59 @@ class Fournisseur_model extends CI_Model
         if ($id_fournisseur === false)
         {
 
-            $query = $this->db->get('pa_fournisseur');
+            $query = $this->db->get(self::$table_name);
             return $query->result_array();
         }
 
-        $query = $this->db->get_where('pa_fournisseur', array('id_fournisseur' => $id_fournisseur));
+        $query = $this->db->get_where(self::$table_name, array(self::$pk => $id_fournisseur));
         return $query->row_array();
+    }
+
+    /**
+     * Finds a supplier by name
+     * 
+     * @param String $name
+     * @return mixed
+     */
+    public function find_by_name($name)
+    {
+
+        $query = $this->db->get_where(self::$table_name, array('nom' => $name));
+        return $query->row_array();
+    }
+
+    /**
+     * Saves a supplier if it doesn't exist
+     * 
+     * @param array $data
+     * @return boolean
+     */
+    public function save($data)
+    {
+        //find supplier
+        if ($this->find_by_name($data['nom']) === NULL)
+        {
+            return $this->db->insert(self::$table_name, $data);
+        }
+        return FALSE;
+    }
+
+    /**
+     * Updates a truck
+     * 
+     * @param array $data
+     * @return boolean
+     */
+    public function update($data)
+    {
+        // build where section
+        $where = array(self::$pk => $data[self::$pk]);
+
+        // build new data (update data)
+        unset($data[self::$pk]);
+
+        // do update
+        return $this->db->update(self::$table_name, $data, $where);
     }
 
 }

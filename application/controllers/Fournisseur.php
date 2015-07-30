@@ -24,13 +24,18 @@ class Fournisseur extends CI_Controller
 
     /**
      * get fournisseurs (suppliers)
+     * 
+     * @param String $msg message to display
+     * @param boolean $error if $msg is an error message
      */
-    public function index()
+    public function index($msg = '', $error = FALSE)
     {
 
         $data = array(
             'suppliers' => $this->fournisseur_model->get_fournisseurs(),
-            'title' => lang('SUPPLIERS_MANAGEMENT')
+            'title' => lang('SUPPLIERS_MANAGEMENT'),
+            'msg' => $msg,
+            'error' => $error
         );
 
         $this->display($data, 'fournisseur/index');
@@ -46,6 +51,24 @@ class Fournisseur extends CI_Controller
     }
 
     /**
+     * Save a supplier
+     */
+    public function save()
+    {
+        // get supplier name
+        $name = trim(ucwords(strtolower($this->input->post('nom'))));
+
+        // save if the supplier number doesn't exist
+        if ($this->fournisseur_model->save(array('nom' => $name)) !== FALSE)
+        {
+            $this->index(lang('SAVING_SUPPLIER_SUCCESS'));
+        } else
+        {
+            $this->index(lang('SUPPLIER_EXISTS') . ': ' . $name, TRUE);
+        }
+    }
+
+    /**
      * Render page
      * @param array $data
      * @param string $page concerning page
@@ -53,7 +76,7 @@ class Fournisseur extends CI_Controller
     private function display($data, $page)
     {
         $data['active'] = 'fournisseur';
-        
+
         //checks admin session
         if (!$this->session->has_userdata('admin'))
         {

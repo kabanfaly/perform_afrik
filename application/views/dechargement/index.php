@@ -52,7 +52,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="id_camion"><?php echo lang('TRUCK'); ?>:</label>
+                        <label for="id_camion"><?php echo lang('TRUCK'); ?>*:</label>
                         <select type="text" name="id_camion" class="form-control" id="truck" required >
                             
                         </select>

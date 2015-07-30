@@ -40,7 +40,6 @@ class Connection extends CI_Controller
      */
     public function login()
     {
-        $this->load->helper('form');
         $data = array(
             'title' => lang('CONNECTION'),
             'err_msg' => ''

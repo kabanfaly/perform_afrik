@@ -44,11 +44,16 @@ $lang['MANDATORY_FIELD'] = 'Champ obligatoire';
 
 $lang['SAVE_CITY'] = 'Ajout d\'une ville';
 $lang['TYPE_CITY_NAME'] = 'Saisir le nom de la ville';
+$lang['SAVING_CITY_SUCCESS'] = 'La ville a été enrégistrée avec succès.';
+$lang['CITY_EXISTS'] = 'Le nom de la ville saisie existe déjà';
+
 
 $lang['SAVE_SUPPLIER'] = 'Ajout d\'un fournisseur';
 $lang['TYPE_SUPPLIER_NAME'] = 'Saisir le nom complet du fournisseur';
 $lang['TYPE_SUPPLIER_PHONE'] = 'Saisir le numéro de téléphone du fournisseur';
 $lang['TYPE_SUPPLIER_ADDRESS'] = 'Saisir l\'adresse complete du fournisseur';
+$lang['SAVING_SUPPLIER_SUCCESS'] = 'Le fournisseur a été enrégistré avec succès.';
+$lang['SUPPLIER_EXISTS'] = 'Le nom du fournisseur saisi existe déjà';
 
 $lang['SAVE_UNLOAD'] = 'Ajout d\'un déchargement';
 $lang['DATE_FORMAT'] = 'JJ/MM/AAAA';
@@ -60,6 +65,8 @@ $lang['TYPE_HUMIDITY'] = 'Saisir l\'humidité';
 
 $lang['SAVE_TRUCK'] = 'Ajout d\'un camion';
 $lang['TYPE_TRUCK_NUMBER'] = 'Saisir le numéro du camion';
+$lang['SAVING_TRUCK_SUCCESS'] = 'Le camion a été enrégistré avec succès.';
+$lang['TRUCK_EXISTS'] = 'Le numéro de camion saisi existe déjà';
 
 $lang['CANCEL'] = 'Annuler';
 $lang['AUTO_TYPE'] = 'Ceci est calculé automatiquement';
