@@ -2,7 +2,7 @@
     <tr>
         <th class="number"><?php echo lang('NO'); ?></th>
         <th><?php echo lang('NUMBER'); ?></th>
-        <th><?php echo lang('OPTIONS'); ?></th>
+        <th class="option"><?php echo lang('OPTIONS'); ?></th>
     </tr>
 </thead>
 <tbody>
@@ -11,7 +11,14 @@
         <tr>
             <td><?php echo $no++; ?></td>
             <td><?php echo $truck['numero']; ?></td>
-            <td></td>
+            <td>
+                <a href="#">
+                    <span class="glyphicon glyphicon-pencil"></span> 
+                </a>
+                <a href="#" onclick="return deleteElement('<?php echo site_url('camion'); ?>', '<?php echo 'delete/'.$truck['id_camion']; ?>');">
+                    <span class="glyphicon glyphicon-remove"></span> 
+                </a>
+            </td>
         </tr>
     <?php endforeach; ?>
 </tbody>

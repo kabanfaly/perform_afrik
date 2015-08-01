@@ -27,7 +27,7 @@ class Fournisseur_model extends CI_Model
      * @var String
      */
     public static $pk = 'id_fournisseur';
-    
+
     public function __construct()
     {
         parent::__construct();
@@ -98,6 +98,17 @@ class Fournisseur_model extends CI_Model
 
         // do update
         return $this->db->update(self::$table_name, $data, $where);
+    }
+
+    /**
+     * Delete a supplier
+     * 
+     * @param array $where
+     * @return boolean
+     */
+    public function delete($where)
+    {
+        return $this->db->delete(self::$table_name, $where);
     }
 
 }

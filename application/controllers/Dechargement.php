@@ -49,6 +49,15 @@ class Dechargement extends CI_Controller
 
         $this->display($data, 'dechargement/index');
     }
+    
+    /**
+     * Delete a supplier
+     * @param int $id_dechargement
+     */
+    public function delete($id_dechargement)
+    {
+        $this->dechargement_model->delete(array(Dechargement_model::$pk => $id_dechargement));
+    }
 
     /**
      * Render page

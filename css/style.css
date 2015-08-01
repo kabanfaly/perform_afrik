@@ -34,6 +34,10 @@ body{
 .number{
     width: 40px;
 }
+.option{
+    width: 100px;
+}
+
 .title{
     text-align: center;
     font-size: 15px;

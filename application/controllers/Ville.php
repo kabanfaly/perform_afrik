@@ -29,7 +29,7 @@ class Ville extends CI_Controller
      * @param boolean $error if $msg is an error message
      */
     public function index($msg = '', $error = FALSE)
-    {        
+    {
         $data = array(
             'cities' => $this->ville_model->get_villes(),
             'title' => lang('CITIES_MANAGEMENT'),
@@ -39,22 +39,22 @@ class Ville extends CI_Controller
 
         $this->display($data, 'ville/index');
     }
-    
-     /**
+
+    /**
      * Save a city
      */
     public function save()
     {
         // get city name
         $name = str_replace(' ', '', ucfirst(strtolower($this->input->post('nom'))));
-        
+
         // save if the city number doesn't exist
         if ($this->ville_model->save(array('nom' => $name)) !== FALSE)
         {
             $this->index(lang('SAVING_CITY_SUCCESS'));
         } else
         {
-            $this->index(lang('CITY_EXISTS'). ': '.$name, TRUE);
+            $this->index(lang('CITY_EXISTS') . ': ' . $name, TRUE);
         }
     }
 
@@ -66,6 +66,15 @@ class Ville extends CI_Controller
         );
 
         $this->display($data, 'ville/index');
+    }
+
+    /**
+     * Delete a city
+     * @param int $id_ville
+     */
+    public function delete($id_ville)
+    {
+        $this->ville_model->delete(array(Ville_model::$pk => $id_ville));
     }
 
     /**

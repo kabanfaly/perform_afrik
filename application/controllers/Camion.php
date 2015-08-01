@@ -68,6 +68,14 @@ class Camion extends CI_Controller
             $this->index(lang('TRUCK_EXISTS'). ': '.$number, TRUE);
         }
     }
+    /**
+     * Delete a truck
+     * @param int $id_camion
+     */
+    public function delete($id_camion)
+    {
+        $this->camion_model->delete(array(Camion_model::$pk => $id_camion));
+    }
 
     /**
      * Render page

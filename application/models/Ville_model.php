@@ -1,4 +1,7 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
 
 /**
  * Ville model
@@ -24,7 +27,7 @@ class Ville_model extends CI_Model
      * @var String
      */
     public static $pk = 'id_ville';
-    
+
     public function __construct()
     {
         parent::__construct();
@@ -49,7 +52,7 @@ class Ville_model extends CI_Model
         $query = $this->db->get_where(self::$table_name, array(self::$pk => $id_ville));
         return $query->row_array();
     }
-    
+
     /**
      * Finds a city by name
      * 
@@ -95,6 +98,17 @@ class Ville_model extends CI_Model
 
         // do update
         return $this->db->update(self::$table_name, $data, $where);
+    }
+
+    /**
+     * Delete a city
+     * 
+     * @param array $where
+     * @return boolean
+     */
+    public function delete($where)
+    {
+        return $this->db->delete(self::$table_name, $where);
     }
 
 }

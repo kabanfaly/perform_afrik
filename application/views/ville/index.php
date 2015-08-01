@@ -2,7 +2,7 @@
     <tr>
         <th class="number"><?php echo lang('NO'); ?></th>
         <th><?php echo lang('CITY'); ?></th>
-        <th><?php echo lang('OPTIONS'); ?></th>
+        <th class="option"><?php echo lang('OPTIONS'); ?></th>
     </tr>
 </thead>
 <tbody>
@@ -11,7 +11,14 @@
         <tr>
             <td><?php echo $no++; ?></td>
             <td><?php echo $city['nom']; ?></td>
-            <td></td>
+            <td>
+                <a href="<?php echo site_url('ville'); ?>">
+                    <span class="glyphicon glyphicon-pencil"></span> 
+                </a>
+                <a href="#" onclick="return deleteElement('<?php echo site_url('ville'); ?>', '<?php echo 'delete/'.$city['id_ville']; ?>');">
+                    <span class="glyphicon glyphicon-remove"></span> 
+                </a>
+            </td>
         </tr>
     <?php endforeach; ?>
 </tbody>

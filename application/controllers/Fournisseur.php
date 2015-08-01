@@ -69,6 +69,15 @@ class Fournisseur extends CI_Controller
     }
 
     /**
+     * Delete a supplier
+     * @param int $id_fournisseur
+     */
+    public function delete($id_fournisseur)
+    {
+        $this->fournisseur_model->delete(array(Fournisseur_model::$pk => $id_fournisseur));
+    }
+
+    /**
      * Render page
      * @param array $data
      * @param string $page concerning page

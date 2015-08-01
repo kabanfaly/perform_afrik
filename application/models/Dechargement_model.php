@@ -13,6 +13,18 @@
 class Dechargement_model extends CI_Model
 {
 
+    /**
+     * Dechargement (unloading) table name
+     * @var String
+     */
+    public static $table_name = 'pa_dechargement';
+
+    /**
+     * Dechargement (unloading) table primary key
+     * @var String
+     */
+    public static $pk = 'id_dechargement';
+    
     public function __construct()
     {
         parent::__construct();
@@ -29,12 +41,23 @@ class Dechargement_model extends CI_Model
         if ($id_dechargement === false)
         {
 
-            $query = $this->db->get('pa_dechargement');
+            $query = $this->db->get(self::$table_name);
             return $query->result_array();
         }
 
-        $query = $this->db->get_where('pa_dechargement', array('id_dechargement' => $id_dechargement));
+        $query = $this->db->get_where(self::$table_name, array(self::$pk => $id_dechargement));
         return $query->row_array();
+    }
+    
+    /**
+     * Delete a unload
+     * 
+     * @param array $where
+     * @return boolean
+     */
+    public function delete($where)
+    {
+        return $this->db->delete(self::$table_name, $where);
     }
 
 

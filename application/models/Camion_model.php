@@ -100,4 +100,15 @@ class Camion_model extends CI_Model
         return $this->db->update(self::$table_name, $data, $where);
     }
 
+    /**
+     * Delete a truck
+     * 
+     * @param array $where
+     * @return boolean
+     */
+    public function delete($where)
+    {
+        return $this->db->delete(self::$table_name, $where);
+    }
+
 }

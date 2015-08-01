@@ -13,7 +13,7 @@
         <th><?php echo lang('NET_WEIGHT'); ?></th>
         <th><?php echo lang('REFRACTED_WEIGHT'); ?></th>
         <th><?php echo lang('HUMIDITY'); ?></th>
-        <th><?php echo lang('OPTIONS'); ?></th>
+        <th class="option"><?php echo lang('OPTIONS'); ?></th>
     </tr>
 </thead>
 <tbody>
@@ -32,7 +32,14 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
+            <td>
+                <a href="<?php echo site_url('ville'); ?>">
+                    <span class="glyphicon glyphicon-pencil"></span> 
+                </a>
+                <a href="#" onclick="return deleteElement('<?php echo site_url('ville'); ?>', '<?php echo 'delete/'.$unload['id_ville']; ?>');">
+                    <span class="glyphicon glyphicon-remove"></span> 
+                </a>
+            </td>
         </tr>
     <?php endforeach; ?>
 </tbody>

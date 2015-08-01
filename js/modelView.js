@@ -15,6 +15,7 @@ define(["jquery", "jquery-ui", "datetimepicker", "datatables",
             timepicker: false
         });
     });
+
 //    $('.left-side').on('click', function(){
 //       var link = $(this).attr('href');
 //       
@@ -32,3 +33,27 @@ define(["jquery", "jquery-ui", "datetimepicker", "datatables",
 //       });
 //    });
 });
+
+/**
+ *  delete element
+ * @param {type} link
+ * @returns {Boolean}
+ */
+function deleteElement(redirect_link, del) {
+    
+    if (confirm('Voulez vous supprimer cet élément ?')) {
+        $.ajax({
+            url: redirect_link+'/'+del,
+            success: function (data, textStatus, jqXHR) {
+                document.location.href = redirect_link;
+                return true;
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Erreur de suppression');
+                return false;
+            }
+        });
+       
+    }
+    return false;
+}

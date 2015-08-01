@@ -4,7 +4,7 @@
         <th><?php echo lang('SUPPLIER'); ?></th>
         <th><?php echo lang('PHONE'); ?></th>
         <th><?php echo lang('ADDRESS'); ?></th>
-        <th><?php echo lang('OPTIONS'); ?></th>
+        <th class="option"><?php echo lang('OPTIONS'); ?></th>
     </tr>
 </thead>
 <tbody>
@@ -15,7 +15,14 @@
             <td><?php echo $supplier['nom']; ?></td>
             <td><?php echo $supplier['telephone']; ?></td>
             <td><?php echo $supplier['adresse']; ?></td>
-            <td></td>
+            <td>
+                <a href="#">
+                    <span class="glyphicon glyphicon-pencil"></span> 
+                </a>
+                <a href="#" onclick="return deleteElement('<?php echo site_url('fournisseur'); ?>', '<?php echo 'delete/'.$supplier['id_fournisseur']; ?>');">
+                    <span class="glyphicon glyphicon-remove"></span> 
+                </a>
+            </td>
         </tr>
     <?php endforeach; ?>
 </tbody>
