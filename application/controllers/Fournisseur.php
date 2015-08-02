@@ -100,10 +100,10 @@ class Fournisseur extends CI_Controller
         // save if the supplier number doesn't exist
         if ($this->fournisseur_model->save($data) !== FALSE)
         {
-            $this->index(lang('SAVING_SUPPLIER_SUCCESS'));
+            redirect('fournisseur/index/' . lang('SAVING_SUPPLIER_SUCCESS'));
         } else
         {
-            $this->index(lang('SUPPLIER_EXISTS') . ': ' . $name, TRUE);
+            redirect('fournisseur/index/' . lang('SUPPLIER_EXISTS'). ': ' . $data['nom'].'/'.TRUE);
         }
     }
 
@@ -122,10 +122,10 @@ class Fournisseur extends CI_Controller
         // update
         if ($this->fournisseur_model->update($data, $where) !== FALSE)
         {
-            $this->index(lang('UPDATING_SUPPLIER_SUCCESS'));
+            redirect('fournisseur/index/' . lang('UPDATING_SUPPLIER_SUCCESS'));
         } else
         {
-            $this->index(lang('UPDATING_FAILED'), TRUE);
+            redirect('fournisseur/index/' . lang('UPDATING_FAILED').'/'.TRUE);
         }
     }
 
@@ -137,10 +137,10 @@ class Fournisseur extends CI_Controller
     {
         if ($this->fournisseur_model->delete(array(Fournisseur_model::$pk => $id_fournisseur)) !== FALSE)
         {
-            $this->index(lang('SUPPLIER_DELETION_SUCCESS'));
+            redirect('fournisseur/index/' . lang('SUPPLIER_DELETION_SUCCESS'));
         } else
         {
-            $this->index(lang('DELETING_FAILED'), TRUE);
+            redirect('fournisseur/index/' . lang('DELETING_FAILED').'/'.TRUE);
         }
     }
 

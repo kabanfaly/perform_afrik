@@ -57,17 +57,18 @@ CREATE TABLE IF NOT EXISTS `pa_camion` (
 
 DROP TABLE IF EXISTS `pa_dechargement`;
 CREATE TABLE IF NOT EXISTS `pa_dechargement` (
-  `id_dechargement` int(11) NOT NULL AUTO_INCREMENT,
+`id_dechargement` int(11) NOT NULL AUTO_INCREMENT,
   `id_camion` int(11) NOT NULL,
   `id_ville` int(11) NOT NULL,
   `id_fournisseur` int(11) NOT NULL,
   `date` date NOT NULL,
   `bon_sac` int(11) NOT NULL,
   `sac_dechire` int(11) NOT NULL,
-  `poids_brut` int(11) NOT NULL,
-  `poids_net` int(11) NOT NULL,
-  `poids_refracte` int(11) NOT NULL,
-  `humidite` int(11) NOT NULL,
+  `sac_total` int(11) NOT NULL,
+  `poids_brut` double NOT NULL,
+  `poids_net` double NOT NULL,
+  `poids_refracte` double NOT NULL,
+  `humidite` double NOT NULL,
   PRIMARY KEY (`id_dechargement`),
   KEY `id_camion` (`id_camion`,`id_ville`,`id_fournisseur`),
   KEY `id_camion_2` (`id_camion`),

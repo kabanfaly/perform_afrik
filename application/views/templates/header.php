@@ -85,7 +85,7 @@
                                 <button type="button" href="<?php echo $form_link; ?>" data-toggle="modal" data-target="#form-content" class="btn btn-primary btn-large"><?php echo lang('ADD'); ?></button>
                             </p>
                             <div class="msg <?php echo!$error ? 'success' : 'alert-danger fade in'; ?>">
-                                <center><?php echo $msg; ?></center>
+                                <center><?php echo urldecode($msg); ?></center>
                             </div>
                             <table id="tableContent" class="table table-striped table-bordered table-hover">
 <?php } ?>

@@ -97,10 +97,10 @@ class Ville extends CI_Controller
         // save if the city number doesn't exist
         if ($this->ville_model->save($data) !== FALSE)
         {
-            $this->index(lang('SAVING_CITY_SUCCESS'));
+            redirect('ville/index/' . lang('SAVING_CITY_SUCCESS'));
         } else
         {
-            $this->index(lang('CITY_EXISTS') . ': ' . $name, TRUE);
+            redirect('ville/index/' . lang('CITY_EXISTS'). ': ' . $data['nom'].'/'.TRUE);
         }
     }
 
@@ -119,10 +119,10 @@ class Ville extends CI_Controller
         // update
         if ($this->ville_model->update($data, $where) !== FALSE)
         {
-            $this->index(lang('UPDATING_CITY_SUCCESS'));
+            redirect('ville/index/' . lang('UPDATING_CITY_SUCCESS'));
         } else
         {
-            $this->index(lang('UPDATING_FAILED'), TRUE);
+            redirect('ville/index/' . lang('UPDATING_FAILED').'/'.TRUE);
         }
     }
 
@@ -134,10 +134,10 @@ class Ville extends CI_Controller
     {
         if ($this->ville_model->delete(array(Ville_model::$pk => $id_ville)) !== FALSE)
         {
-            $this->index(lang('CITY_DELETION_SUCCESS'));
+            redirect('ville/index/' . lang('CITY_DELETION_SUCCESS'));
         } else
         {
-            $this->index(lang('DELETING_FAILED'), TRUE);
+            redirect('ville/index/' . lang('DELETING_FAILED').'/'.TRUE);
         }
     }
 

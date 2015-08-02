@@ -81,10 +81,10 @@ class Dechargement extends CI_Controller
     {
         if ($this->dechargement_model->delete(array(Dechargement_model::$pk => $id_dechargement)) !== FALSE)
         {
-            $this->index(lang('UNLOADING_DELETION_SUCCESS'));
+            redirect('dechargement/index/' . lang('UNLOADING_DELETION_SUCCESS'));
         } else
         {
-            $this->index(lang('DELETING_FAILED'), TRUE);
+            redirect('dechargement/index/' . lang('DELETING_FAILED') . '/' . TRUE);
         }
     }
 
@@ -95,25 +95,77 @@ class Dechargement extends CI_Controller
     private function get_inputs()
     {
 
-        //TO DO
+        // get input values
+        $id_camion = $this->input->post('id_camion');
+        $id_fournisseur = $this->input->post('id_fournisseur');
+        $id_ville = $this->input->post('id_ville');
+        $date = $this->input->post('date');
+        $good_bag = trim($this->input->post('bon_sac'));
+        $torn_bag = trim($this->input->post('sac_dechire'));
+        $gross_weight = trim($this->input->post('poids_brut'));
+        $net_weight = trim($this->input->post('poids_net'));
+        $humidity = trim($this->input->post('humidite'));
+        
+        $total_bag = intval($good_bag) + intval($torn_bag);
+        $refracted_weight = $this->compute_refracted($good_bag, $torn_bag, $net_weight);
+
+        $data = array('id_camion' => $id_camion, 'id_ville' => $id_ville, 'id_fournisseur' => $id_fournisseur,
+            'date' => $date, 'bon_sac' => $good_bag, 'sac_dechire' => $torn_bag, 'total_sac' => $total_bag,
+            'poids_brut' => $gross_weight, 'poids_net' => $net_weight, 'poids_refracte' => $refracted_weight,'humidite' => $humidity);
+
+        return $data;
+    }
+    
+    /**
+     * 
+     * @param float $good_bag
+     * @param float $torn_bag
+     * @param float $net_weight
+     * @return float
+     */
+    private function compute_refracted($good_bag, $torn_bag, $net_weight){
+        
+        return abs(($good_bag + $torn_bag * 8) - $net_weight);
     }
 
     /**
-     * Saves a city
+     * Saves an unloading
      */
     public function save()
     {
-        //TO DO
-        $this->index();
+        //get inputs
+        $data = $this->get_inputs();
+
+        // save unloading
+        if ($this->dechargemtnt_model->save($data) !== FALSE)
+        {
+            redirect('dechargement/index/' . lang('SAVING_UNLOADING_SUCCESS'));
+        } else
+        {
+            redirect('dechargement/index/' . lang('SAVING_UNLOADING_FAILES').'/'.TRUE);
+        }
     }
 
     /**
-     * Updates a city
+     * Updates an unloading
      */
     public function update()
     {
-        //TO DO
-        $this->index();
+        // get input values
+        $data = $this->get_inputs();
+
+        $id_dechargement = $this->input->post('id_dechargement');
+
+        $where = array(Dechargement_model::$pk => $id_dechargement);
+
+        // update
+        if ($this->dechargement_model->update($data, $where) !== FALSE)
+        {
+            redirect('dechargement/index/' . lang('UPDATING_UNLOADING_SUCCESS'));
+        } else
+        {
+            redirect('dechargement/index/' . lang('UPDATING_FAILED') . '/' . TRUE);
+        }
     }
 
     /**

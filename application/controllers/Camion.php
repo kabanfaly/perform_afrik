@@ -98,10 +98,10 @@ class Camion extends CI_Controller
         // save if the truck number doesn't exist
         if ($this->camion_model->save($data) !== FALSE)
         {
-            $this->index(lang('SAVING_TRUCK_SUCCESS'));
+            redirect('camion/index/' . lang('SAVING_TRUCK_SUCCESS'));
         } else
         {
-            $this->index(lang('TRUCK_EXISTS') . ': ' . $number, TRUE);
+            redirect('camion/index/' . lang('TRUCK_EXISTS'). ': ' . $data['numero'].'/'.TRUE);
         }
     }
 
@@ -120,10 +120,10 @@ class Camion extends CI_Controller
         // update
         if ($this->camion_model->update($data, $where) !== FALSE)
         {
-            $this->index(lang('UPDATING_TRUCK_SUCCESS'));
+            redirect('camion/index/' . lang('UPDATING_TRUCK_SUCCESS'));
         } else
         {
-            $this->index(lang('UPDATING_FAILED'), TRUE);
+            redirect('camion/index/' . lang('UPDATING_FAILED').'/'.TRUE);
         }
     }
 
@@ -135,10 +135,10 @@ class Camion extends CI_Controller
     {
         if ($this->camion_model->delete(array(Camion_model::$pk => $id_camion)) !== FALSE)
         {
-            $this->index(lang('TRUCK_DELETION_SUCCESS'));
+            redirect('camion/index/' . lang('TRUCK_DELETION_SUCCESS'));
         } else
         {
-            $this->index(lang('DELETING_FAILED'), TRUE);
+            redirect('camion/index/' . lang('DELETING_FAILED').'/'.TRUE);
         }
     }
 

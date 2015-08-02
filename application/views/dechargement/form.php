@@ -34,31 +34,27 @@
                 </div>
                 <div class="form-group">
                     <label for="date"><?php echo lang('DATE'); ?>*:</label>
-                    <input type="text" name="date" class="form-control" id="numero datetimepicker" required placeholder="<?php echo lang('DATE_FORMAT'); ?>"/>
+                    <input type="text" name="date" value="<?php echo !isset($date) ?'' : $date; ?>" class="form-control" id="datetimepicker" required placeholder="<?php echo lang('DATE_FORMAT'); ?>"/>
                 </div>
                 <div class="form-group">
                     <label for="bon_sac"><?php echo lang('GOOD_BAGS'); ?>*:</label>
-                    <input type="text" name="bon_sac" class="form-control" id="good_bags" required placeholder="<?php echo lang('TYPE_GOOD_BAGS'); ?>"/>
+                    <input type="text" name="bon_sac" value="<?php echo !isset($bon_sac) ?'' : $bon_sac; ?>" class="form-control" id="good_bags" required placeholder="<?php echo lang('TYPE_GOOD_BAGS'); ?>"/>
                 </div>
                 <div class="form-group">
                     <label for="sac_dechire"><?php echo lang('TORN_BAGS'); ?>*:</label>
-                    <input type="text" name="sac_dechire" class="form-control" id="torn_bags" required placeholder="<?php echo lang('TYPE_TORN_BAGS'); ?>"/>
+                    <input type="text" name="sac_dechire" value="<?php echo !isset($sac_dechire) ?'' : $sac_dechire; ?>" class="form-control" id="torn_bags" required placeholder="<?php echo lang('TYPE_TORN_BAGS'); ?>"/>
                 </div>
                 <div class="form-group">
                     <label for="poids_brut"><?php echo lang('GROSS_WEIGHT'); ?>*:</label>
-                    <input type="text" name="poids_brut" class="form-control" id="gross_weight" required placeholder="<?php echo lang('TYPE_GROSS_WEIGHT'); ?>"/>
+                    <input type="text" name="poids_brut" value="<?php echo !isset($poids_brut) ?'' : $poids_brut; ?>" class="form-control" id="gross_weight" required placeholder="<?php echo lang('TYPE_GROSS_WEIGHT'); ?>"/>
                 </div>
                 <div class="form-group">
                     <label for="poids_net"><?php echo lang('NET_WEIGHT'); ?>*:</label>
-                    <input type="text" name="poids_net" class="form-control" id="net_weight" required placeholder="<?php echo lang('TYPE_NET_WEIGHT'); ?>"/>
-                </div>
-                <div class="form-group">
-                    <label for="poids_refracte"><?php echo lang('REFRACTED_WEIGHT'); ?>:</label>
-                    <input type="text" name="poids_refracte" disabled class="form-control" id="refracted_weight" required placeholder="<?php echo lang('AUTO_TYPE'); ?>"/>
+                    <input type="text" name="poids_net" value="<?php echo !isset($poids_net) ?'' : $poids_net; ?>" class="form-control" id="net_weight" required placeholder="<?php echo lang('TYPE_NET_WEIGHT'); ?>"/>
                 </div>
                 <div class="form-group">
                     <label for="humitide"><?php echo lang('HUMIDITY'); ?>:*</label>
-                    <input type="text" name="humidite" class="form-control" id="humidity" required placeholder="<?php echo lang('TYPE_HUMIDITY'); ?>"/>
+                    <input type="text" name="humidite" value="<?php echo !isset($humidite) ?'' : $humidite; ?>" class="form-control" id="humidity" required placeholder="<?php echo lang('TYPE_HUMIDITY'); ?>"/>
                 </div>
             </div>
             <div class="mandatory">* <?php echo lang('MANDATORY_FIELD'); ?> </div>
@@ -76,5 +72,14 @@
 EOF;
         ?>
     </body>
-    <script type="text/javascript" data-main="<?php echo base_url(); ?>js/main?<?php echo time(); ?>" src="<?php echo base_url(); ?>assets/requirejs/require.js"></script>
+    <script>
+    $(function () {
+        $('#datetimepicker').datetimepicker({
+            lang: 'fr',
+            format: 'd/m/Y',
+            timepicker: false
+        }); 
+    });
+    </script>
+    <script type="text/javascript" data-main="<?php echo base_url(); ?>js/main?e=<?php echo time(); ?>" src="<?php echo base_url(); ?>assets/requirejs/require.js"></script>
 </html>

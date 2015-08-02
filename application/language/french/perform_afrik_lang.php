@@ -63,7 +63,6 @@ $lang['SAVING_UNLOADING_SUCCESS'] = 'La déchargement a été enrégistré avec 
 $lang['UPDATING_UNLOADING_SUCCESS'] = 'Le déchargement a été modifié avec succès.';
 $lang['UNLOADING_DELETION_SUCCESS'] = 'Le déchargement a été supprimé avec succès';
 
-
 $lang['OPTIONS'] = 'Options';
 $lang['NO'] = 'N°';
 $lang['NUMBER'] = 'Numéro';
@@ -81,4 +80,3 @@ $lang['AUTO_TYPE'] = 'Ceci est calculé automatiquement';
 $lang['INVALID_LOGIN_PASSWORD'] = 'Login ou mot de passe incorrect';
 $lang['DELETING_FAILED'] = 'La suppression a échoué';
 $lang['UPDATING_FAILED'] = 'La modification a échoué';
-

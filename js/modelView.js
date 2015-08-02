@@ -9,11 +9,6 @@ define(["jquery", "jquery-ui", "datetimepicker", "datatables",
                 "url": baseUrl + "assets/datatables-plugins/i18n/French.lang"
             }
         });
-        $('#datetimepicker').datetimepicker({
-            lang: 'fr',
-            format: 'd/m/Y',
-            timepicker: false
-        });
     });
 });
 
