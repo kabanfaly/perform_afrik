@@ -83,25 +83,20 @@ class Ville_model extends CI_Model
     }
 
     /**
-     * Updates a truck
+     * Updates a city
      * 
      * @param array $data
+     * @param array $where
      * @return boolean
      */
-    public function update($data)
+    public function update($data, $where)
     {
-        // build where section
-        $where = array(self::$pk => $data[self::$pk]);
-
-        // build new data (update data)
-        unset($data[self::$pk]);
-
         // do update
         return $this->db->update(self::$table_name, $data, $where);
     }
 
     /**
-     * Delete a city
+     * Deletes a city
      * 
      * @param array $where
      * @return boolean

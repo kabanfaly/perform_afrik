@@ -86,16 +86,11 @@ class Camion_model extends CI_Model
      * Updates a truck
      * 
      * @param array $data
+     * @param array $where
      * @return boolean
      */
-    public function update($data)
+    public function update($data, $where)
     {
-        // build where section
-        $where = array(self::$pk => $data[self::$pk]);
-
-        // build new data (update data)
-        unset($data[self::$pk]);
-
         // do update
         return $this->db->update(self::$table_name, $data, $where);
     }

@@ -34,22 +34,68 @@ class Ville extends CI_Controller
             'cities' => $this->ville_model->get_villes(),
             'title' => lang('CITIES_MANAGEMENT'),
             'msg' => $msg,
-            'error' => $error
+            'error' => $error,
+            'form_link' => site_url('ville/edit')
         );
 
         $this->display($data, 'ville/index');
     }
 
     /**
-     * Save a city
+     * Displays a form to add or edit a city
+     * 
+     * @param int $id_ville city id to modify
+     */
+    public function edit($id_ville = NULL)
+    {
+
+        $data = array(
+            'title' => lang('ADD_CITY'),
+            'form_action' => site_url('ville/save')
+        );
+
+        // preset data for modification form
+        if ($id_ville !== NULL)
+        {
+
+            //get city by id
+            $city = $this->ville_model->get_villes($id_ville);
+
+            //merge row data with $data
+            $data = array_merge_recursive($data, $city);
+
+            $data['title'] = lang('EDIT_CITY');
+            $data['form_action'] = site_url('ville/update');
+        }
+
+        $this->load->view('ville/form', $data);
+    }
+
+    /**
+     * builds inputs value in an array
+     * @return array
+     */
+    private function get_inputs()
+    {
+
+        // get input values
+        $name = str_replace(' ', '', ucfirst(strtolower($this->input->post('nom'))));
+
+        $data = array('nom' => $name);
+
+        return $data;
+    }
+
+    /**
+     * Saves a city
      */
     public function save()
     {
-        // get city name
-        $name = str_replace(' ', '', ucfirst(strtolower($this->input->post('nom'))));
+        //get inputs
+        $data = $this->get_inputs();
 
         // save if the city number doesn't exist
-        if ($this->ville_model->save(array('nom' => $name)) !== FALSE)
+        if ($this->ville_model->save($data) !== FALSE)
         {
             $this->index(lang('SAVING_CITY_SUCCESS'));
         } else
@@ -58,14 +104,26 @@ class Ville extends CI_Controller
         }
     }
 
-    public function view($id_ville = NULL)
+    /**
+     * Updates a city
+     */
+    public function update()
     {
-        $data = array(
-            'city' => $this->ville_model->get_villes($id_ville),
-            'title' => $lang['CITY_VIEW']
-        );
+        // get input values
+        $data = $this->get_inputs();
 
-        $this->display($data, 'ville/index');
+        $id_ville = $this->input->post('id_ville');
+
+        $where = array(Ville_model::$pk => $id_ville);
+
+        // update
+        if ($this->ville_model->update($data, $where) !== FALSE)
+        {
+            $this->index(lang('UPDATING_CITY_SUCCESS'));
+        } else
+        {
+            $this->index(lang('UPDATING_FAILED'), TRUE);
+        }
     }
 
     /**
@@ -74,7 +132,13 @@ class Ville extends CI_Controller
      */
     public function delete($id_ville)
     {
-        $this->ville_model->delete(array(Ville_model::$pk => $id_ville));
+        if ($this->ville_model->delete(array(Ville_model::$pk => $id_ville)) !== FALSE)
+        {
+            $this->index(lang('CITY_DELETION_SUCCESS'));
+        } else
+        {
+            $this->index(lang('DELETING_FAILED'), TRUE);
+        }
     }
 
     /**

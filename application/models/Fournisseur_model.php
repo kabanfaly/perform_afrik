@@ -86,16 +86,11 @@ class Fournisseur_model extends CI_Model
      * Updates a truck
      * 
      * @param array $data
+     * @param array $where
      * @return boolean
      */
-    public function update($data)
+    public function update($data, $where)
     {
-        // build where section
-        $where = array(self::$pk => $data[self::$pk]);
-
-        // build new data (update data)
-        unset($data[self::$pk]);
-
         // do update
         return $this->db->update(self::$table_name, $data, $where);
     }
@@ -109,6 +104,15 @@ class Fournisseur_model extends CI_Model
     public function delete($where)
     {
         return $this->db->delete(self::$table_name, $where);
+    }
+
+    /**
+     * Returns current table fieds
+     * @return array
+     */
+    public function get_fields()
+    {
+        return $this->db->list_fields(self::$table_name);
     }
 
 }

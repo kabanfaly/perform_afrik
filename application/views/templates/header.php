@@ -25,7 +25,8 @@
                         </a>
                     </div>
                     <div>
-                        <?php if (isset($_SESSION['admin']))
+                        <?php
+                        if (isset($_SESSION['admin']))
                         {
                             ?>  
                             <ul class="nav navbar-nav">
@@ -73,15 +74,18 @@
                                         </a>
                                     </div>
                                 </div>-->
-                <?php if (isset($_SESSION['admin']))
+                <?php
+                if (isset($_SESSION['admin']))
                 {
                     ?>
                     <div class=" col-lg-10 col-lg-offset-1 ">
                         <div class="content clearfix">
                             <!--<div class="title"><h3><?php echo $title; ?></h3></div>-->
-                            <p><button type="button" data-toggle="modal" data-target="#form-content" class="btn btn-primary btn-large"><?php echo lang('ADD'); ?></button></p>
-                            <div class="msg <?php echo !$error ? 'success': 'alert-danger fade in'; ?>">
+                            <p>
+                                <button type="button" href="<?php echo $form_link; ?>" data-toggle="modal" data-target="#form-content" class="btn btn-primary btn-large"><?php echo lang('ADD'); ?></button>
+                            </p>
+                            <div class="msg <?php echo!$error ? 'success' : 'alert-danger fade in'; ?>">
                                 <center><?php echo $msg; ?></center>
                             </div>
                             <table id="tableContent" class="table table-striped table-bordered table-hover">
-                <?php } ?>
+<?php } ?>

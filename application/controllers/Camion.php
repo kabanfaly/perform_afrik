@@ -21,60 +21,125 @@ class Camion extends CI_Controller
         parent::__construct();
         $this->load->model('camion_model');
     }
-    
+
     /**
      * get trucks 
      * 
      * @param String $msg message to display
      * @param boolean $error if $msg is an error message
      */
-    public function index($msg = '', $error=FALSE)
+    public function index($msg = '', $error = FALSE)
     {
 
         $data = array(
             'trucks' => $this->camion_model->get_camions(),
             'title' => lang('TRUCKS_MANAGEMENT'),
             'msg' => $msg,
-            'error' => $error
-        );
-
-        $this->display($data, 'camion/index');
-    }
-
-    public function view($id_camion = NULL)
-    {
-        $data = array(
-            'truck' => $this->camion_model->get_camions($id_camion),
-            'title' => $lang['TRUCK_VIEW']
+            'error' => $error,
+            'form_link' => site_url('camion/edit')
         );
 
         $this->display($data, 'camion/index');
     }
 
     /**
-     * Save a truck
+     * Displays a form to add or edit a truck
+     * 
+     * @param int $id_camion truck id to modify
+     */
+    public function edit($id_camion = NULL)
+    {
+
+        $data = array(
+            'title' => lang('ADD_TRUCK'),
+            'form_action' => site_url('camion/save')
+        );
+
+        // preset data for modification form
+        if ($id_camion !== NULL)
+        {
+
+            //get truck by id
+            $truck = $this->camion_model->get_camions($id_camion);
+
+            //merge row data with $data
+            $data = array_merge_recursive($data, $truck);
+
+            $data['title'] = lang('EDIT_TRUCK');
+            $data['form_action'] = site_url('camion/update');
+        }
+
+        $this->load->view('camion/form', $data);
+    }
+
+    /**
+     * builds inputs value in an array
+     * @return array
+     */
+    private function get_inputs()
+    {
+
+        // get input values
+        $number = str_replace(' ', '', strtoupper($this->input->post('numero')));
+
+        $data = array('numero' => $number);
+
+        return $data;
+    }
+
+    /**
+     * Saves a truck
      */
     public function save()
     {
-        // get truck number
-        $number = str_replace(' ', '', strtoupper($this->input->post('numero')));
-        
+        //get inputs
+        $data = $this->get_inputs();
+
         // save if the truck number doesn't exist
-        if ($this->camion_model->save(array('numero' => $number)) !== FALSE)
+        if ($this->camion_model->save($data) !== FALSE)
         {
             $this->index(lang('SAVING_TRUCK_SUCCESS'));
         } else
         {
-            $this->index(lang('TRUCK_EXISTS'). ': '.$number, TRUE);
+            $this->index(lang('TRUCK_EXISTS') . ': ' . $number, TRUE);
         }
     }
+
     /**
-     * Delete a truck
+     * updates a truck
+     */
+    public function update()
+    {
+        //get inputs
+        $data = $this->get_inputs();
+
+        $id_camion = $this->input->post('id_camion');
+
+        $where = array(Camion_model::$pk => $id_camion);
+
+        // update
+        if ($this->camion_model->update($data, $where) !== FALSE)
+        {
+            $this->index(lang('UPDATING_TRUCK_SUCCESS'));
+        } else
+        {
+            $this->index(lang('UPDATING_FAILED'), TRUE);
+        }
+    }
+
+    /**
+     * Deletes a truck
      * @param int $id_camion
      */
     public function delete($id_camion)
     {
-        $this->camion_model->delete(array(Camion_model::$pk => $id_camion));
+        if ($this->camion_model->delete(array(Camion_model::$pk => $id_camion)) !== FALSE)
+        {
+            $this->index(lang('TRUCK_DELETION_SUCCESS'));
+        } else
+        {
+            $this->index(lang('DELETING_FAILED'), TRUE);
+        }
     }
 
     /**

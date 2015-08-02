@@ -12,10 +12,10 @@
             <td><?php echo $no++; ?></td>
             <td><?php echo $truck['numero']; ?></td>
             <td>
-                <a href="#">
-                    <span class="glyphicon glyphicon-pencil"></span> 
+                <a href="<?php echo  $form_link .'/'. $truck['id_camion']; ?>" data-toggle="modal" data-target="#form-content">
+                    <span class="glyphicon glyphicon-pencil"></span>
                 </a>
-                <a href="#" onclick="return deleteElement('<?php echo site_url('camion'); ?>', '<?php echo 'delete/'.$truck['id_camion']; ?>');">
+                <a href="<?php echo site_url('camion/delete/' . $truck['id_camion']); ?>" onclick="return confirmDeletion();">
                     <span class="glyphicon glyphicon-remove"></span> 
                 </a>
             </td>
@@ -24,31 +24,10 @@
 </tbody>
 
 <!-- Modal -->
-
-<div id="form-content" class="modal fade" role="dialog">
+<div id="form-content" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="form-content" aria-hidden="true">
     <div class="modal-dialog">
-
         <!-- Modal content-->
-        <form class="contact" name="camion" action="<?php echo site_url('camion/save'); ?>" method="POST">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <a class="close" data-dismiss="modal">×</a>
-                    <h3><?php echo lang('SAVE_TRUCK'); ?></h3>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="numero"><?php echo lang('NUMBER'); ?>*:</label>
-                        <input type="text" name="numero" class="form-control" id="numero" required placeholder="<?php echo lang('TYPE_TRUCK_NUMBER'); ?>">
-                    </div>
-                </div>
-                <div class="mandatory">* <?php echo lang('MANDATORY_FIELD'); ?> </div>
-                <div class="modal-footer">
-                    <input class="btn btn-primary" type="submit" value="<?php echo lang('SUBMIT'); ?>" id="submit">
-                    <button class="btn btn-default" data-dismiss="modal"><?php echo lang('CANCEL'); ?></button>
-                </div>
-            </div>
-        </form>
+        <div class="modal-content">
+        </div>
     </div>
 </div>
-

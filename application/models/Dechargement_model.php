@@ -1,4 +1,7 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
 
 /**
  * Dechargement model
@@ -24,12 +27,13 @@ class Dechargement_model extends CI_Model
      * @var String
      */
     public static $pk = 'id_dechargement';
-    
+
     public function __construct()
     {
         parent::__construct();
         $this->load->database();
     }
+
     /**
      * retreives all unloading if the input parameter (id_dechargement) is false, or 
      * retreives the unloading identified by the input parameter value
@@ -48,7 +52,20 @@ class Dechargement_model extends CI_Model
         $query = $this->db->get_where(self::$table_name, array(self::$pk => $id_dechargement));
         return $query->row_array();
     }
-    
+
+    /**
+     * Updates an unloading
+     * 
+     * @param array $data
+     * @param array $where
+     * @return boolean
+     */
+    public function update($data, $where)
+    {
+        // do update
+        return $this->db->update(self::$table_name, $data, $where);
+    }
+
     /**
      * Delete a unload
      * 
@@ -59,6 +76,5 @@ class Dechargement_model extends CI_Model
     {
         return $this->db->delete(self::$table_name, $where);
     }
-
 
 }
