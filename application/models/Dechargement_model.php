@@ -54,6 +54,16 @@ class Dechargement_model extends CI_Model
     }
 
     /**
+     * Saves a unloading
+     * @param array $data
+     * @return boolean
+     */
+    public function save($data)
+    {
+        return $this->db->insert(self::$table_name, $data);
+    }
+
+    /**
      * Updates an unloading
      * 
      * @param array $data

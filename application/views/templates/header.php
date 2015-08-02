@@ -31,7 +31,7 @@
                             ?>  
                             <ul class="nav navbar-nav">
                                 <li class="<?php echo $active == 'dechargement' ? 'active' : '' ?>">
-                                    <a href="<?php echo site_url("dechargement"); ?>"><?php echo lang('UNLOADING'); ?></a>
+                                    <a href="<?php echo site_url("dechargement"); ?>"><?php echo lang('UNLOADINGS'); ?></a>
                                 </li>
                                 <li  class="<?php echo $active == 'camion' ? 'active' : ' ' ?>">
                                     <a href="<?php echo site_url("camion"); ?>"><?php echo lang('TRUCKS'); ?></a>

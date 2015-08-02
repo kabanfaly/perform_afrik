@@ -11,7 +11,7 @@ if (!defined('BASEPATH'))
  * @version 1.0
  * @package perform_afrik
  * @subpackage perform_afrik/application/controllers
- * * @filesource dechargement.php
+ * @filesource dechargement.php
  */
 class Dechargement extends CI_Controller
 {
@@ -22,6 +22,7 @@ class Dechargement extends CI_Controller
         $this->load->model('dechargement_model');
         $this->load->model('camion_model');
         $this->load->model('fournisseur_model');
+        $this->load->model('ville_model');
     }
 
     /**
@@ -33,12 +34,26 @@ class Dechargement extends CI_Controller
     public function index($msg = '', $error = FALSE)
     {
         $data = array(
-            'unloading' => $this->dechargement_model->get_dechargements(),
+            'unloadings' => $this->dechargement_model->get_dechargements(),
             'title' => lang('UNLOADING_MANAGEMENT'),
             'msg' => $msg,
             'error' => $error,
             'form_link' => site_url('dechargement/edit')
         );
+
+        if ($data['unloadings'] !== NULL)
+        {
+            foreach ($data['unloadings'] as &$unloading)
+            {
+                $trucks = $this->camion_model->get_camions($unloading['id_camion']);
+                $suppliers = $this->fournisseur_model->get_fournisseurs($unloading['id_fournisseur']);
+                $cities = $this->ville_model->get_villes($unloading['id_ville']);
+                $unloading['camion'] = $trucks['numero'];
+                $unloading['fournisseur'] = $suppliers['nom'];
+                $unloading['ville'] = $cities['nom'];
+                $unloading['date'] = $this->mk_app_date($unloading['date']);
+            }
+        }
 
         $this->display($data, 'dechargement/index');
     }
@@ -53,13 +68,15 @@ class Dechargement extends CI_Controller
 
         $data = array(
             'title' => lang('ADD_UNLOADING'),
-            'form_action' => site_url('dechargement/save')
+            'form_action' => site_url('dechargement/save'),
+            'trucks' => $this->camion_model->get_camions(),
+            'suppliers' => $this->fournisseur_model->get_fournisseurs(),
+            'cities' => $this->ville_model->get_villes()
         );
-
         // preset data for modification form
         if ($id_dechargement !== NULL)
         {
-
+            
             //get unloading by id
             $unloading = $this->dechargement_model->get_dechargements($id_dechargement);
 
@@ -68,6 +85,7 @@ class Dechargement extends CI_Controller
 
             $data['title'] = lang('EDIT_UNLOADING');
             $data['form_action'] = site_url('dechargement/update');
+            $data['date'] = $this->mk_app_date($data['date']);
         }
 
         $this->load->view('dechargement/form', $data);
@@ -89,6 +107,28 @@ class Dechargement extends CI_Controller
     }
 
     /**
+     * Converts application date format (dd/mm/YYYY) to db date format (YYYY-mm-dd)
+     * @param string $date
+     */
+    private function mk_db_date($date){
+        
+        //application date format is dd/mm/YYYY
+        
+        $explode_date = explode('/', $date);
+        return "{$explode_date[2]}-{$explode_date[1]}-{$explode_date[0]}";
+        
+    }
+    /**
+     * Converts bd date format (YYYY-mm-dd) to application date format (dd/mm/YYYY)
+     * @param string $date
+     */
+    private function mk_app_date($date){
+        
+        $explode_date = explode('-', $date);
+        return "{$explode_date[2]}/{$explode_date[1]}/{$explode_date[0]}";
+        
+    }
+    /**
      * builds inputs value in an array
      * @return array
      */
@@ -99,23 +139,24 @@ class Dechargement extends CI_Controller
         $id_camion = $this->input->post('id_camion');
         $id_fournisseur = $this->input->post('id_fournisseur');
         $id_ville = $this->input->post('id_ville');
-        $date = $this->input->post('date');
+        
+        $date = $this->mk_db_date($this->input->post('date'));        
         $good_bag = trim($this->input->post('bon_sac'));
         $torn_bag = trim($this->input->post('sac_dechire'));
         $gross_weight = trim($this->input->post('poids_brut'));
         $net_weight = trim($this->input->post('poids_net'));
         $humidity = trim($this->input->post('humidite'));
-        
+
         $total_bag = intval($good_bag) + intval($torn_bag);
         $refracted_weight = $this->compute_refracted($good_bag, $torn_bag, $net_weight);
 
         $data = array('id_camion' => $id_camion, 'id_ville' => $id_ville, 'id_fournisseur' => $id_fournisseur,
-            'date' => $date, 'bon_sac' => $good_bag, 'sac_dechire' => $torn_bag, 'total_sac' => $total_bag,
-            'poids_brut' => $gross_weight, 'poids_net' => $net_weight, 'poids_refracte' => $refracted_weight,'humidite' => $humidity);
+            'date' => $date, 'bon_sac' => $good_bag, 'sac_dechire' => $torn_bag, 'sac_total' => $total_bag,
+            'poids_brut' => $gross_weight, 'poids_net' => $net_weight, 'poids_refracte' => $refracted_weight, 'humidite' => $humidity);
 
         return $data;
     }
-    
+
     /**
      * 
      * @param float $good_bag
@@ -123,8 +164,9 @@ class Dechargement extends CI_Controller
      * @param float $net_weight
      * @return float
      */
-    private function compute_refracted($good_bag, $torn_bag, $net_weight){
-        
+    private function compute_refracted($good_bag, $torn_bag, $net_weight)
+    {
+
         return abs(($good_bag + $torn_bag * 8) - $net_weight);
     }
 
@@ -137,12 +179,12 @@ class Dechargement extends CI_Controller
         $data = $this->get_inputs();
 
         // save unloading
-        if ($this->dechargemtnt_model->save($data) !== FALSE)
+        if ($this->dechargement_model->save($data) !== FALSE)
         {
             redirect('dechargement/index/' . lang('SAVING_UNLOADING_SUCCESS'));
         } else
         {
-            redirect('dechargement/index/' . lang('SAVING_UNLOADING_FAILES').'/'.TRUE);
+            redirect('dechargement/index/' . lang('SAVING_UNLOADING_FAILES') . '/' . TRUE);
         }
     }
 
@@ -153,11 +195,11 @@ class Dechargement extends CI_Controller
     {
         // get input values
         $data = $this->get_inputs();
-
+        
         $id_dechargement = $this->input->post('id_dechargement');
 
         $where = array(Dechargement_model::$pk => $id_dechargement);
-
+        
         // update
         if ($this->dechargement_model->update($data, $where) !== FALSE)
         {

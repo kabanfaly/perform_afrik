@@ -11,7 +11,7 @@ if (!defined('BASEPATH'))
  * @version 1.0
  * @package perform_afrik
  * @subpackage perform_afrik/application/controllers
- * * @filesource fournisseur.php
+ * @filesource fournisseur.php
  */
 class Fournisseur extends CI_Controller
 {
