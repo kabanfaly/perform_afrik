@@ -1,17 +1,45 @@
-<?php if (isset($_SESSION['admin'])) { ?>
-</table>
-</div>
-</div>
+<?php
+if (isset($_SESSION['admin']))
+{
+    ?>
+    </table>
+    </div>
+    </div>
 <?php } ?>
 </div>
 </div>
-<footer id="footer" class="panel-footer">
-    <div class="container-fluid" role="contentinfo">
+<footer>
+    <div id="footer" class="panel-footer">
         <div class="row">
-            <div class="col-lg-12 col-md-12">
-                <center><small>&copy; Perform Afrik</small></center>
+            <div class="col-lg-10 col-md-10">
+                <h4><?php echo lang('CONTACT_NAME'); ?></h4>
+                <small>
+                    <br><br>
+                    <p>
+                        <i class="glyphicon glyphicon-home"></i>
+                        <?php echo lang('CONTACT_ADDRESS'); ?> 
+                        <br>
+                    </p> 
+                    <p>
+                        <i class="glyphicon glyphicon-envelope"></i>
+                        <?php echo lang('CONTACT_EMAIL'); ?> 
+                        <br>
+                    </p> 
+                    <p>
+                        <i class="glyphicon glyphicon-phone"></i>
+                        <?php echo lang('CONTACT_TEL'); ?> 
+                        <br>
+                    </p> 
+                </small>
+            </div>
+            <div class="col-lg-2 col-md-2 pull-right">
+
             </div>
         </div>
+
+    </div>
+    <div class="row copy-right">
+        <center><small>&copy; Perform Afrik 2015</small></center>
     </div>
 </footer>
 <?php

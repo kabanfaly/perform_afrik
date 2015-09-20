@@ -1,4 +1,8 @@
 <?php
+$lang['CONTACT_TEL'] = 'Tel: +225  ....';
+$lang['CONTACT_NAME'] = 'Perform Afrik <br';
+$lang['CONTACT_EMAIL'] = 'performafrik@gmail.com';
+$lang['CONTACT_ADDRESS'] = 'Plateau Immeuble du Mali <br> 21 BP 2924 <br> Abidjan 21';
 $lang['TRUCKS_MANAGEMENT'] = 'Gestion des camions';
 $lang['ADD_TRUCK'] = 'Ajout d\'un camion';
 $lang['EDIT_TRUCK'] = 'Modification d\'un camion';

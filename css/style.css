@@ -18,10 +18,13 @@ body{
 
 #footer{
     clear: both;
-    height: 50px;
+    min-height: 50px;
     /*    border-radius: 10px;
         border-top: solid 1px #999;*/
     margin: 50px auto 0px auto;
+}
+.copy-right{
+    background-color: lightgray;
 }
 .fixed{
     position: fixed;
