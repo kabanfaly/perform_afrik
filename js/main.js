@@ -2,6 +2,10 @@
 requirejs.config({
     "baseUrl": baseUrl+"assets",
     "urlArgs": "bust=" + (new Date()).getTime(),
+    shim : {
+        "bootstrap" : { "deps" :['jquery'] },
+        "datetimepicker" : { "deps" :['jquery'] }
+    },
     "paths": {
 //        "metro":"metro-ui-css/min/metro.min",
         "modelView" : "../js/modelView",
@@ -14,5 +18,4 @@ requirejs.config({
         "datatables.bootstrap" : "datatables-bootstrap3/BS3/assets/js/datatables"
     }
 });
-//require(["jquery", "jquery-ui", "angular", "datatables","bootstrap", "datatables.bootstrap", "modelView"]);
-require(["angular", "modelView"]);
+require(["modelView"]);
