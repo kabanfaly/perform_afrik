@@ -13,6 +13,8 @@
 
     <link href="css/metro.css" rel="stylesheet">
     <link href="css/metro-icons.css" rel="stylesheet">
+    <link href="css/metro-responsive.css" rel="stylesheet">
+    <link href="css/metro-schemes.css" rel="stylesheet">
 
     <link href="css/docs.css" rel="stylesheet">
 
@@ -24,15 +26,11 @@
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
 </head>
-<body onload="init()">
+<body>
     <div class="container page-content">
         <h1><a href="index.html" class="nav-button transform"><span></span></a>&nbsp;Accordion</h1>
-        <!-- Google adsense block -->
-        <div style="margin: 10px 0;"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1632668592742327" data-ad-slot="8347181909" data-ad-format="auto"></ins></div>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-        <!-- End of gad block -->
+
+        @@adsense
 
         <div class="example" data-text="example">
             <div class="grid">
@@ -113,7 +111,11 @@
                 <div class="row">
                     <div class="cell">
                         <h5>.accordion & .large-heading</h5>
-                        <div class="accordion large-heading" data-role="accordion">
+                        <div class="accordion large-heading" data-role="accordion"
+                             data-on-frame-open="return frame.attr('id') !== 'f3'"
+                             data-on-frame-opened="alert('You open frame '+frame.find('.heading').text())"
+                             data-on-frame-closed="alert('You close frame '+frame.find('.heading').text())"
+                            >
                             <div class="frame">
                                 <div class="heading">Item 1</div>
                                 <div class="content">
@@ -126,7 +128,13 @@
                                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute.
                                 </div>
                             </div>
-                            <div class="frame">
+                            <div class="frame active">
+                                <div class="heading">Item 4</div>
+                                <div class="content">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute.
+                                </div>
+                            </div>
+                            <div class="frame" id="f3">
                                 <div class="heading">Item 3</div>
                                 <div class="content">
                                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
@@ -170,28 +178,7 @@
         </div>
     </div>
 
-    <!-- hit.ua -->
-    <a href='http://hit.ua/?x=136046' target='_blank'>
-        <script language="javascript" type="text/javascript"><!--
-        Cd=document;Cr="&"+Math.random();Cp="&s=1";
-        Cd.cookie="b=b";if(Cd.cookie)Cp+="&c=1";
-        Cp+="&t="+(new Date()).getTimezoneOffset();
-        if(self!=top)Cp+="&f=1";
-        //--></script>
-        <script language="javascript1.1" type="text/javascript"><!--
-        if(navigator.javaEnabled())Cp+="&j=1";
-        //--></script>
-        <script language="javascript1.2" type="text/javascript"><!--
-        if(typeof(screen)!='undefined')Cp+="&w="+screen.width+"&h="+
-        screen.height+"&d="+(screen.colorDepth?screen.colorDepth:screen.pixelDepth);
-        //--></script>
-        <script language="javascript" type="text/javascript"><!--
-        Cd.write("<img src='http://c.hit.ua/hit?i=136046&g=0&x=2"+Cp+Cr+
-        "&r="+escape(Cd.referrer)+"&u="+escape(window.location.href)+
-        "' border='0' wi"+"dth='1' he"+"ight='1'/>");
-        //--></script></a>
-    <!-- / hit.ua -->
-
+    @@hit
 
 </body>
 </html>

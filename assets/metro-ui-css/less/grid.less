@@ -40,13 +40,19 @@
 					width: (@width);
 
 					.generate-colspan(@i);
-
 					.generate-colspan(@j, @k: 2) when (@k =< @j){
 						&.colspan@{k} {
 							width: @width * @k + ((@k - 1) * @gridMargin);
 						}
-
 						.generate-colspan(@j, (@k + 1));
+					}
+
+					.generate-offset(@i);
+					.generate-offset(@j, @k: 1) when (@k =< @j){
+						&.offset@{k} {
+							margin-left: @width * @k + ((@k - 1) * @gridMargin) + @gridMargin;
+						}
+						.generate-offset(@j, (@k + 1));
 					}
 				}
 			}
@@ -57,38 +63,6 @@
 
 	.row:empty {
 		display: none;
-	}
-
-	&:not(.no-responsive-future) {
-		@media screen and (max-width: 768px) {
-			.row {
-				margin: 0;
-			}
-
-			.row {
-				& > .cell, & > .cell[class*=colspan] {
-					width: 48.936175% ;
-					margin-bottom: 10px;
-
-					&:nth-child(odd) {
-						margin-left: 0;
-					}
-				}
-			}
-		}
-
-		@media only screen and (max-width: 640px) {
-			.row {
-				margin: 0;
-			}
-
-			.row {
-				& > .cell, & > .cell[class*=colspan] {
-					width: 100%;
-					margin: .3125rem 0;
-				}
-			}
-		}
 	}
 }
 
@@ -129,50 +103,26 @@
 					width: (@width);
 
 					.generate-colspan(@i);
-
 					.generate-colspan(@j, @k: 2) when (@k =< @j){
 						&.colspan@{k} {
 							width: @width * @k + ((@k - 1) * @gridMarginCondensed);
 						}
-
 						.generate-colspan(@j, (@k + 1));
 					}
-				}
+
+                    .generate-offset(@i);
+                    .generate-offset(@j, @k: 1) when (@k =< @j){
+                        &.offset@{k} {
+                            margin-left: @width * @k + ((@k - 1) * @gridMarginCondensed);
+                        }
+                        .generate-offset(@j, (@k + 1));
+                    }
+
+                }
 			}
 
 			.generate-cell(@n, (@i + 1));
 		}
 	}
-
-	&:not(.no-responsive-future) {
-		@media screen and (max-width: 768px) {
-			.row {
-				margin: 0;
-			}
-
-			.row {
-				& > .cell, & > .cell[class*=colspan] {
-					width: 50% ;
-					margin-bottom: 10px ;
-
-					&:nth-child(odd) {
-						margin-left: 0;
-					}
-				}
-			}
-		}
-
-		@media only screen and (max-width: 640px) {
-			.row {
-				margin: 0;
-			}
-
-			.row {
-				& > .cell, & > .cell[class*=colspan] {
-					width: 100%;
-					margin: .3125rem 0;
-				}
-			}
-		}
-	}
 }
+

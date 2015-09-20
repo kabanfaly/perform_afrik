@@ -13,6 +13,9 @@
 
     <link href="css/metro.css" rel="stylesheet">
     <link href="css/metro-icons.css" rel="stylesheet">
+    <link href="css/metro-responsive.css" rel="stylesheet">
+    <link href="css/metro-schemes.css" rel="stylesheet">
+
     <link href="css/docs.css" rel="stylesheet">
 
     <script src="js/jquery-2.1.3.min.js"></script>
@@ -23,15 +26,11 @@
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
 </head>
-<body onload="init()">
+<body>
     <div class="container page-content">
-        <h1><a href="index.html" class="nav-button transform"><span></span></a>&nbsp;Grid system</h1>
-        <!-- Google adsense block -->
-        <div style="margin: 10px 0;"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1632668592742327" data-ad-slot="8347181909" data-ad-format="auto"></ins></div>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-        <!-- End of gad block -->
+        <h1><a href="index.html" class="nav-button transform"><span></span></a>&nbsp;Simple grid</h1>
+
+        @@adsense
 
         <div class="margin20 no-margin-left no-margin-right sub-header text-light">
             Metro UI CSS includes a responsive fluid grid system that appropriately scales up to 12 columns. It includes predefined classes for easy layout options.
@@ -39,7 +38,7 @@
 
         <div class="example" data-text="example">
             <h5>Default grid</h5>
-            <div class="grid">
+            <div class="grid demo-grid">
                 <div class="row cells3">
                     <div class="cell debug">1</div>
                     <div class="cell debug">2</div>
@@ -73,8 +72,50 @@
         </div>
 
         <div class="example" data-text="example">
+            <h5>Offset for default grid</h5>
+            <div class="grid demo-grid">
+                <div class="row cells12">
+                    <div class="cell offset11">offset11</div>
+                </div>
+                <div class="row cells12">
+                    <div class="cell offset10 colspan2">offset10</div>
+                </div>
+                <div class="row cells12">
+                    <div class="cell offset9 colspan3">offset9</div>
+                </div>
+                <div class="row cells12">
+                    <div class="cell offset8 colspan4">offset8</div>
+                </div>
+                <div class="row cells12">
+                    <div class="cell offset7 colspan5">offset7</div>
+                </div>
+                <div class="row cells12">
+                    <div class="cell offset6 colspan6">offset6</div>
+                </div>
+                <div class="row cells12">
+                    <div class="cell offset5 colspan7">offset5</div>
+                </div>
+                <div class="row cells12">
+                    <div class="cell offset4 colspan8">offset4</div>
+                </div>
+                <div class="row cells12">
+                    <div class="cell offset3 colspan9">offset3</div>
+                </div>
+                <div class="row cells12">
+                    <div class="cell offset2 colspan10">offset2</div>
+                </div>
+                <div class="row cells12">
+                    <div class="cell offset1 colspan11">offset1</div>
+                </div>
+                <div class="row">
+                    <div class="cell">no offset</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="example" data-text="example">
             <h5>Condensed grid</h5>
-            <div class="grid condensed">
+            <div class="grid condensed demo-grid">
                 <div class="row cells3">
                     <div class="cell debug">1</div>
                     <div class="cell debug">2</div>
@@ -103,6 +144,48 @@
                     <div class="cell debug">10</div>
                     <div class="cell debug">11</div>
                     <div class="cell debug">12</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="example" data-text="example">
+            <h5>Offset for condensed grid</h5>
+            <div class="grid condensed demo-grid">
+                <div class="row cells12">
+                    <div class="cell offset11">offset11</div>
+                </div>
+                <div class="row cells12">
+                    <div class="cell offset10 colspan2">offset10</div>
+                </div>
+                <div class="row cells12">
+                    <div class="cell offset9 colspan3">offset9</div>
+                </div>
+                <div class="row cells12">
+                    <div class="cell offset8 colspan4">offset8</div>
+                </div>
+                <div class="row cells12">
+                    <div class="cell offset7 colspan5">offset7</div>
+                </div>
+                <div class="row cells12">
+                    <div class="cell offset6 colspan6">offset6</div>
+                </div>
+                <div class="row cells12">
+                    <div class="cell offset5 colspan7">offset5</div>
+                </div>
+                <div class="row cells12">
+                    <div class="cell offset4 colspan8">offset4</div>
+                </div>
+                <div class="row cells12">
+                    <div class="cell offset3 colspan9">offset3</div>
+                </div>
+                <div class="row cells12">
+                    <div class="cell offset2 colspan10">offset2</div>
+                </div>
+                <div class="row cells12">
+                    <div class="cell offset1 colspan11">offset1</div>
+                </div>
+                <div class="row">
+                    <div class="cell">no offset</div>
                 </div>
             </div>
         </div>
@@ -166,28 +249,7 @@
         </div>
     </div>
 
-    <!-- hit.ua -->
-    <a href='http://hit.ua/?x=136046' target='_blank'>
-        <script language="javascript" type="text/javascript"><!--
-        Cd=document;Cr="&"+Math.random();Cp="&s=1";
-        Cd.cookie="b=b";if(Cd.cookie)Cp+="&c=1";
-        Cp+="&t="+(new Date()).getTimezoneOffset();
-        if(self!=top)Cp+="&f=1";
-        //--></script>
-        <script language="javascript1.1" type="text/javascript"><!--
-        if(navigator.javaEnabled())Cp+="&j=1";
-        //--></script>
-        <script language="javascript1.2" type="text/javascript"><!--
-        if(typeof(screen)!='undefined')Cp+="&w="+screen.width+"&h="+
-        screen.height+"&d="+(screen.colorDepth?screen.colorDepth:screen.pixelDepth);
-        //--></script>
-        <script language="javascript" type="text/javascript"><!--
-        Cd.write("<img src='http://c.hit.ua/hit?i=136046&g=0&x=2"+Cp+Cr+
-        "&r="+escape(Cd.referrer)+"&u="+escape(window.location.href)+
-        "' border='0' wi"+"dth='1' he"+"ight='1'/>");
-        //--></script></a>
-    <!-- / hit.ua -->
-
+    @@hit
 
 </body>
 </html>

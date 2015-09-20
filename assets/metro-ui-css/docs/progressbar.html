@@ -13,6 +13,9 @@
 
     <link href="css/metro.css" rel="stylesheet">
     <link href="css/metro-icons.css" rel="stylesheet">
+    <link href="css/metro-responsive.css" rel="stylesheet">
+    <link href="css/metro-schemes.css" rel="stylesheet">
+
     <link href="css/docs.css" rel="stylesheet">
 
     <script src="js/jquery-2.1.3.min.js"></script>
@@ -23,33 +26,58 @@
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
 </head>
-<body onload="init()">
+<body>
     <div class="container page-content">
         <h1><a href="index.html" class="nav-button transform"><span></span></a>&nbsp;ProgressBar</h1>
-        <!-- Google adsense block -->
-        <div style="margin: 10px 0;"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1632668592742327" data-ad-slot="8347181909" data-ad-format="auto"></ins></div>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-        <!-- End of gad block -->
+
+        @@adsense
 
         <div class="example" data-text="example">
-            <h5>Small</h5>
-            <div class="progress small" data-value="30" data-role="progressBar"></div>
             <h5>Default</h5>
-            <div class="progress" data-value="85" data-color="bg-red" data-role="progressBar"></div>
+            <div class="progress" data-value="85" data-color="bg-red" data-role="progress"></div>
+
+            <pre class="prettyprint linenums no-scroll-x"><code>
+                &lt;div class="progress"
+                    data-value="85"
+                    data-color="bg-red"
+                    data-role="progress"&gt;&lt;/div&gt;
+            </code></pre>
+
+            <h5>Small</h5>
+            <div class="progress small" data-value="30" data-role="progress"></div>
+            <pre class="prettyprint linenums no-scroll-x"><code>
+                &lt;div class="progress small" data-role="progress"&gt;&lt;/div&gt;
+            </code></pre>
+
             <h5>Large</h5>
-            <div class="progress large" data-value="55" data-color="ribbed-amber" data-role="progressBar"></div>
+            <div class="progress large" data-value="55" data-color="ribbed-amber" data-role="progress"></div>
+            <pre class="prettyprint linenums no-scroll-x"><code>
+                &lt;div class="progress large" data-role="progress"&gt;&lt;/div&gt;
+            </code></pre>
+
             <h5>Gradient</h5>
-            <div class="progress small gradient-bar" data-value="85" data-role="progressBar"></div>
+            <div class="progress small gradient-bar" data-value="85" data-role="progress"></div>
+            <pre class="prettyprint linenums no-scroll-x"><code>
+                &lt;div class="progress gradient-bar" data-role="progress"&gt;&lt;/div&gt;
+            </code></pre>
+
+            <h5>Animate</h5>
+            <div class="progress small" data-animate="500" data-value="85" data-role="progress"></div>
+            <div class="progress large ani" data-value="55" data-color="ribbed-amber" data-role="progress"></div>
+
+            <pre class="prettyprint linenums no-scroll-x"><code>
+                &lt;div class="progress small" data-animate="500" data-role="progress"&gt;&lt;/div&gt;
+
+                &lt;div class="progress ani" data-color="ribbed-amber" data-role="progress"&gt;&lt;/div&gt;
+            </code></pre>
         </div>
 
         <div class="grid">
             <div class="row cells2">
                 <div class="cell">
                     <div class="example" data-text="example">
-                        <h5>Simple color test</h5>
-                        <div class="progress small" id="pb1" data-role="progressBar" data-value="0" data-color="bg-pink"></div>
+                        <h5>Simple color test <span id="sct-1">0%</span></h5>
+                        <div class="progress small" id="pb1" data-role="progress" data-value="0" data-color="bg-pink" data-on-progress="$('#sct-1').html(value+'%')"></div>
 
                         <button class="button success" onclick="runPB1()">Start</button>
                         <button class="button danger" onclick="stopPB1()">Stop</button>
@@ -59,11 +87,11 @@
                             var interval1;
                             function runPB1(){
                                 clearInterval(interval1);
-                                var pb = $("#pb1").progressBar();
+                                var pb = $("#pb1").data('progress');
                                 var val = 0;
                                 interval1 = setInterval(function(){
                                     val += 1;
-                                    pb.progressBar('progress', val);
+                                    pb.set(val);
                                     if (val >= 100) {
                                         val = 0;
                                         clearInterval(interval1);
@@ -73,8 +101,8 @@
 
                             function flashPB1(){
                                 clearInterval(interval1);
-                                var pb = $("#pb1").progressBar();
-                                pb.progressBar('progress', 0);
+                                var pb = $("#pb1").data('progress');
+                                pb.set(0);
                             }
 
                             function stopPB1(){
@@ -86,7 +114,7 @@
                 <div class="cell">
                     <div class="example" data-text="example">
                         <h5>Multi color test</h5>
-                        <div class="progress small" id="pb2" data-parts="true" data-role="progressBar" data-value="0" data-colors='{"bg-red": 33, "bg-yellow": 66, "bg-cyan": 90, "bg-green": 100}'></div>
+                        <div class="progress small" id="pb2" data-parts="true" data-role="progress" data-value="0" data-colors='{"bg-red": 33, "bg-yellow": 66, "bg-cyan": 90, "bg-green": 100}'></div>
 
                         <button class="button success" onclick="runPB2()">Start</button>
                         <button class="button danger" onclick="stopPB2()">Stop</button>
@@ -96,11 +124,11 @@
                             var interval2;
                             function runPB2(){
                                 clearInterval(interval2);
-                                var pb = $("#pb2").progressBar();
+                                var pb = $("#pb2").data('progress');
                                 var val = 0;
                                 interval2 = setInterval(function(){
                                     val += 2;
-                                    pb.progressBar('progress', val);
+                                    pb.set(val);
                                     if (val >= 100) {
                                         val = 0;
                                         clearInterval(interval2);
@@ -110,8 +138,8 @@
 
                             function flashPB2(){
                                 clearInterval(interval2);
-                                var pb = $("#pb2").progressBar();
-                                pb.progressBar('progress', 0);
+                                var pb = $("#pb2").data('progress');
+                                pb.set(0);
                             }
 
                             function stopPB2(){
@@ -122,30 +150,40 @@
                 </div>
             </div>
         </div>
+
+        <div class="example" data-text="code">
+            <pre class="prettyprint linenums no-scroll-x"><code>
+                &lt;script&gt;
+                    var interval1;
+                    function runPB1(){
+                        clearInterval(interval1);
+                        var pb = $("#pb1").data('progress');
+                        var val = 0;
+                        interval1 = setInterval(function(){
+                            val += 1;
+                            pb.set(val);
+                            if (val >= 100) {
+                                val = 0;
+                                clearInterval(interval1);
+                            }
+                        }, 100);
+                    }
+
+                    function flashPB1(){
+                        clearInterval(interval1);
+                        var pb = $("#pb1").data('progress');
+                        pb.set(0);
+                    }
+
+                    function stopPB1(){
+                        clearInterval(interval1);
+                    }
+                &lt;/script&gt;
+            </code></pre>
+        </div>
     </div>
 
-    <!-- hit.ua -->
-    <a href='http://hit.ua/?x=136046' target='_blank'>
-        <script language="javascript" type="text/javascript"><!--
-        Cd=document;Cr="&"+Math.random();Cp="&s=1";
-        Cd.cookie="b=b";if(Cd.cookie)Cp+="&c=1";
-        Cp+="&t="+(new Date()).getTimezoneOffset();
-        if(self!=top)Cp+="&f=1";
-        //--></script>
-        <script language="javascript1.1" type="text/javascript"><!--
-        if(navigator.javaEnabled())Cp+="&j=1";
-        //--></script>
-        <script language="javascript1.2" type="text/javascript"><!--
-        if(typeof(screen)!='undefined')Cp+="&w="+screen.width+"&h="+
-        screen.height+"&d="+(screen.colorDepth?screen.colorDepth:screen.pixelDepth);
-        //--></script>
-        <script language="javascript" type="text/javascript"><!--
-        Cd.write("<img src='http://c.hit.ua/hit?i=136046&g=0&x=2"+Cp+Cr+
-        "&r="+escape(Cd.referrer)+"&u="+escape(window.location.href)+
-        "' border='0' wi"+"dth='1' he"+"ight='1'/>");
-        //--></script></a>
-    <!-- / hit.ua -->
-
+    @@hit
 
 </body>
 </html>

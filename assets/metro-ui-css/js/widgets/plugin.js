@@ -1,38 +1,38 @@
-(function ( $ ) {
+$.widget( "metro.widget" , {
 
-    "use strict";
+    version: "3.0.0",
 
-    $.widget( "metro.widget" , {
+    options: {
+        someValue: null
+    },
 
-        version: "3.0.0",
+    _create: function () {
+        var that = this, element = this.element, o = this.options;
 
-        options: {
-            someValue: null
-        },
+        this._setOprionsFromDOM();
 
-        _create: function () {
-            var that = this, element = this.element, o = this.options;
+        element.data('widget', this);
 
-            $.each(element.data(), function(key, value){
-                if (key in o) {
-                    try {
-                        o[key] = $.parseJSON(value);
-                    } catch (e) {
-                        o[key] = value;
-                    }
+    },
+
+    _setOprionsFromDOM: function(){
+        var that = this, element = this.element, o = this.options;
+
+        $.each(element.data(), function(key, value){
+            if (key in o) {
+                try {
+                    o[key] = $.parseJSON(value);
+                } catch (e) {
+                    o[key] = value;
                 }
-            });
+            }
+        });
+    },
 
-            element.data('widget', this);
+    _destroy: function () {
+    },
 
-        },
-
-        _destroy: function () {
-        },
-
-        _setOption: function ( key, value ) {
-            this._super('_setOption', key, value);
-        }
-    });
-
-})( jQuery );
+    _setOption: function ( key, value ) {
+        this._super('_setOption', key, value);
+    }
+});

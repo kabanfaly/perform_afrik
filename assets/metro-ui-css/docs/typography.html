@@ -13,6 +13,9 @@
 
     <link href="css/metro.css" rel="stylesheet">
     <link href="css/metro-icons.css" rel="stylesheet">
+    <link href="css/metro-responsive.css" rel="stylesheet">
+    <link href="css/metro-schemes.css" rel="stylesheet">
+
     <link href="css/docs.css" rel="stylesheet">
 
     <script src="js/jquery-2.1.3.min.js"></script>
@@ -23,15 +26,11 @@
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
 </head>
-<body onload="init()">
+<body>
     <div class="container page-content">
         <h1><a href="index.html" class="nav-button transform"><span></span></a>&nbsp;Typography</h1>
-        <!-- Google adsense block -->
-        <div style="margin: 10px 0;"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1632668592742327" data-ad-slot="8347181909" data-ad-format="auto"></ins></div>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-        <!-- End of gad block -->
+
+        @@adsense
 
         <div class="example" data-text="font">
             <table class="table bordered">
@@ -321,6 +320,7 @@
 
         <div class="example" data-text="stylized lists">
             <div class="grid">
+                <h5>Default bullets</h5>
                 <div class="row cells3">
                     <div class="cell">
                         <h5>.simple-list</h5>
@@ -360,6 +360,194 @@
                             <li>Aenean sit amet erat nunc</li>
                             <li>Eget porttitor lorem</li>
                         </ol>
+                    </div>
+                </div>
+
+                <h5>Large bullets</h5>
+                <div class="row cells3">
+                    <div class="cell">
+                        <h5>.simple-list</h5>
+                        <ul class="simple-list large-bullet">
+                            <li>Lorem ipsum dolor sit amet</li>
+                            <li>Consectetur adipiscing elit</li>
+                            <li>Integer molestie lorem at massa</li>
+                            <li>Facilisis in pretium nisl aliquet</li>
+                            <li>Nulla volutpat aliquam velit</li>
+                            <li>Faucibus porta lacus fringilla vel</li>
+                            <li>Aenean sit amet erat nunc</li>
+                            <li>Eget porttitor lorem</li>
+                        </ul>
+                    </div>
+                    <div class="cell">
+                        <h5>.numeric-list</h5>
+                        <ol class="numeric-list large-bullet">
+                            <li>Lorem ipsum dolor sit amet</li>
+                            <li>Consectetur adipiscing elit</li>
+                            <li>Integer molestie lorem at massa</li>
+                            <li>Facilisis in pretium nisl aliquet</li>
+                            <li>Nulla volutpat aliquam velit</li>
+                            <li>Faucibus porta lacus fringilla vel</li>
+                            <li>Aenean sit amet erat nunc</li>
+                            <li>Eget porttitor lorem</li>
+                        </ol>
+                    </div>
+                    <div class="cell">
+                        <h5>.numeric-list.square-marker</h5>
+                        <ol class="numeric-list square-marker large-bullet">
+                            <li>Lorem ipsum dolor sit amet</li>
+                            <li>Consectetur adipiscing elit</li>
+                            <li>Integer molestie lorem at massa</li>
+                            <li>Facilisis in pretium nisl aliquet</li>
+                            <li>Nulla volutpat aliquam velit</li>
+                            <li>Faucibus porta lacus fringilla vel</li>
+                            <li>Aenean sit amet erat nunc</li>
+                            <li>Eget porttitor lorem</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <h5>Colored bullets</h5>
+                <div class="row cells5">
+                    <div class="cell">
+                        <h5>.dark-bullet</h5>
+                        <ul class="simple-list large-bullet dark-bullet">
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                        </ul>
+                    </div>
+                    <div class="cell">
+                        <h5>.red-bullet</h5>
+                        <ul class="simple-list large-bullet red-bullet">
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                        </ul>
+                    </div>
+                    <div class="cell">
+                        <h5>.green-bullet</h5>
+                        <ul class="simple-list large-bullet green-bullet">
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                        </ul>
+                    </div>
+                    <div class="cell">
+                        <h5>.blue-bullet</h5>
+                        <ul class="simple-list large-bullet blue-bullet">
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                        </ul>
+                    </div>
+                    <div class="cell">
+                        <h5>.yellow-bullet</h5>
+                        <ul class="simple-list large-bullet yellow-bullet">
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row cells5">
+                    <div class="cell">
+                        <h5>.dark-bullet</h5>
+                        <ul class="numeric-list large-bullet dark-bullet">
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                        </ul>
+                    </div>
+                    <div class="cell">
+                        <h5>.red-bullet</h5>
+                        <ul class="numeric-list large-bullet red-bullet">
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                        </ul>
+                    </div>
+                    <div class="cell">
+                        <h5>.green-bullet</h5>
+                        <ul class="numeric-list large-bullet green-bullet">
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                        </ul>
+                    </div>
+                    <div class="cell">
+                        <h5>.blue-bullet</h5>
+                        <ul class="numeric-list large-bullet blue-bullet">
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                        </ul>
+                    </div>
+                    <div class="cell">
+                        <h5>.yellow-bullet</h5>
+                        <ul class="numeric-list large-bullet yellow-bullet">
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row cells5">
+                    <div class="cell">
+                        <h5>.dark-bullet</h5>
+                        <ul class="numeric-list large-bullet dark-bullet square-bullet">
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                        </ul>
+                    </div>
+                    <div class="cell">
+                        <h5>.red-bullet</h5>
+                        <ul class="numeric-list large-bullet red-bullet square-bullet">
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                        </ul>
+                    </div>
+                    <div class="cell">
+                        <h5>.green-bullet</h5>
+                        <ul class="numeric-list large-bullet green-bullet square-bullet">
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                        </ul>
+                    </div>
+                    <div class="cell">
+                        <h5>.blue-bullet</h5>
+                        <ul class="numeric-list large-bullet blue-bullet square-bullet">
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                        </ul>
+                    </div>
+                    <div class="cell">
+                        <h5>.yellow-bullet</h5>
+                        <ul class="numeric-list large-bullet yellow-bullet square-bullet">
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                            <li>Lorem ipsum</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -463,30 +651,10 @@
                 Quisque dapibus elit ut metus varius ac bibendum  sem luctus. <span class="tag warning">Lorem ipsum</span> dolor sit amet, consectetur adipiscing elit. Sed quis sagittis lorem. Praesent ac eros quam.
             </p>
         </div>
+
     </div>
 
-    <!-- hit.ua -->
-    <a href='http://hit.ua/?x=136046' target='_blank'>
-        <script language="javascript" type="text/javascript"><!--
-        Cd=document;Cr="&"+Math.random();Cp="&s=1";
-        Cd.cookie="b=b";if(Cd.cookie)Cp+="&c=1";
-        Cp+="&t="+(new Date()).getTimezoneOffset();
-        if(self!=top)Cp+="&f=1";
-        //--></script>
-        <script language="javascript1.1" type="text/javascript"><!--
-        if(navigator.javaEnabled())Cp+="&j=1";
-        //--></script>
-        <script language="javascript1.2" type="text/javascript"><!--
-        if(typeof(screen)!='undefined')Cp+="&w="+screen.width+"&h="+
-        screen.height+"&d="+(screen.colorDepth?screen.colorDepth:screen.pixelDepth);
-        //--></script>
-        <script language="javascript" type="text/javascript"><!--
-        Cd.write("<img src='http://c.hit.ua/hit?i=136046&g=0&x=2"+Cp+Cr+
-        "&r="+escape(Cd.referrer)+"&u="+escape(window.location.href)+
-        "' border='0' wi"+"dth='1' he"+"ight='1'/>");
-        //--></script></a>
-    <!-- / hit.ua -->
-
+    @@hit
 
 </body>
 </html>

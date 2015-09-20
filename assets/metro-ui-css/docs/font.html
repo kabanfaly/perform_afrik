@@ -13,6 +13,9 @@
 
     <link href="css/metro.css" rel="stylesheet">
     <link href="css/metro-icons.css" rel="stylesheet">
+    <link href="css/metro-responsive.css" rel="stylesheet">
+    <link href="css/metro-schemes.css" rel="stylesheet">
+
     <link href="css/docs.css" rel="stylesheet">
 
     <script src="js/jquery-2.1.3.min.js"></script>
@@ -46,15 +49,11 @@
     </style>
 
 </head>
-<body onload="init()">
+<body>
     <div class="container page-content">
         <h1><a href="index.html" class="nav-button transform"><span></span></a>&nbsp;Metro Icon Font</h1>
-        <!-- Google adsense block -->
-        <div style="margin: 10px 0;"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1632668592742327" data-ad-slot="8347181909" data-ad-format="auto"></ins></div>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-        <!-- End of gad block -->
+
+        @@adsense
 
         <div class="margin20 no-margin-left no-margin-right sub-header text-light">
             Metro Icon Font gives you scalable vector icons that can instantly be customized — size, color, drop shadow, and anything that can be done with the power of CSS. Metro Icon Font includes over 400 icons.
@@ -111,8 +110,8 @@
             </code></pre>
         </div>
 
-        <h2 class="text-light">Icons <span class="small dropdown-toggle">goto</span>
-            <ul class="d-menu" data-role="dropdown">
+        <h2 class="text-light pos-rel">Icons <span class="small dropdown-toggle">goto</span>
+            <ul class="d-menu context" data-role="dropdown">
                 <li><a href="#_application_">Application icons</a></li>
                 <li><a href="#_mobile_">Mobile icons</a></li>
                 <li><a href="#_device_">Device icons</a></li>
@@ -128,9 +127,82 @@
             Below is an exhaustive list of icons that are included in Metro Icon Font.
         </p>
 
+        <h4 id="_new_">New icons</h4>
+        <div class="example">
+            <ul class="inline-list icon-list">
+                <li><span class="mif-microscope"></span> microscope</li>
+                <li><span class="mif-stack2"></span> stack2</li>
+                <li><span class="mif-stack3"></span> stack3</li>
+                <li><span class="mif-lamp"></span> lamp</li>
+                <li><span class="mif-injection"></span> injection</li>
+                <li><span class="mif-thermometer2"></span> thermometer2</li>
+                <li><span class="mif-justice"></span> justice</li>
+                <li><span class="mif-user-md"></span> user-md</li>
+                <li><span class="mif-stethoscope"></span> stethoscope</li>
+                <li><span class="mif-ambulance"></span> ambulance</li>
+                <li><span class="mif-medkit"></span> medkit</li>
+                <li><span class="mif-paw"></span> paw</li>
+                <li><span class="mif-file-pdf"></span> file-pdf</li>
+                <li><span class="mif-file-word"></span> file-word</li>
+                <li><span class="mif-file-excel"></span> file-excel</li>
+                <li><span class="mif-file-powerpoint"></span> file-powerpoint</li>
+                <li><span class="mif-file-image"></span> file-image</li>
+                <li><span class="mif-file-archive"></span> file-archive</li>
+                <li><span class="mif-file-audio"></span> file-audio</li>
+                <li><span class="mif-file-movie"></span> file-movie</li>
+                <li><span class="mif-file-code"></span> file-code</li>
+                <li><span class="mif-visa"></span> visa</li>
+                <li><span class="mif-mastercard"></span> mastercard</li>
+                <li><span class="mif-discover"></span> discover</li>
+                <li><span class="mif-amex"></span> amex</li>
+                <li><span class="mif-cc-paypal"></span> cc-paypal</li>
+                <li><span class="mif-heartbeat"></span> heartbeat</li>
+                <li><span class="mif-venus"></span> venus</li>
+                <li><span class="mif-mars"></span> mars</li>
+                <li><span class="mif-medium"></span> medium</li>
+                <li><span class="mif-directions-bike"></span> directions-bike</li>
+                <li><span class="mif-location-city"></span> location-city</li>
+                <li><span class="mif-library"></span> library</li>
+            </ul>
+        </div>
+
+
         <h4 id="_application_">Application icons</h4>
         <div class="example">
             <ul class="inline-list icon-list">
+                <li><span class="mif-microscope"></span> microscope</li>
+                <li><span class="mif-stack2"></span> stack2</li>
+                <li><span class="mif-stack3"></span> stack3</li>
+                <li><span class="mif-lamp"></span> lamp</li>
+                <li><span class="mif-injection"></span> injection</li>
+                <li><span class="mif-thermometer2"></span> thermometer2</li>
+                <li><span class="mif-justice"></span> justice</li>
+                <li><span class="mif-user-md"></span> user-md</li>
+                <li><span class="mif-stethoscope"></span> stethoscope</li>
+                <li><span class="mif-ambulance"></span> ambulance</li>
+                <li><span class="mif-medkit"></span> medkit</li>
+                <li><span class="mif-paw"></span> paw</li>
+                <li><span class="mif-file-pdf"></span> file-pdf</li>
+                <li><span class="mif-file-word"></span> file-word</li>
+                <li><span class="mif-file-excel"></span> file-excel</li>
+                <li><span class="mif-file-powerpoint"></span> file-powerpoint</li>
+                <li><span class="mif-file-image"></span> file-image</li>
+                <li><span class="mif-file-archive"></span> file-archive</li>
+                <li><span class="mif-file-audio"></span> file-audio</li>
+                <li><span class="mif-file-movie"></span> file-movie</li>
+                <li><span class="mif-file-code"></span> file-code</li>
+                <li><span class="mif-visa"></span> visa</li>
+                <li><span class="mif-mastercard"></span> mastercard</li>
+                <li><span class="mif-discover"></span> discover</li>
+                <li><span class="mif-amex"></span> amex</li>
+                <li><span class="mif-cc-paypal"></span> cc-paypal</li>
+                <li><span class="mif-heartbeat"></span> heartbeat</li>
+                <li><span class="mif-venus"></span> venus</li>
+                <li><span class="mif-mars"></span> mars</li>
+                <li><span class="mif-medium"></span> medium</li>
+                <li><span class="mif-directions-bike"></span> directions-bike</li>
+                <li><span class="mif-location-city"></span> location-city</li>
+                <li><span class="mif-library"></span> library</li>
                 <li><span class="mif-calculator2"></span> calculator2</li>
                 <li><span class="mif-barbell"></span> barbell</li>
                 <li><span class="mif-3d-rotation"></span> 3d-rotation</li>
@@ -613,30 +685,65 @@
                 <li><span class="mif-loop2 mif-ani-pulse"></span> loop2</li>
             </ul>
         </div>
+
+        <h4 id="_animated_">Animated icons</h4>
+        <div class="padding10 bg-lighterBlue fg-white margin10 no-margin-right no-margin-left align-center">
+            Special thanks to <a href="https://github.com/MenesesEvandro" class="text-accent text-bold fg-white">Meneses Evandro</a> for adding this animations.
+        </div>
+        <div class="example">
+            <h5>Normal speed</h5>
+            <ul class="inline-list icon-list">
+                <li><span class="mif-wrench mif-ani-spanner"></span> spanner</li>
+                <li><span class="mif-bell mif-ani-ring"></span> bell</li>
+                <li><span class="mif-envelop mif-ani-vertical"></span> vertical</li>
+                <li><span class="mif-blocked mif-ani-horizontal"></span> horizontal</li>
+                <li><span class="mif-warning mif-ani-flash"></span> flash</li>
+                <li><span class="mif-thumbs-up mif-ani-bounce"></span> bounce</li>
+                <li><span class="mif-paper-plane mif-ani-float"></span> float</li>
+                <li><span class="mif-heart mif-ani-heartbeat"></span> heartbeat</li>
+                <li><span class="mif-envelop mif-ani-shake"></span> shake</li>
+                <li><span class="mif-gift mif-ani-shuttle"></span> shuttle</li>
+                <li><span class="mif-truck mif-ani-pass"></span> pass</li>
+                <li><span class="mif-earth mif-ani-ripple"></span> ripple</li>
+            </ul>
+            <h5>Fast speed (with subclass mif-ani-fast)</h5>
+            <ul class="inline-list icon-list">
+                <li><span class="mif-wrench mif-ani-spanner mif-ani-fast"></span> spanner</li>
+                <li><span class="mif-bell mif-ani-ring mif-ani-fast"></span> bell</li>
+                <li><span class="mif-envelop mif-ani-vertical mif-ani-fast"></span> vertical</li>
+                <li><span class="mif-blocked mif-ani-horizontal mif-ani-fast"></span> horizontal</li>
+                <li><span class="mif-warning mif-ani-flash mif-ani-fast"></span> flash</li>
+                <li><span class="mif-thumbs-up mif-ani-bounce mif-ani-fast"></span> bounce</li>
+                <li><span class="mif-paper-plane mif-ani-float mif-ani-fast"></span> float</li>
+                <li><span class="mif-heart mif-ani-heartbeat mif-ani-fast"></span> heartbeat</li>
+                <li><span class="mif-envelop mif-ani-shake mif-ani-fast"></span> shake</li>
+                <li><span class="mif-gift mif-ani-shuttle mif-ani-fast"></span> shuttle</li>
+                <li><span class="mif-truck mif-ani-pass mif-ani-fast"></span> pass</li>
+                <li><span class="mif-earth mif-ani-ripple mif-ani-fast"></span> ripple</li>
+            </ul>
+            <h5>Slow speed (with subclass mif-ani-slow)</h5>
+            <ul class="inline-list icon-list">
+                <li><span class="mif-wrench mif-ani-spanner mif-ani-slow"></span> spanner</li>
+                <li><span class="mif-bell mif-ani-ring mif-ani-slow"></span> bell</li>
+                <li><span class="mif-envelop mif-ani-vertical mif-ani-slow"></span> vertical</li>
+                <li><span class="mif-blocked mif-ani-horizontal mif-ani-slow"></span> horizontal</li>
+                <li><span class="mif-warning mif-ani-flash mif-ani-slow"></span> flash</li>
+                <li><span class="mif-thumbs-up mif-ani-bounce mif-ani-slow"></span> bounce</li>
+                <li><span class="mif-paper-plane mif-ani-float mif-ani-slow"></span> float</li>
+                <li><span class="mif-heart mif-ani-heartbeat mif-ani-slow"></span> heartbeat</li>
+                <li><span class="mif-envelop mif-ani-shake mif-ani-slow"></span> shake</li>
+                <li><span class="mif-gift mif-ani-shuttle mif-ani-slow"></span> shuttle</li>
+                <li><span class="mif-truck mif-ani-pass mif-ani-slow"></span> pass</li>
+                <li><span class="mif-earth mif-ani-ripple mif-ani-slow"></span> ripple</li>
+            </ul>
+            <p>
+                To use animation only on-hover use classes with <span class="tag">mif-ani-hover-*</span>.
+            </p>
+        </div>
+
     </div>
 
-    <!-- hit.ua -->
-    <a href='http://hit.ua/?x=136046' target='_blank'>
-        <script language="javascript" type="text/javascript"><!--
-        Cd=document;Cr="&"+Math.random();Cp="&s=1";
-        Cd.cookie="b=b";if(Cd.cookie)Cp+="&c=1";
-        Cp+="&t="+(new Date()).getTimezoneOffset();
-        if(self!=top)Cp+="&f=1";
-        //--></script>
-        <script language="javascript1.1" type="text/javascript"><!--
-        if(navigator.javaEnabled())Cp+="&j=1";
-        //--></script>
-        <script language="javascript1.2" type="text/javascript"><!--
-        if(typeof(screen)!='undefined')Cp+="&w="+screen.width+"&h="+
-        screen.height+"&d="+(screen.colorDepth?screen.colorDepth:screen.pixelDepth);
-        //--></script>
-        <script language="javascript" type="text/javascript"><!--
-        Cd.write("<img src='http://c.hit.ua/hit?i=136046&g=0&x=2"+Cp+Cr+
-        "&r="+escape(Cd.referrer)+"&u="+escape(window.location.href)+
-        "' border='0' wi"+"dth='1' he"+"ight='1'/>");
-        //--></script></a>
-    <!-- / hit.ua -->
-
+    @@hit
 
 </body>
 </html>

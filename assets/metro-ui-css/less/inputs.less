@@ -8,7 +8,6 @@
 	min-height: 2.125rem;
 	height: 2.125rem;
 	position: relative;
-	min-width: 10.875rem;
 	vertical-align: middle;
 	margin: .325rem 0;
 	line-height: 1;
@@ -20,6 +19,7 @@
 
 .input-control {
 	&.text, &.select, &.file, &.password, &.number, &.email, &.tel {
+        width: 10.875rem;
 
 		.button {
 			position: absolute;
@@ -46,10 +46,11 @@
 			font-size: 24px;
 			line-height: 1;
 			position: absolute;
-			top: 4px;
+			top: 50%;
+            margin-top: -12px;
 			left: 4px;
 			z-index: 2;
-			color: @gray;
+			color: @grayLight;
 		}
 
 		.prepend-icon ~ input {
@@ -126,57 +127,96 @@
 		}
 	}
 
+    [class*=input-state-] {
+        position: absolute;
+        display: none;
+        top: 50%;
+        right: 8px;
+        z-index: 3;
+        font-size: 1rem;
+        margin-top: -.5rem;
+    }
+
+    &.required {
+        input, textarea, select {
+            border: 1px dashed @cyan ;
+        }
+        &.neon {
+            input, textarea, select {
+                .block-shadow-info;
+            }
+        }
+        .input-state-required {
+            display: block;
+            color: @cyan;
+        }
+    }
 	&.error {
 		input, textarea, select {
-			border-color: @red ;
-		}
+            border: 1px solid @red;
+        }
 
 		&.neon {
 			input, textarea, select {
 				.block-shadow-error;
 			}
 		}
+
+        .input-state-error {
+            display: block;
+            color: @red;
+        }
 	}
 	&.warning {
 		input, textarea, select {
-			border-color: @yellow ;
-		}
+            border: 1px solid @yellow;
+        }
 		&.neon {
 			input, textarea, select {
 				.block-shadow-warning;
 			}
 		}
+        .input-state-warning {
+            display: block;
+            color: @yellow;
+        }
 	}
 	&.success {
 		input, textarea, select {
-			border-color: @green ;
-		}
+            border: 1px solid @green;
+        }
 		&.neon {
 			input, textarea, select {
 				.block-shadow-success;
 			}
 		}
+        .input-state-success {
+            display: block;
+            color: @green;
+        }
 	}
 	&.info {
 		input, textarea, select {
-			border-color: @cyan ;
-		}
+            border: 1px solid @cyan;
+        }
 		&.neon {
 			input, textarea, select {
 				.block-shadow-info;
 			}
 		}
+        .input-state-success {
+            display: block;
+            color: @cyan;
+        }
 	}
-	&.required {
-		input, textarea, select {
-			border: 1px dashed @cyan ;
-		}
-		&.neon {
-			input, textarea, select {
-				.block-shadow-info;
-			}
-		}
-	}
+}
+
+input, select, textarea {
+    &.error {border: 1px solid @red;}
+    &.warning {border: 1px solid @yellow;}
+    &.info {border: 1px solid @cyan;}
+    &.success {border: 1px solid @green;}
+    &.required {border: 1px dashed @cyan;}
 }
 
 .input-control {
@@ -310,7 +350,7 @@
 		font-size: 1rem;
 		color: #C8C8C8;
 		position: absolute;
-		top: 1rem;
+		top: 1.2rem;
 		left: 0;
 		z-index: 1;
 		opacity: 1;
@@ -322,17 +362,17 @@
 	}
 
 	&.iconic {
-		margin-left: 2rem;
+		margin-left: 32px;
 
 		.icon {
-			width: 1.5rem;
-			height: 1.5rem;
-			font-size: 1.5rem;
-			line-height: 100%;
+			width: 24px;
+			height: 24px;
+			font-size: 24px;
+			line-height: 1;
 			position: absolute;
-			left: -32px;
+			left: -28px;
 			top: 50%;
-			margin-top: -.5rem;
+			margin-top: -8px;
 			display: block;
 			opacity: .2;
 			.transition(.3s, linear);
@@ -345,6 +385,10 @@
 			}
 
 		}
+
+        &.full-size {
+            width: ~"calc(100% - 32px) !important";
+        }
 	}
 }
 
@@ -771,6 +815,123 @@ input[type="button"], input[type="reset"], input[type="submit"] {
 
 		&.multi-state {
 
+		}
+	}
+}
+
+.input-control {
+	&.range {
+		input[type=range] {
+			border: 0;
+			box-sizing: border-box;
+			line-height: 1;
+			background-color: transparent;
+			cursor: pointer;
+			-webkit-appearance: none;
+			width: 100%;
+
+			&::-webkit-slider-thumb {
+				-webkit-appearance: none;
+			}
+			&:focus {
+				outline: none;
+			}
+			&::-ms-track {
+				width: 100%;
+				cursor: pointer;
+				background: transparent;
+				border-color: transparent;
+				color: transparent;
+			}
+
+			.mx-trange-trump(){
+				width: 1em;
+				height: 1em;
+				margin-top: 0;
+				background-color: @gray;
+				border: 2px solid @gray;
+				cursor: pointer;
+			}
+
+			&::-webkit-slider-thumb {
+				-webkit-appearance: none;
+				.mx-trange-trump();
+			}
+
+			&::-moz-range-thumb {
+				.mx-trange-trump();
+				border-radius: 0;
+				margin: 0;
+			}
+
+			&::-ms-thumb {
+				.mx-trange-trump();
+			}
+
+			&:hover{
+				&::-webkit-slider-thumb { border-color: lighten(@dark, 10%); background-color: @dark;}
+				&::-moz-range-thumb     { border-color: lighten(@dark, 10%); background-color: @dark; }
+				&::-ms-thumb            { border-color: lighten(@dark, 10%); background-color: @dark; }
+			}
+
+			&:active{
+				&::-webkit-slider-thumb { border-color: lighten(@dark, 10%); }
+				&::-moz-range-thumb     { border-color: lighten(@dark, 10%); }
+				&::-ms-thumb            { border-color: lighten(@dark, 10%); }
+			}
+
+			.mx-range-track(){
+				width: 100%;
+				cursor: pointer;
+				height: 100%;
+				background-color: @teal;
+				transition: background .3s ease;
+			}
+
+
+			&::-webkit-slider-runnable-track {
+				.mx-range-track();
+			}
+
+			&:focus::-webkit-slider-runnable-track {
+
+			}
+
+			&::-moz-range-track {
+				.mx-range-track()
+			}
+
+			&::-ms-track {
+				background: @teal;
+				border-color: transparent;
+				color: transparent;
+				height: 1.25em;
+			}
+			&::-ms-fill-lower {
+				background: @teal;
+			}
+			&:focus::-ms-fill-lower {
+
+			}
+			&::-ms-fill-upper {
+				display: none;
+			}
+			&:focus::-ms-fill-upper {
+
+			}
+			&::-moz-range-track {
+				height: 1.25em;
+			}
+		}
+
+		&.big-input {
+			height: 2.125rem;
+			input[type=range] {
+				padding: 0;
+				&::-moz-range-track {
+					height: 1.2em;
+				}
+			}
 		}
 	}
 }

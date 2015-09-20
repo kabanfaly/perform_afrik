@@ -83,25 +83,6 @@
 	text-align: center;
 	text-decoration:none;
 	vertical-align: middle;
-
-	&.big-button {
-		.square(3.125rem);
-		line-height: 1.1;
-	}
-}
-
-.round-button, .cycle-button, .square-button {
-	&.mini-button {
-		.square(1.5rem);
-	}
-
-	&.small-button {
-		.square(1.7rem);
-	}
-
-	&.large-button {
-		.square(2.55rem);
-	}
 }
 
 .square-button {
@@ -112,8 +93,6 @@ a.button, a.round-button, a.square-button {
 	color: inherit;
 	&:hover {text-decoration: none;}
 }
-
-
 
 .button {
 	&.loading-pulse {
@@ -272,6 +251,7 @@ a.image-button {
 	width: 5.75rem;
 	height: 5.75rem;
 	text-align: center;
+    font-size: .75rem;
 
 	.icon, .title {
 		display: block;
@@ -326,10 +306,11 @@ a.shortcut-button {
 	display: inline-block;
 	cursor: pointer;
 	z-index: 2;
+    position: relative;
 
 	&:active, &:focus {
-		outline: 1px @grayLighter solid;
-	}	position: relative;
+		//outline: 1px @grayLighter solid;
+	}
 
 	&:hover {
 		//background: rgba(255,255,255, .1);
@@ -382,6 +363,15 @@ a.shortcut-button {
 			}
 		}
 	}
+
+    &.light {
+        span {
+            background-color: @white;
+            &:before, &:after {
+                background-color: @white;
+            }
+        }
+    }
 }
 
 .group-of-buttons {
@@ -397,9 +387,10 @@ a.shortcut-button {
 	}
 }
 
-.split-button {
+.split-button, .dropdown-button {
 	display: inline-block;
 	position: relative;
+	vertical-align: middle;
 	.clear-float;
 
 	.button, .split {
@@ -418,7 +409,7 @@ a.shortcut-button {
 		cursor: pointer;
 		outline: none;
 		font-size: .875rem;
-		line-height: 2.1rem;
+		//line-height: 2.1rem;
 		position: relative;
 		margin: .15625rem 0;
 
@@ -426,6 +417,19 @@ a.shortcut-button {
 		&:hover {
 			background-color: @grayLighter;
 			border-color: darken(@inputHoverState, 10%);
+		}
+
+		&.dropdown-toggle {
+			&:before {
+				.transition(.3s);
+			}
+
+			&.active-toggle {
+				&:before {
+					.rotate135;
+					.transition(.3s);
+				}
+			}
 		}
 	}
 
@@ -543,6 +547,38 @@ a.shortcut-button {
 	font-size: 1.2rem;
 	line-height: 1;
 }
+
+.round-button, .cycle-button, .square-button {
+    &.mini-button {
+        .square(1.4rem);
+        font-size: .6rem;
+        line-height: 1;
+        padding: 0;
+        min-width: 0;
+    }
+
+    &.small-button {
+        .square(1.7rem);
+        font-size: .7rem;
+        line-height: 1.68rem;
+        padding: 0;
+        min-width: 0;
+    }
+
+    &.large-button {
+        height: 2.55rem;
+        font-size: 1.05rem;
+        line-height: 1;
+        .square(2.55rem);
+    }
+    &.big-button {
+        height: 3.125rem;
+        font-size: 1.2rem;
+        line-height: 1;
+        .square(3.125rem);
+    }
+}
+
 .button {
     &.primary {
         background: @linkColor;
@@ -613,6 +649,39 @@ a, span, div {
 
 		&.big-button {
 			padding-top: .78125rem;
+		}
+	}
+}
+
+.dropdown-button {
+	button.dropdown-toggle {
+		&:before {
+			.transition(.3s);
+		}
+
+		&.active-toggle {
+			&:before {
+				.rotate135;
+				.transition(.3s);
+			}
+		}
+	}
+}
+
+.shortcut-button {
+	&[data-hotkey] {
+		&::after {
+			position: absolute;
+			content: attr(data-hotkey);
+			font-size: .625rem;
+			bottom: 0;
+			right: 0;
+			color: @grayLight;
+		}
+		&.no-hotkey-display {
+			&::after {
+				display: none;
+			}
 		}
 	}
 }

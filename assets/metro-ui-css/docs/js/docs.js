@@ -7,10 +7,11 @@ var metro_colors = [
     'darkGreen', 'darkOrange', 'darkRed', 'darkPink', 'darkViolet', 'darkBlue',
     'lightBlue', 'lightRed', 'lightGreen', 'lighterBlue', 'lightTeal', 'lightOlive',
     'lightOrange', 'lightPink', 'grayDark', 'grayDarker', 'grayLight', 'grayLighter'
-
 ];
 
-function init(){
+var adBlock = false;
+
+jQuery(document).ready(function($){
     "use strict";
 
     $("<div/>").load("header.html").insertBefore($(".page-content"));
@@ -19,19 +20,14 @@ function init(){
             $("div[data-text='sponsor']").remove();
         }
     }).insertAfter($(".page-content"));
-}
+});
 
-$(function(){
+(function($){
     "use strict";
 
-    setInterval(function(){
-        $("h1 .nav-button").toggleClass('transform');
-    }, 2000);
+    $("h1 .nav-button").addClass('transform');
+})(jQuery);
 
-    setInterval(function(){
-        $("#job").toggleClass('block-shadow-danger');
-    }, 1000);
-});
 
 if (window.location.hostname !== 'localhost') {
 
@@ -45,10 +41,21 @@ if (window.location.hostname !== 'localhost') {
 
 }
 
-$(function(){
-    if (window.location.hostname == 'localhost') {
-        setTimeout(function(){
-            $("div[data-text='sponsor']").remove();
-        }, 100);
+jQuery(document).ready(function($){
+    if (window.location.hostname !== 'localhost') {
+        var gb = $('.adsbygoogle');
+        $.each(gb, function () {
+            var block = $(this);
+            if (block.css('display') == 'none' || block.css('height') == 0) {
+                adBlock = true;
+            }
+        });
+        if (gb.length === 0 || adBlock) {
+            var b = $("<div/>").addClass('padding10 bg-red fg-white text-accent');
+            b.html('Advertising on the website of the project allows the project to evolve. Support the project, please disable ad blocker.');
+            var target = window.location.pathname == '/' ? $('.metro-title') : $('.page-content > h1:nth-child(1)');
+            b.insertAfter(target);
+        }
     }
 });
+

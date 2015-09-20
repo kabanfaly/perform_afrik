@@ -13,6 +13,9 @@
 
     <link href="css/metro.css" rel="stylesheet">
     <link href="css/metro-icons.css" rel="stylesheet">
+    <link href="css/metro-responsive.css" rel="stylesheet">
+    <link href="css/metro-schemes.css" rel="stylesheet">
+
     <link href="css/docs.css" rel="stylesheet">
 
     <script src="js/jquery-2.1.3.min.js"></script>
@@ -24,15 +27,11 @@
 
 
 </head>
-<body onload="init()">
+<body>
     <div class="container page-content">
         <h1><a href="index.html" class="nav-button transform"><span></span></a>&nbsp;Buttons</h1>
-        <!-- Google adsense block -->
-        <div style="margin: 10px 0;"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1632668592742327" data-ad-slot="8347181909" data-ad-format="auto"></ins></div>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-        <!-- End of gad block -->
+
+        @@adsense
 
         <div class="margin20 no-margin-left no-margin-right sub-header text-light">
             With the Metro UI CSS you can easily create different types of buttons, stylized to Windows 8.
@@ -95,6 +94,26 @@
                 <button class="button small-button"><span class="mif-3d-rotation"></span> Small</button>
                 <button class="button"><span class="mif-3d-rotation"></span> Button</button>
                 <button class="button large-button"><span class="mif-3d-rotation"></span> Large</button>
+            </div>
+            <div class="margin10">
+                <button class="square-button mini-button">M</button>
+                <button class="square-button small-button">S</button>
+                <button class="square-button">D</button>
+                <button class="square-button large-button">L</button>
+                <button class="square-button mini-button"><span class="mif-3d-rotation"></span></button>
+                <button class="square-button small-button"><span class="mif-3d-rotation"></span></button>
+                <button class="square-button"><span class="mif-3d-rotation"></span></button>
+                <button class="square-button large-button"><span class="mif-3d-rotation"></span></button>
+            </div>
+            <div class="margin10">
+                <button class="cycle-button mini-button">M</button>
+                <button class="cycle-button small-button">S</button>
+                <button class="cycle-button">D</button>
+                <button class="cycle-button large-button">L</button>
+                <button class="cycle-button mini-button"><span class="mif-3d-rotation"></span></button>
+                <button class="cycle-button small-button"><span class="mif-3d-rotation"></span></button>
+                <button class="cycle-button"><span class="mif-3d-rotation"></span></button>
+                <button class="cycle-button large-button"><span class="mif-3d-rotation"></span></button>
             </div>
         </div>
 
@@ -377,7 +396,7 @@
         <h4>Dropdown button</h4>
         <div class="example" data-text="example">
             <div class="margin10">
-                <div class="inline-block">
+                <div class="dropdown-button">
                     <button class="button dropdown-toggle">Menu</button>
                     <ul class="split-content d-menu" data-role="dropdown">
                         <li><a href="#">Reply</a></li>
@@ -385,7 +404,7 @@
                         <li><a href="#">Forward</a></li>
                     </ul>
                 </div>
-                <div class="inline-block place-right">
+                <div class="dropdown-button place-right">
                     <button class="button dropdown-toggle">Menu</button>
                     <ul class="split-content d-menu place-right" data-role="dropdown">
                         <li><a href="#">Reply</a></li>
@@ -399,7 +418,7 @@
         <div class="example" data-text="code">
             <pre class="prettyprint linenums"><code>
                 &lt;!-- left --&gt;
-                &lt;div class="inline-block"&gt;
+                &lt;div class="dropdown-button"&gt;
                     &lt;button class="button dropdown-toggle"&gt;Menu&lt;/button&gt;
                     &lt;ul class="split-content d-menu" data-role="dropdown"&gt;
                         &lt;li&gt;&lt;a href="#"&gt;Reply&lt;/a&gt;&lt;/li&gt;
@@ -409,7 +428,7 @@
                 &lt;/div&gt;
 
                 &lt;!-- right --&gt;
-                &lt;div class="inline-block place-right"&gt;
+                &lt;div class="dropdown-button place-right"&gt;
                     &lt;button class="button dropdown-toggle"&gt;Menu&lt;/button&gt;
                     &lt;ul class="split-content d-menu place-right" data-role="dropdown"&gt;
                         &lt;li&gt;&lt;a href="#"&gt;Reply&lt;/a&gt;&lt;/li&gt;
@@ -529,6 +548,7 @@
         <h4>Breadcrumbs</h4>
         <div class="example" data-text="example">
             <div class="margin10">
+                <h5>breadcrumbs</h5>
                 <ul class="breadcrumbs">
                     <li><a href="#"><span class="icon mif-home"></span></a></li>
                     <li><a href="#">Products</a></li>
@@ -541,7 +561,21 @@
                     <li><a href="#">Download</a></li>
                     <li><a href="#">Windows 10</a></li>
                 </ul>
-                <ul class="breadcrumbs">
+                <br />
+                <h5>breadcrumbs2</h5>
+                <ul class="breadcrumbs2">
+                    <li><a href="#"><span class="icon mif-home"></span></a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Download</a></li>
+                    <li><a href="#">Windows 10</a></li>
+                </ul>
+                <ul class="breadcrumbs2 small">
+                    <li><a href="#"><span class="icon mif-home"></span></a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Download</a></li>
+                    <li><a href="#">Windows 10</a></li>
+                </ul>
+                <ul class="breadcrumbs2 mini">
                     <li><a href="#"><span class="icon mif-home"></span></a></li>
                     <li><a href="#">Products</a></li>
                     <li><a href="#">Download</a></li>
@@ -560,32 +594,16 @@
                 &lt;/ul&gt;
 
                 &lt;ul class="breadcrumbs dark"&gt;...&lt;/ul&gt;
+
+                &lt;ul class="breadcrumbs2"&gt;...&lt;/ul&gt;
+                &lt;ul class="breadcrumbs2 small"&gt;...&lt;/ul&gt;
+                &lt;ul class="breadcrumbs2 mini"&gt;...&lt;/ul&gt;
+
             </code></pre>
         </div>
     </div>
 
-    <!-- hit.ua -->
-    <a href='http://hit.ua/?x=136046' target='_blank'>
-        <script language="javascript" type="text/javascript"><!--
-        Cd=document;Cr="&"+Math.random();Cp="&s=1";
-        Cd.cookie="b=b";if(Cd.cookie)Cp+="&c=1";
-        Cp+="&t="+(new Date()).getTimezoneOffset();
-        if(self!=top)Cp+="&f=1";
-        //--></script>
-        <script language="javascript1.1" type="text/javascript"><!--
-        if(navigator.javaEnabled())Cp+="&j=1";
-        //--></script>
-        <script language="javascript1.2" type="text/javascript"><!--
-        if(typeof(screen)!='undefined')Cp+="&w="+screen.width+"&h="+
-        screen.height+"&d="+(screen.colorDepth?screen.colorDepth:screen.pixelDepth);
-        //--></script>
-        <script language="javascript" type="text/javascript"><!--
-        Cd.write("<img src='http://c.hit.ua/hit?i=136046&g=0&x=2"+Cp+Cr+
-        "&r="+escape(Cd.referrer)+"&u="+escape(window.location.href)+
-        "' border='0' wi"+"dth='1' he"+"ight='1'/>");
-        //--></script></a>
-    <!-- / hit.ua -->
-
+    @@hit
 
 </body>
 </html>

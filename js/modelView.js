@@ -1,4 +1,5 @@
-define(["jquery", "jquery-ui", "datetimepicker", "datatables",
+define(["jquery", "jquery-ui", "datetimepicker", "datatables", 
+    "datatables.buttons", "datatables.buttons.flash", "datatables.buttons.html5", "datatables.buttons.print",
     "bootstrap", "datatables.bootstrap"], function () {
     $(function () {
 
@@ -7,7 +8,11 @@ define(["jquery", "jquery-ui", "datetimepicker", "datatables",
             "language": {
                 //baseUrl is define in application/views/templates/footer.php 
                 "url": baseUrl + "assets/datatables-plugins/i18n/French.lang"
-            }
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                'csv', 'pdf', 'print'
+            ]
         });
     });
 });
