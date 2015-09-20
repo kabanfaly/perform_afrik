@@ -134,6 +134,9 @@ body{
     margin-top: 10px;
 }
 
-.dataTables_filter > label{
+.dataTables_filter > label, div.dataTables_paginate{
     float: right;
+}
+div.dataTables_info {
+    float: left;
 }
