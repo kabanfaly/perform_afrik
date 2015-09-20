@@ -36,10 +36,9 @@ if (isset($_SESSION['admin']))
 
             </div>
         </div>
-
-    </div>
-    <div class="row copy-right">
-        <center><small>&copy; Perform Afrik 2015</small></center>
+        <div class="row">
+            <center><small>&copy; Perform Afrik 2015</small></center>
+        </div>
     </div>
 </footer>
 <?php
