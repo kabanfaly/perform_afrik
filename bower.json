@@ -12,7 +12,6 @@
         "datatables-plugins": "latest",
         "bootstrap": "latest",
         "datatables-bootstrap3": "latest",
-        "metro-ui-css": "latest",
         "angular": "latest",
         "angular-mocks": "~1.2.x",
         "angular-route": "~1.2.x",

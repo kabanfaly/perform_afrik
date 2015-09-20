@@ -10,7 +10,6 @@ requirejs.config({
         "datatables.buttons.html5" : { "deps" :['jquery'] }
     },
     "paths": {
-//        "metro":"metro-ui-css/min/metro.min",
         "modelView" : "../js/modelView",
         "jquery": "jquery/dist/jquery.min",
         "jquery-ui": "jquery-ui/jquery-ui.min",
