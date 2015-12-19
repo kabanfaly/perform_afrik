@@ -1,4 +1,4 @@
-<div class="col-sm-6 col-md-4 col-md-offset-4">
+<div class="col-sm-12 col-xs-12 col-lg-4 col-lg-offset-2">
     <div class="account-wall">
         <?php if(!empty($err_msg)){ ?>
         <div class="alert alert-danger fade in">
