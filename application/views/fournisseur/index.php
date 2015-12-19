@@ -15,7 +15,7 @@
             <td><?php echo $supplier['nom']; ?></td>
             <td><?php echo $supplier['telephone']; ?></td>
             <td><?php echo $supplier['adresse']; ?></td>
-            <td>
+            <td align="center">
                 <a href="<?php echo  $form_link .'/'. $supplier['id_fournisseur']; ?>" data-toggle="modal" data-target="#form-content">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </a>

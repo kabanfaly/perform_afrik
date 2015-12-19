@@ -1,8 +1,10 @@
 <?php
-$lang['CONTACT_TEL'] = 'Tel: +225  ....';
-$lang['CONTACT_NAME'] = 'Perform Afrik <br';
+$lang['TITLE'] = 'Perform World';
+$lang['CONTACT_TEL'] = 'Tel: (+225) 49755853 / 06377407';
+$lang['CONTACT_NAME'] = 'PERFORM WORLD';
+$lang['COPYRIGHT'] = '&copy; 2015 PERFORM WORLD ';
 $lang['CONTACT_EMAIL'] = 'performafrik@gmail.com';
-$lang['CONTACT_ADDRESS'] = 'Plateau Immeuble du Mali <br> 21 BP 2924 <br> Abidjan 21';
+$lang['CONTACT_ADDRESS'] = 'Plateau Immeuble du Mali, 21 BP 2924, <b> Abidjan 21, Côte D\'Ivoire</b>';
 $lang['TRUCKS_MANAGEMENT'] = 'Gestion des camions';
 $lang['ADD_TRUCK'] = 'Ajout d\'un camion';
 $lang['EDIT_TRUCK'] = 'Modification d\'un camion';

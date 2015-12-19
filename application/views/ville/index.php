@@ -11,7 +11,7 @@
         <tr>
             <td><?php echo $no++; ?></td>
             <td><?php echo $city['nom']; ?></td>
-            <td>
+            <td align="center">
                <a href="<?php echo  $form_link .'/'. $city['id_ville']; ?>" data-toggle="modal" data-target="#form-content">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </a>

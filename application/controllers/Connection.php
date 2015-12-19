@@ -47,7 +47,6 @@ class Connection extends CI_Controller
 
         $login = $this->input->post('login');
         $password = $this->input->post('password');
-
         //get admin
         $admin = $this->connection_model->get_admin($login, $password);
         

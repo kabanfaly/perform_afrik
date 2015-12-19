@@ -11,7 +11,7 @@
         <tr>
             <td><?php echo $no++; ?></td>
             <td><?php echo $truck['numero']; ?></td>
-            <td>
+            <td align="center">
                 <a href="<?php echo  $form_link .'/'. $truck['id_camion']; ?>" data-toggle="modal" data-target="#form-content">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </a>

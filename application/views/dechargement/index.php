@@ -32,7 +32,7 @@
             <td><?php echo $unloading['poids_net']; ?></td>
             <td><?php echo $unloading['poids_refracte']; ?></td>
             <td><?php echo $unloading['humidite']; ?> %</td>
-            <td>
+            <td align="center">
                 <a href="<?php echo $form_link . '/' . $unloading['id_dechargement']; ?>" data-toggle="modal" data-target="#form-content">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </a>

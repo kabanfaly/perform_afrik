@@ -1,3 +1,10 @@
 Bugs:
 remove delete link after deletion
 
+Features:
+- add access right for user:
+    - MANAGER
+    - MAGASIN
+    - COMPTABILITE
+    - TRANSIT
+
