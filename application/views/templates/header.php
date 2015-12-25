@@ -25,24 +25,24 @@
                 </div>
                 <!-- Top Menu Items -->
                  <?php
-                    if (isset($_SESSION['admin']))
+                    if (isset($_SESSION['user']))
                     {
                     ?>
                         <ul class="nav navbar-right top-nav">
 
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $_SESSION['admin']['type'];?> <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $_SESSION['user']['profil'];?> <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-<!--                                    <li>
-                                        <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                                    <li>
+                                        <a href="#"><i class="fa fa-fw fa-user"></i>  <?php echo lang('PROFILE'); ?></a>
                                     </li>
                                     <li>
-                                        <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                                    </li>-->
+                                        <a href="#"><i class="fa fa-fw fa-gear"></i>  <?php echo lang('SETTINGS'); ?></a>
+                                    </li>
                                     <li class="divider"></li>
 
                                     <li>
-                                        <a href="<?php echo site_url("connection/logout"); ?>"><span class="fa fa-fw fa-sign-out">
+                                        <a href="<?php echo site_url("connexion/logout"); ?>"><span class="fa fa-fw fa-sign-out">
                                             </span> <?php echo lang('LOGOUT'); ?> 
                                         </a>
                                     </li>
@@ -81,7 +81,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <?php
-                    if (isset($_SESSION['admin']))
+                    if (isset($_SESSION['user']))
                     {
                         ?>
                         <div class="col-lg-12">

@@ -4,26 +4,26 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 /**
- * Connection controller
+ * Connexion controller
  *
  * @author Kaba N'faly
  * @since 07/14/15
  * @version 1.0
  * @package perform_afrik
  * @subpackage perform_afrik/application/controllers
- * @filesource Connection.php
+ * @filesource Connexion.php
  */
-class Connection extends CI_Controller
+class Connexion extends CI_Controller
 {
 
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('connection_model');
+        $this->load->model('utilisateur_model');
     }
 
     /**
-     * Displays connection page
+     * Displays connexion page
      */
     public function index()
     {
@@ -32,7 +32,7 @@ class Connection extends CI_Controller
             'title' => lang('CONNECTION')
         );
 
-        $this->display($data, 'connection/index');
+        $this->display($data, 'connexion/index');
     }
 
     /**
@@ -48,15 +48,15 @@ class Connection extends CI_Controller
         $login = $this->input->post('login');
         $password = $this->input->post('password');
         //get admin
-        $admin = $this->connection_model->get_admin($login, $password);
+        $user = $this->utilisateur_model->get_user_profile($login, $password);
         
-        if ($admin !== NULL)
+        if ($user !== NULL)
         {
-            $this->session->set_userdata('admin', $admin);
+            $this->session->set_userdata('user', $user);
             redirect('dechargement/index');
         }else{
             $data['err_msg'] = lang('INVALID_LOGIN_PASSWORD');
-            $this->display($data, 'connection/index');
+            $this->display($data, 'connexion/index');
         }
     }
 
@@ -65,13 +65,13 @@ class Connection extends CI_Controller
      */
     public function logout()
     {
-        $this->session->unset_userdata('admin');
+        $this->session->unset_userdata('user');
         $data = array(
             'title' => lang('CONNECTION'),
             'err_msg' => ''
         );
 
-        $this->display($data, 'connection/index');
+        $this->display($data, 'connexion/index');
     }
 
     /**

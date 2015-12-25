@@ -49,6 +49,45 @@ CREATE TABLE IF NOT EXISTS `pa_camion` (
   PRIMARY KEY (`id_camion`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `pa_profil`
+--
+
+DROP TABLE IF EXISTS `pa_profil`;
+CREATE TABLE IF NOT EXISTS `pa_profil` (
+  `id_profil` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_profil`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+
+INSERT INTO `pa_profil` (`id_profil`, `nom`) VALUES
+(1, 'Manger'),
+(2, 'Comptabilité'),
+(3, 'Transit'),
+(4, 'Magasin');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `pa_utilisateur`
+--
+
+DROP TABLE IF EXISTS `pa_utilisateur`;
+CREATE TABLE IF NOT EXISTS `pa_utilisateur` (
+  `id_utilisateur` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(45) NOT NULL,
+  `prenom` varchar(45) NOT NULL,
+  `login` varchar(45) NOT NULL,
+  `mot_de_passe` varchar(45) NOT NULL,
+  `id_profil` int(11) NOT NULL,
+  PRIMARY KEY (`id_utilisateur`),
+  KEY `profil` (`id_profil`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+
 --
 -- Contenu de la table `pa_camion`
 --
@@ -167,6 +206,22 @@ INSERT INTO `pa_ville` (`id_ville`, `nom`) VALUES
 (19, 'Dabakala'),
 (20, 'Odienne');
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `pa_preference`
+--
+
+DROP TABLE IF EXISTS `pa_preference`;
+CREATE TABLE IF NOT EXISTS `pa_preference` (
+  `id_preference` int(11) NOT NULL AUTO_INCREMENT,
+  `entreprise` varchar(255) NOT NULL,
+  `telephone` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `fax` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_preference`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
 --
 -- Contraintes pour les tables exportées
 --
@@ -180,3 +235,15 @@ ALTER TABLE `pa_dechargement`
   ADD CONSTRAINT `pa_dechargement_ibfk_3` FOREIGN KEY (`id_ville`) REFERENCES `pa_ville` (`id_ville`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `pa_admin` ADD `type` VARCHAR( 45 ) NOT NULL;
+
+
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `pa_utilisateur`
+--
+ALTER TABLE `pa_utilisateur`
+  ADD CONSTRAINT `pa_utilisateur_ibfk_2` FOREIGN KEY (`id_profil`) REFERENCES `pa_profil` (`id_profil`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `pa_utilisateur` ADD UNIQUE (`login`)

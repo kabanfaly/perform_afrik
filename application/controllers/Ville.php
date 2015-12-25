@@ -151,12 +151,12 @@ class Ville extends CI_Controller
         $data['active'] = 'ville';
 
         //checks admin session
-        if (!$this->session->has_userdata('admin'))
+        if (!$this->session->has_userdata('user'))
         {
             $data = array(
                 'title' => lang('CONNECTION')
             );
-            $page = 'connection/index';
+            $page = 'connexion/index';
         }
 
         $this->load->view('templates/header', $data);

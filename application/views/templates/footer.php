@@ -1,5 +1,5 @@
 <?php
-if (isset($_SESSION['admin']))
+if (isset($_SESSION['user']))
 {
     ?>
     </table>
@@ -14,7 +14,7 @@ if (isset($_SESSION['admin']))
 <!-- /#page-wrapper -->
 </div>
 <?php
-    if (isset($_SESSION['admin']))
+    if (isset($_SESSION['user']))
     {
     ?>
     <footer>

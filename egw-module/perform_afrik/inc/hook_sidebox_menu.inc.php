@@ -32,7 +32,7 @@
         //display_sidebox($appname, $menu_title, $file);
     }
 
-    if ($GLOBALS['egw_info']['user']['apps']['admin']) {
+    if ($GLOBALS['egw_info']['user']['apps']['user']) {
         $menu_title = 'Administration';
         $file = Array(
             'Configuration' => $GLOBALS['egw']->link('/index.php', 'menuaction=perform_afrik.ui_perform_afrik.index&appname=admin'),

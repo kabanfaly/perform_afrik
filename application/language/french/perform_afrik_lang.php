@@ -1,9 +1,9 @@
 <?php
 $lang['TITLE'] = 'Perform World';
-$lang['CONTACT_TEL'] = 'Tel: (+225) 49755853 / 06377407';
+$lang['CONTACT_TEL'] = 'Tel: (+225) 20 22 57 02 / 77 77 03 03';
 $lang['CONTACT_NAME'] = 'PERFORM WORLD';
-$lang['COPYRIGHT'] = '&copy; 2015 PERFORM WORLD ';
-$lang['CONTACT_EMAIL'] = 'performafrik@gmail.com';
+$lang['COPYRIGHT'] = '&copy; 2015 PERFORM WORLD';
+$lang['CONTACT_EMAIL'] = 'performworld15@gmail.com';
 $lang['CONTACT_ADDRESS'] = 'Plateau Immeuble du Mali, 21 BP 2924, <b> Abidjan 21, Côte D\'Ivoire</b>';
 $lang['TRUCKS_MANAGEMENT'] = 'Gestion des camions';
 $lang['ADD_TRUCK'] = 'Ajout d\'un camion';
@@ -90,3 +90,5 @@ $lang['UPDATING_FAILED'] = 'La modification a échoué';
 $lang['SELECT_CITY'] = 'Choisissez une ville ...';
 $lang['SELECT_SUPPLIER'] = 'Choisissez un fournisseur ...';
 $lang['SELECT_TRUCK'] = 'Choisissez un camion ...';
+$lang['PROFILE'] = 'Profil';
+$lang['SETTINGS'] = 'Configuration';

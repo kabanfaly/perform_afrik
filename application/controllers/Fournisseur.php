@@ -154,12 +154,12 @@ class Fournisseur extends CI_Controller
         $data['active'] = 'fournisseur';
 
         //checks admin session
-        if (!$this->session->has_userdata('admin'))
+        if (!$this->session->has_userdata('user'))
         {
             $data = array(
                 'title' => lang('CONNECTION')
             );
-            $page = 'connection/index';
+            $page = 'connexion/index';
         }
         $this->load->view('templates/header', $data);
         $this->load->view($page, $data);
