@@ -13,7 +13,10 @@ if (!defined('BASEPATH'))
  * @subpackage perform_afrik/application/controllers
  * @filesource ville.php
  */
-class Ville extends CI_Controller
+
+include_once 'Common_Controller.php';
+
+class Ville extends Common_Controller
 {
 
     public function __construct()
@@ -35,6 +38,7 @@ class Ville extends CI_Controller
             'title' => lang('CITIES_MANAGEMENT'),
             'msg' => $msg,
             'error' => $error,
+            'active' => 'ville',
             'form_link' => site_url('ville/edit')
         );
 
@@ -51,6 +55,7 @@ class Ville extends CI_Controller
 
         $data = array(
             'title' => lang('ADD_CITY'),
+            'form_name' => 'ville',
             'form_action' => site_url('ville/save')
         );
 
@@ -68,7 +73,9 @@ class Ville extends CI_Controller
             $data['form_action'] = site_url('ville/update');
         }
 
+        $this->load->view('templates/form_header', $data);
         $this->load->view('ville/form', $data);
+        $this->load->view('templates/form_footer', $data);
     }
 
     /**
@@ -114,7 +121,7 @@ class Ville extends CI_Controller
 
         $id_ville = $this->input->post('id_ville');
 
-        $where = array(Ville_model::$pk => $id_ville);
+        $where = array(Ville_model::$PK => $id_ville);
 
         // update
         if ($this->ville_model->update($data, $where) !== FALSE)
@@ -132,36 +139,12 @@ class Ville extends CI_Controller
      */
     public function delete($id_ville)
     {
-        if ($this->ville_model->delete(array(Ville_model::$pk => $id_ville)) !== FALSE)
+        if ($this->ville_model->delete(array(Ville_model::$PK => $id_ville)) !== FALSE)
         {
             redirect('ville/index/' . lang('CITY_DELETION_SUCCESS'));
         } else
         {
-            redirect('ville/index/' . lang('DELETING_FAILED').'/'.TRUE);
+            redirect('ville/index/' . lang('DELETION_FAILED').'/'.TRUE);
         }
     }
-
-    /**
-     * Render page
-     * @param array $data
-     * @param string $page concerning page
-     */
-    private function display($data, $page)
-    {
-        $data['active'] = 'ville';
-
-        //checks admin session
-        if (!$this->session->has_userdata('user'))
-        {
-            $data = array(
-                'title' => lang('CONNECTION')
-            );
-            $page = 'connexion/index';
-        }
-
-        $this->load->view('templates/header', $data);
-        $this->load->view($page, $data);
-        $this->load->view('templates/footer');
-    }
-
 }

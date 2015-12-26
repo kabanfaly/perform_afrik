@@ -36,9 +36,9 @@
                                     <li>
                                         <a href="#"><i class="fa fa-fw fa-user"></i>  <?php echo lang('PROFILE'); ?></a>
                                     </li>
-                                    <li>
+<!--                                    <li>
                                         <a href="#"><i class="fa fa-fw fa-gear"></i>  <?php echo lang('SETTINGS'); ?></a>
-                                    </li>
+                                    </li>-->
                                     <li class="divider"></li>
 
                                     <li>
@@ -68,6 +68,15 @@
                             <li class="<?php echo $active == 'ville' ? 'active' : '' ?>">
                                 <a href="<?php echo site_url("ville"); ?>"><i class="fa fa-fw fa-building"></i>&nbsp;<?php echo lang('CITIES'); ?></a>
                             </li>
+<!--                            <li class="<?php echo $active == 'ville' ? 'active' : '' ?>">
+                                <a href="<?php echo site_url("ville"); ?>"><i class="fa fa-fw fa-gear"></i>&nbsp;<?php echo lang('ADMINISTRATION'); ?></a>
+                            </li>-->
+                            <li class="<?php echo $active == 'profil' ? 'active' : '' ?>">
+                                <a href="<?php echo site_url("profil"); ?>"><i class="fa fa-fw fa-group"></i>&nbsp;<?php echo lang('PROFILES'); ?></a>
+                            </li>
+                            <li class="<?php echo $active == 'parametres' ? 'active' : '' ?>">
+                                <a href="<?php echo site_url("parametres"); ?>"><i class="fa fa-fw fa-wrench"></i>&nbsp;<?php echo lang('PARAMETERS'); ?></a>
+                            </li>
 
                         </ul>
                     </div>
@@ -87,11 +96,17 @@
                         <div class="col-lg-12">
                             <div class="content clearfix">
                                 <!--<div class="title"><h3><?php echo $title; ?></h3></div>-->
+                                <?php
+                                if (!isset($configuration))
+                                {
+                                ?>
                                 <p>
                                     <a href="<?php echo $form_link; ?>" data-toggle="modal" data-target="#form-content" class="btn btn-primary btn-large"><?php echo lang('ADD'); ?></a>
                                 </p>
+                                <?php
+                                }
+                                ?>
                                 <div class="msg <?php echo!$error ? 'success' : 'alert-danger fade in'; ?>">
                                     <center><?php echo urldecode($msg); ?></center>
                                 </div>
-                                <table id="tableContent" class="table table-striped table-bordered table-hover">
 <?php } ?>

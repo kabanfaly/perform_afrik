@@ -17,13 +17,13 @@ class Utilisateur_model extends CI_Model
      * Utilisateur (user) table name
      * @var String
      */
-    public static $table_name = 'pa_utilisateur';
+    public static $TABLE_NAME = 'pa_utilisateur';
     
     /**
      * Utilisateur (user) table primary key
      * @var String
      */
-    public static $pk = 'id_camion';
+    public static $PK = 'id_camion';
 
     public function __construct()
     {
@@ -58,11 +58,11 @@ class Utilisateur_model extends CI_Model
        if ($id_utilisateur === false)
         {
 
-            $query = $this->db->get(self::$table_name);
+            $query = $this->db->get(self::$TABLE_NAME);
             return $query->result_array();
         }
 
-        $query = $this->db->get_where(self::$table_name, array(self::$pk => $id_utilisateur));
+        $query = $this->db->get_where(self::$TABLE_NAME, array(self::$PK => $id_utilisateur));
         return $query->row_array();
     }
     

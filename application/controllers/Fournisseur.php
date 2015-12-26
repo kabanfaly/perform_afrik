@@ -13,7 +13,10 @@ if (!defined('BASEPATH'))
  * @subpackage perform_afrik/application/controllers
  * @filesource fournisseur.php
  */
-class Fournisseur extends CI_Controller
+
+include_once 'Common_Controller.php';
+
+class Fournisseur extends Common_Controller
 {
 
     public function __construct()
@@ -36,6 +39,7 @@ class Fournisseur extends CI_Controller
             'title' => lang('SUPPLIERS_MANAGEMENT'),
             'msg' => $msg,
             'error' => $error,
+            'active' => 'fournisseur',
             'form_link' => site_url('fournisseur/edit')
         );
 
@@ -52,6 +56,7 @@ class Fournisseur extends CI_Controller
 
         $data = array(
             'title' => lang('ADD_SUPPLIER'),
+            'form_name' => 'fournisseur',
             'form_action' => site_url('fournisseur/save')
         );
 
@@ -68,8 +73,10 @@ class Fournisseur extends CI_Controller
             $data['title'] = lang('EDIT_SUPPLIER');
             $data['form_action'] = site_url('fournisseur/update');
         }
-
+        
+        $this->load->view('templates/form_header', $data);
         $this->load->view('fournisseur/form', $data);
+        $this->load->view('templates/form_footer', $data);
     }
 
     /**
@@ -117,7 +124,7 @@ class Fournisseur extends CI_Controller
 
         $id_fournisseur = $this->input->post('id_fournisseur');
 
-        $where = array(Fournisseur_model::$pk => $id_fournisseur);
+        $where = array(Fournisseur_model::$PK => $id_fournisseur);
 
         // update
         if ($this->fournisseur_model->update($data, $where) !== FALSE)
@@ -135,35 +142,13 @@ class Fournisseur extends CI_Controller
      */
     public function delete($id_fournisseur)
     {
-        if ($this->fournisseur_model->delete(array(Fournisseur_model::$pk => $id_fournisseur)) !== FALSE)
+        if ($this->fournisseur_model->delete(array(Fournisseur_model::$PK => $id_fournisseur)) !== FALSE)
         {
             redirect('fournisseur/index/' . lang('SUPPLIER_DELETION_SUCCESS'));
         } else
         {
-            redirect('fournisseur/index/' . lang('DELETING_FAILED').'/'.TRUE);
+            redirect('fournisseur/index/' . lang('DELETION_FAILED').'/'.TRUE);
         }
-    }
-
-    /**
-     * Render page
-     * @param array $data
-     * @param string $page concerning page
-     */
-    private function display($data, $page)
-    {
-        $data['active'] = 'fournisseur';
-
-        //checks admin session
-        if (!$this->session->has_userdata('user'))
-        {
-            $data = array(
-                'title' => lang('CONNECTION')
-            );
-            $page = 'connexion/index';
-        }
-        $this->load->view('templates/header', $data);
-        $this->load->view($page, $data);
-        $this->load->view('templates/footer');
     }
 
 }

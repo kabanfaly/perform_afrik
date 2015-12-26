@@ -20,13 +20,20 @@ class Preference_model extends CI_Model
      * Preference (preference) table name
      * @var String
      */
-    public static $table_name = 'pa_preference';
+    public static $TABLE_NAME = 'pa_preference';
 
     /**
      * Preference (preference) table primary key
      * @var String
      */
-    public static $pk = 'id_preference';
+    public static $PK = 'id_preference';
+    public static $DEFAULT_PARAMETERS = array(
+        'PHONE' => 'Tel: (+225) 20 22 57 02 / 77 77 03 03',
+        'EMAIL' => 'performworld15@gmail.com',
+        'ADDRESS' => 'Plateau Immeuble du Mali, 21 BP 2924, Abidjan 21, Côte D\'Ivoire',
+        'FAX' => '',
+        'COMPANY' => 'PERFORM WORLD',
+    );
 
     public function __construct()
     {
@@ -34,26 +41,32 @@ class Preference_model extends CI_Model
         $this->load->database();
     }
 
+
     /**
-     * retreives all preferences if the input parameter (id_preference) is false, or 
-     * retreives the preference identified by the input parameter value
-     * @param type $id_preference
-     * @return type array
+     * get all parameters. Saves default parameters if any parameter is found
+     * @return array
      */
-    public function get_preferences($id_preference = false)
+    public function get_parameters()
     {
-        if ($id_preference === false)
+        // get parameters
+        $result = $this->find_by_name('parameters');
+        
+        if ($result !== NULL)
         {
+            return json_decode($result['valeur'], true);
+        } else
+        {   
 
-            $query = $this->db->get(self::$table_name);
-            return $query->result_array();
+            // save default parameters
+            $data = array('nom' => 'parameters', 'valeur' => json_encode(self::$DEFAULT_PARAMETERS));
+            $this->save($data);
+            
+            return self::$DEFAULT_PARAMETERS;
         }
-
-        $query = $this->db->get_where(self::$table_name, array(self::$pk => $id_preference));
-        return $query->row_array();
+        return self::$DEFAULT_PARAMETERS;
     }
 
-    /**
+     /**
      * Finds a preference by name
      * 
      * @param String $name
@@ -62,10 +75,9 @@ class Preference_model extends CI_Model
     public function find_by_name($name)
     {
 
-        $query = $this->db->get_where(self::$table_name, array('nom' => $name));
+        $query = $this->db->get_where(self::$TABLE_NAME, array('nom' => $name));
         return $query->row_array();
     }
-
     /**
      * Saves a preference if it doesn't exist
      * 
@@ -74,10 +86,10 @@ class Preference_model extends CI_Model
      */
     public function save($data)
     {
-        //find city
+
         if ($this->find_by_name($data['nom']) === NULL)
         {
-            return $this->db->insert(self::$table_name, $data);
+            return $this->db->insert(self::$TABLE_NAME, $data);
         }
         return FALSE;
     }
@@ -89,21 +101,11 @@ class Preference_model extends CI_Model
      * @param array $where
      * @return boolean
      */
-    public function update($data, $where)
+    public function update_parameters($data)
     {
         // do update
-        return $this->db->update(self::$table_name, $data, $where);
+        return $this->db->update(self::$TABLE_NAME, $data, array('nom' => 'parameters'));
     }
 
-    /**
-     * Deletes a preference
-     * 
-     * @param array $where
-     * @return boolean
-     */
-    public function delete($where)
-    {
-        return $this->db->delete(self::$table_name, $where);
-    }
 
 }

@@ -13,7 +13,10 @@ if (!defined('BASEPATH'))
  * @subpackage perform_afrik/application/controllers
  * @filesource dechargement.php
  */
-class Dechargement extends CI_Controller
+
+include_once 'Common_Controller.php';
+
+class Dechargement extends Common_Controller
 {
 
     public function __construct()
@@ -38,6 +41,7 @@ class Dechargement extends CI_Controller
             'title' => lang('UNLOADING_MANAGEMENT'),
             'msg' => $msg,
             'error' => $error,
+            'active' => 'dechargement',
             'form_link' => site_url('dechargement/edit')
         );
 
@@ -69,6 +73,7 @@ class Dechargement extends CI_Controller
         $data = array(
             'title' => lang('ADD_UNLOADING'),
             'form_action' => site_url('dechargement/save'),
+            'form_name' => 'dechargement',
             'trucks' => $this->camion_model->get_camions(),
             'suppliers' => $this->fournisseur_model->get_fournisseurs(),
             'cities' => $this->ville_model->get_villes()
@@ -87,8 +92,10 @@ class Dechargement extends CI_Controller
             $data['form_action'] = site_url('dechargement/update');
             $data['date'] = $this->mk_app_date($data['date']);
         }
-
+        
+        $this->load->view('templates/form_header', $data);
         $this->load->view('dechargement/form', $data);
+        $this->load->view('templates/form_footer', $data);
     }
 
     /**
@@ -97,12 +104,12 @@ class Dechargement extends CI_Controller
      */
     public function delete($id_dechargement)
     {
-        if ($this->dechargement_model->delete(array(Dechargement_model::$pk => $id_dechargement)) !== FALSE)
+        if ($this->dechargement_model->delete(array(Dechargement_model::$PK => $id_dechargement)) !== FALSE)
         {
             redirect('dechargement/index/' . lang('UNLOADING_DELETION_SUCCESS'));
         } else
         {
-            redirect('dechargement/index/' . lang('DELETING_FAILED') . '/' . TRUE);
+            redirect('dechargement/index/' . lang('DELETION_FAILED') . '/' . TRUE);
         }
     }
 
@@ -198,7 +205,7 @@ class Dechargement extends CI_Controller
         
         $id_dechargement = $this->input->post('id_dechargement');
 
-        $where = array(Dechargement_model::$pk => $id_dechargement);
+        $where = array(Dechargement_model::$PK => $id_dechargement);
         
         // update
         if ($this->dechargement_model->update($data, $where) !== FALSE)
@@ -208,28 +215,6 @@ class Dechargement extends CI_Controller
         {
             redirect('dechargement/index/' . lang('UPDATING_FAILED') . '/' . TRUE);
         }
-    }
-
-    /**
-     * Render page
-     * @param array $data
-     * @param string $page concerning page
-     */
-    private function display($data, $page)
-    {
-        $data['active'] = 'dechargement';
-
-        //checks admin session
-        if (!$this->session->has_userdata('user'))
-        {
-            $data = array(
-                'title' => lang('CONNECTION')
-            );
-            $page = 'connexion/index';
-        }
-        $this->load->view('templates/header', $data);
-        $this->load->view($page, $data);
-        $this->load->view('templates/footer');
     }
 
 }

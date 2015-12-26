@@ -20,6 +20,7 @@ class Connexion extends CI_Controller
     {
         parent::__construct();
         $this->load->model('utilisateur_model');
+        $this->load->model('preference_model');
     }
 
     /**
@@ -52,7 +53,13 @@ class Connexion extends CI_Controller
         
         if ($user !== NULL)
         {
+            // save user's info in session
             $this->session->set_userdata('user', $user);
+            
+            // save parameters in session
+            $parameters =  $this->preference_model->get_parameters();
+            
+            $this->session->set_userdata('parameters', $parameters);
             redirect('dechargement/index');
         }else{
             $data['err_msg'] = lang('INVALID_LOGIN_PASSWORD');
@@ -65,7 +72,9 @@ class Connexion extends CI_Controller
      */
     public function logout()
     {
+        // clear session
         $this->session->unset_userdata('user');
+        $this->session->unset_userdata('parameters');
         $data = array(
             'title' => lang('CONNECTION'),
             'err_msg' => ''

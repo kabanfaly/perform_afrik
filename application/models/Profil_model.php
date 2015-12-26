@@ -20,13 +20,13 @@ class Profil_model extends CI_Model
      * Profil (profile) table name
      * @var String
      */
-    public static $table_name = 'pa_profil';
+    public static $TABLE_NAME = 'pa_profil';
 
     /**
      * Profil (profile) table primary key
      * @var String
      */
-    public static $pk = 'id_profil';
+    public static $PK = 'id_profil';
 
     public function __construct()
     {
@@ -40,16 +40,16 @@ class Profil_model extends CI_Model
      * @param type $id_profil
      * @return type array
      */
-    public function get_profils($id_profil = false)
+    public function get_profiles($id_profil = false)
     {
         if ($id_profil === false)
         {
 
-            $query = $this->db->get(self::$table_name);
+            $query = $this->db->get(self::$TABLE_NAME);
             return $query->result_array();
         }
 
-        $query = $this->db->get_where(self::$table_name, array(self::$pk => $id_profil));
+        $query = $this->db->get_where(self::$TABLE_NAME, array(self::$PK => $id_profil));
         return $query->row_array();
     }
 
@@ -62,7 +62,7 @@ class Profil_model extends CI_Model
     public function find_by_name($name)
     {
 
-        $query = $this->db->get_where(self::$table_name, array('nom' => $name));
+        $query = $this->db->get_where(self::$TABLE_NAME, array('nom' => $name));
         return $query->row_array();
     }
 
@@ -77,7 +77,7 @@ class Profil_model extends CI_Model
         //find city
         if ($this->find_by_name($data['nom']) === NULL)
         {
-            return $this->db->insert(self::$table_name, $data);
+            return $this->db->insert(self::$TABLE_NAME, $data);
         }
         return FALSE;
     }
@@ -92,7 +92,7 @@ class Profil_model extends CI_Model
     public function update($data, $where)
     {
         // do update
-        return $this->db->update(self::$table_name, $data, $where);
+        return $this->db->update(self::$TABLE_NAME, $data, $where);
     }
 
     /**
@@ -103,7 +103,7 @@ class Profil_model extends CI_Model
      */
     public function delete($where)
     {
-        return $this->db->delete(self::$table_name, $where);
+        return $this->db->delete(self::$TABLE_NAME, $where);
     }
 
 }

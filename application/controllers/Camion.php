@@ -13,7 +13,9 @@ if (!defined('BASEPATH'))
  * @subpackage perform_afrik/application/controllers
  * @filesource camion.php
  */
-class Camion extends CI_Controller
+include_once 'Common_Controller.php';
+
+class Camion extends Common_Controller
 {
 
     public function __construct()
@@ -36,6 +38,7 @@ class Camion extends CI_Controller
             'title' => lang('TRUCKS_MANAGEMENT'),
             'msg' => $msg,
             'error' => $error,
+            'active' => 'camion',
             'form_link' => site_url('camion/edit')
         );
 
@@ -52,6 +55,7 @@ class Camion extends CI_Controller
 
         $data = array(
             'title' => lang('ADD_TRUCK'),
+            'form_name' => 'camion',
             'form_action' => site_url('camion/save')
         );
 
@@ -68,8 +72,9 @@ class Camion extends CI_Controller
             $data['title'] = lang('EDIT_TRUCK');
             $data['form_action'] = site_url('camion/update');
         }
-
+        $this->load->view('templates/form_header', $data);
         $this->load->view('camion/form', $data);
+        $this->load->view('templates/form_footer', $data);
     }
 
     /**
@@ -115,7 +120,7 @@ class Camion extends CI_Controller
 
         $id_camion = $this->input->post('id_camion');
 
-        $where = array(Camion_model::$pk => $id_camion);
+        $where = array(Camion_model::$PK => $id_camion);
 
         // update
         if ($this->camion_model->update($data, $where) !== FALSE)
@@ -133,35 +138,13 @@ class Camion extends CI_Controller
      */
     public function delete($id_camion)
     {
-        if ($this->camion_model->delete(array(Camion_model::$pk => $id_camion)) !== FALSE)
+        if ($this->camion_model->delete(array(Camion_model::$PK => $id_camion)) !== FALSE)
         {
             redirect('camion/index/' . lang('TRUCK_DELETION_SUCCESS'));
         } else
         {
-            redirect('camion/index/' . lang('DELETING_FAILED').'/'.TRUE);
+            redirect('camion/index/' . lang('DELETION_FAILED').'/'.TRUE);
         }
     }
-
-    /**
-     * Render page
-     * @param array $data
-     * @param string $page concerning page
-     */
-    private function display($data, $page)
-    {
-        $data['active'] = 'camion';
-
-        //checks admin session
-        if (!$this->session->has_userdata('user'))
-        {
-            $data = array(
-                'title' => lang('CONNECTION')
-            );
-            $page = 'connexion/index';
-        }
-        $this->load->view('templates/header', $data);
-        $this->load->view($page, $data);
-        $this->load->view('templates/footer');
-    }
-
+    
 }

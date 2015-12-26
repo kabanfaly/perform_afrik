@@ -208,6 +208,8 @@ INSERT INTO `pa_ville` (`id_ville`, `nom`) VALUES
 
 -- --------------------------------------------------------
 
+-- --------------------------------------------------------
+
 --
 -- Structure de la table `pa_preference`
 --
@@ -215,12 +217,17 @@ INSERT INTO `pa_ville` (`id_ville`, `nom`) VALUES
 DROP TABLE IF EXISTS `pa_preference`;
 CREATE TABLE IF NOT EXISTS `pa_preference` (
   `id_preference` int(11) NOT NULL AUTO_INCREMENT,
-  `entreprise` varchar(255) NOT NULL,
-  `telephone` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `fax` varchar(255) NOT NULL,
+  `nom` varchar(45) NOT NULL,
+  `valeur` text NOT NULL,
   PRIMARY KEY (`id_preference`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Contenu de la table `pa_preference`
+--
+
+INSERT INTO `pa_preference` (`id_preference`, `nom`, `valeur`) VALUES
+(2, 'parameters', '{"COMPANY":"PERFORM WORLD","PHONE":"Tel: (+225) 20 22 57 02 \\/ 77 77 03 03","FAX":"","EMAIL":"performworld15@gmail.com","ADDRESS":"Plateau Immeuble du Mali, 21 BP 2924, Abidjan 21, C\\u00f4te D''Ivoire."}');
 
 --
 -- Contraintes pour les tables exportées

@@ -20,13 +20,13 @@ class Ville_model extends CI_Model
      * Ville (city) table name
      * @var String
      */
-    public static $table_name = 'pa_ville';
+    public static $TABLE_NAME = 'pa_ville';
 
     /**
      * Ville (city) table primary key
      * @var String
      */
-    public static $pk = 'id_ville';
+    public static $PK = 'id_ville';
 
     public function __construct()
     {
@@ -45,11 +45,11 @@ class Ville_model extends CI_Model
         if ($id_ville === false)
         {
 
-            $query = $this->db->get(self::$table_name);
+            $query = $this->db->get(self::$TABLE_NAME);
             return $query->result_array();
         }
 
-        $query = $this->db->get_where(self::$table_name, array(self::$pk => $id_ville));
+        $query = $this->db->get_where(self::$TABLE_NAME, array(self::$PK => $id_ville));
         return $query->row_array();
     }
 
@@ -62,7 +62,7 @@ class Ville_model extends CI_Model
     public function find_by_name($name)
     {
 
-        $query = $this->db->get_where(self::$table_name, array('nom' => $name));
+        $query = $this->db->get_where(self::$TABLE_NAME, array('nom' => $name));
         return $query->row_array();
     }
 
@@ -77,7 +77,7 @@ class Ville_model extends CI_Model
         //find city
         if ($this->find_by_name($data['nom']) === NULL)
         {
-            return $this->db->insert(self::$table_name, $data);
+            return $this->db->insert(self::$TABLE_NAME, $data);
         }
         return FALSE;
     }
@@ -92,7 +92,7 @@ class Ville_model extends CI_Model
     public function update($data, $where)
     {
         // do update
-        return $this->db->update(self::$table_name, $data, $where);
+        return $this->db->update(self::$TABLE_NAME, $data, $where);
     }
 
     /**
@@ -103,7 +103,7 @@ class Ville_model extends CI_Model
      */
     public function delete($where)
     {
-        return $this->db->delete(self::$table_name, $where);
+        return $this->db->delete(self::$TABLE_NAME, $where);
     }
 
 }

@@ -16,7 +16,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="nom"><?php echo lang('NAME'); ?>*:</label>
-                    <input type="text" name="nom" value="<?php echo !isset($nom) ?'' : $nom; ?>" class="form-control" id="email" required placeholder="<?php echo lang('TYPE_CITY_NAME'); ?>">
+                    <input type="text" name="nom" value="<?php echo !isset($nom) ?'' : $nom; ?>" class="form-control" id="nom" required placeholder="<?php echo lang('TYPE_CITY_NAME'); ?>">
                 </div>
             </div>
             <div class="mandatory">* <?php echo lang('MANDATORY_FIELD'); ?> </div>

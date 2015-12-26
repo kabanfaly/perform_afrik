@@ -1,11 +1,11 @@
-<input type="hidden" name="id_fournisseur" value="<?php echo !isset($id_fournisseur) ?'' : $id_fournisseur; ?>" />
+<input type="hidden" name="id_preference" value="<?php echo !isset($id_preference) ?'' : $id_preference; ?>" />
 <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <h3><?php echo $title; ?></h3>
 </div>
 <div class="modal-body">
     <div class="form-group">
-        <label for="nom"><?php echo lang('NAME'); ?>*:</label>
+        <label for="nom"><?php echo lang('EN'); ?>*:</label>
         <input type="text" name="nom" value="<?php echo !isset($nom) ?'' : $nom; ?>" class="form-control" id="nom" required placeholder="<?php echo lang('TYPE_SUPPLIER_NAME'); ?>">
     </div>
     <div class="form-group">

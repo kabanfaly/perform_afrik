@@ -2,7 +2,6 @@
 if (isset($_SESSION['user']))
 {
     ?>
-    </table>
     </div>
     <!-- /.content clearfix-->
     </div>
@@ -14,24 +13,27 @@ if (isset($_SESSION['user']))
 <!-- /#page-wrapper -->
 </div>
 <?php
-    if (isset($_SESSION['user']))
+    if (isset($_SESSION['user']) && isset($_SESSION['parameters']))
     {
     ?>
     <footer>
         <div id="footer" class="panel-footer">
             <div class="row">
                 <div class="col-lg-12">
-                    <h5><?php echo lang('CONTACT_NAME'); ?></h5>
+                    <h5><?php echo $_SESSION['parameters']['COMPANY']; ?></h5>
                     <small>
                         <p>
-                            <i class="glyphicon glyphicon-home"></i>
-                            <?php echo lang('CONTACT_ADDRESS'); ?> 
+                            <i class="fa fa-fw fa-home"></i>
+                            <?php echo $_SESSION['parameters']['ADDRESS']; ?> 
                             <br>
-                            <i class="glyphicon glyphicon-envelope"></i>
-                            <?php echo lang('CONTACT_EMAIL'); ?> 
+                            <i class="fa fa-fw fa-envelope"></i>
+                            <?php echo $_SESSION['parameters']['EMAIL']; ?> 
                             <br>
-                            <i class="glyphicon glyphicon-phone"></i>
-                            <?php echo lang('CONTACT_TEL'); ?> 
+                            <i class="fa fa-fw fa-phone"></i>
+                            <?php echo $_SESSION['parameters']['PHONE']; ?> 
+                            <br>
+                            <i class="fa fa-fw fa-fax"></i>
+                            <?php echo $_SESSION['parameters']['FAX']; ?> 
 
                         </p> 
                     </small>
@@ -40,7 +42,7 @@ if (isset($_SESSION['user']))
             <div class="row">
                 <div class="col-lg-12">
                     <p>
-                        <small><?php echo lang('COPYRIGHT'); ?> </small>
+                        <small><?php echo lang('COPYRIGHT').$_SESSION['parameters']['COMPANY'] ; ?> </small>
                     </p>
                 </div>
             </div>
@@ -49,6 +51,17 @@ if (isset($_SESSION['user']))
 <?php } ?>
 <!-- /#wrapper -->
 </div>
+
+
+<!-- Modal -->
+<div id="form-content" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="form-content" aria-hidden="true">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
 <?php
 $url = base_url();
 echo <<<EOF
