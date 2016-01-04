@@ -1,11 +1,9 @@
 <?php
-if (isset($_SESSION['user']))
-{
-    ?>
+if (isset($_SESSION['user'])) :  ?>
     </div>
     <!-- /.content clearfix-->
     </div>
-<?php } ?>
+<?php endif; ?>
 <!-- ./row -->
 </div>
 <!-- /.container-fluid-->
@@ -13,9 +11,7 @@ if (isset($_SESSION['user']))
 <!-- /#page-wrapper -->
 </div>
 <?php
-    if (isset($_SESSION['user']) && isset($_SESSION['parameters']))
-    {
-    ?>
+    if (isset($_SESSION['user']) && isset($_SESSION['parameters'])) : ?>
     <footer>
         <div id="footer" class="panel-footer">
             <div class="row">
@@ -48,7 +44,7 @@ if (isset($_SESSION['user']))
             </div>
         </div>
     </footer>
-<?php } ?>
+<?php endif; ?>
 <!-- /#wrapper -->
 </div>
 

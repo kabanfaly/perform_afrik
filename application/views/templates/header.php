@@ -25,9 +25,7 @@
                 </div>
                 <!-- Top Menu Items -->
                  <?php
-                    if (isset($_SESSION['user']))
-                    {
-                    ?>
+                    if (isset($_SESSION['user'])): ?>
                         <ul class="nav navbar-right top-nav">
 
                             <li class="dropdown">
@@ -63,7 +61,7 @@
                                 <a href="<?php echo site_url("camion"); ?>"><i class="fa fa-fw fa-truck"></i>&nbsp;<?php echo lang('TRUCKS'); ?></a>
                             </li>
                             <li class="<?php echo $active == 'fournisseur' ? 'active' : '' ?>">
-                                <a href="<?php echo site_url("fournisseur"); ?>"><i class="fa fa-fw fa-barcode"></i>&nbsp;<?php echo lang('SUPPLIERS'); ?></a>
+                                <a href="<?php echo site_url("fournisseur"); ?>"><i class="fa fa-fw fa-car"></i>&nbsp;<?php echo lang('SUPPLIERS'); ?></a>
                             </li>
                             <li class="<?php echo $active == 'ville' ? 'active' : '' ?>">
                                 <a href="<?php echo site_url("ville"); ?>"><i class="fa fa-fw fa-building"></i>&nbsp;<?php echo lang('CITIES'); ?></a>
@@ -72,15 +70,19 @@
                                 <a href="<?php echo site_url("ville"); ?>"><i class="fa fa-fw fa-gear"></i>&nbsp;<?php echo lang('ADMINISTRATION'); ?></a>
                             </li>-->
                             <li class="<?php echo $active == 'profil' ? 'active' : '' ?>">
-                                <a href="<?php echo site_url("profil"); ?>"><i class="fa fa-fw fa-group"></i>&nbsp;<?php echo lang('PROFILES'); ?></a>
+                                <a href="<?php echo site_url("profil"); ?>"><i class="fa fa-fw fa-user"></i>&nbsp;<?php echo lang('PROFILES'); ?></a>
+                            </li>
+                            <li class="<?php echo $active == 'utilisateur' ? 'active' : '' ?>">
+                                <a href="<?php echo site_url("utilisateur"); ?>"><i class="fa fa-fw fa-users"></i>&nbsp;<?php echo lang('USERS'); ?></a>
                             </li>
                             <li class="<?php echo $active == 'parametres' ? 'active' : '' ?>">
-                                <a href="<?php echo site_url("parametres"); ?>"><i class="fa fa-fw fa-wrench"></i>&nbsp;<?php echo lang('PARAMETERS'); ?></a>
+                                <a href="<?php echo site_url("parametres"); ?>"><i class="fa fa-fw fa-gear"></i>&nbsp;<?php echo lang('PARAMETERS'); ?></a>
+                                <!--<a href="<?php echo site_url("parametres"); ?>"><i class="fa fa-fw fa-wrench"></i>&nbsp;<?php echo lang('PARAMETERS'); ?></a>-->
                             </li>
 
                         </ul>
                     </div>
-                   <?php } ?>
+                   <?php endif; ?>
                 <!--</div>-->
                 <!-- /.navbar-collapse -->
             </nav>
@@ -90,23 +92,20 @@
             <div class="container-fluid">
                 <div class="row">
                     <?php
-                    if (isset($_SESSION['user']))
-                    {
-                        ?>
+                    if (isset($_SESSION['user'])) : ?>
                         <div class="col-lg-12">
                             <div class="content clearfix">
                                 <!--<div class="title"><h3><?php echo $title; ?></h3></div>-->
+                                
+                                <!-- hide add button if configuration page --> 
                                 <?php
-                                if (!isset($configuration))
-                                {
-                                ?>
+                                if (!isset($configuration)) : ?>
                                 <p>
                                     <a href="<?php echo $form_link; ?>" data-toggle="modal" data-target="#form-content" class="btn btn-primary btn-large"><?php echo lang('ADD'); ?></a>
                                 </p>
-                                <?php
-                                }
-                                ?>
+                                <?php endif;  ?>
+                                
                                 <div class="msg <?php echo!$error ? 'success' : 'alert-danger fade in'; ?>">
                                     <center><?php echo urldecode($msg); ?></center>
                                 </div>
-<?php } ?>
+                    <?php endif; ?>

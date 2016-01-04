@@ -49,3 +49,12 @@ define(["jquery", "jquery-ui", "datetimepicker", "datatables",
 function confirmDeletion() {
     return confirm('Voulez vous supprimer cet élément ?');
 }
+
+
+function checkPassword(pwd, pwd2){
+    if($('#'+pwd).val() !== $('#'+pwd2).val()){
+        alert('Les mots de passe doivent être idendiques');
+        return false;
+    }
+    return true;
+}

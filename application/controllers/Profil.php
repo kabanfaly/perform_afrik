@@ -46,7 +46,7 @@ class Profil extends Common_Controller
     }
 
     /**
-     * Displays a form to add or edit a profil
+     * Displays a form to add or edit a profile
      * 
      * @param int $id_profil profil id to modify
      */
@@ -94,7 +94,7 @@ class Profil extends Common_Controller
     }
 
     /**
-     * Saves a profil
+     * Saves a profile
      */
     public function save()
     {
@@ -112,7 +112,7 @@ class Profil extends Common_Controller
     }
 
     /**
-     * Updates a profil
+     * Updates a profile
      */
     public function update()
     {
@@ -134,7 +134,7 @@ class Profil extends Common_Controller
     }
 
     /**
-     * Delete a profil
+     * Delete a profile
      * @param int $id_profil
      */
     public function delete($id_profil)

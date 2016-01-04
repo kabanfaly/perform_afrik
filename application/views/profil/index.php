@@ -13,12 +13,16 @@
                 <td><?php echo $no++; ?></td>
                 <td><?php echo $profile['nom']; ?></td>
                 <td align="center">
-                    <a href="<?php echo $form_link . '/' . $profile['id_profil']; ?>" data-toggle="modal" data-target="#form-content">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </a>
-                    <a href="<?php echo site_url('profil/delete/' . $profile['id_profil']); ?>" onclick="return confirmDeletion();">
-                        <span class="glyphicon glyphicon-remove"></span> 
-                    </a>
+                    <!--avoid deleting current connected user profile-->
+                     <?php if( $_SESSION['user']['id_profil'] !== $profile['id_profil'] ) : ?>
+                        <a href="<?php echo $form_link . '/' . $profile['id_profil']; ?>" data-toggle="modal" data-target="#form-content">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                        
+                        <a href="<?php echo site_url('profil/delete/' . $profile['id_profil']); ?>" onclick="return confirmDeletion();">
+                            <span class="glyphicon glyphicon-remove"></span> 
+                        </a>
+                    <?php endif; ?>
                 </td>
             </tr>
         <?php endforeach; ?>

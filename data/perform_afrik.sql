@@ -254,3 +254,5 @@ ALTER TABLE `pa_admin` ADD `type` VARCHAR( 45 ) NOT NULL;
 ALTER TABLE `pa_utilisateur`
   ADD CONSTRAINT `pa_utilisateur_ibfk_2` FOREIGN KEY (`id_profil`) REFERENCES `pa_profil` (`id_profil`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `pa_utilisateur` ADD UNIQUE (`login`)
+
+ALTER TABLE `pa_utilisateur` ADD `statut` TINYINT NOT NULL ;
