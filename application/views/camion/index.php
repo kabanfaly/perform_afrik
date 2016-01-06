@@ -13,7 +13,7 @@
                 <td><?php echo $no++; ?></td>
                 <td><?php echo $truck['numero']; ?></td>
                 <td align="center">
-                    <a href="<?php echo $form_link . '/' . $truck['id_camion']; ?>" data-toggle="modal" data-target="#form-content">
+                    <a href="#" onclick="loadForm('<?php echo $form_link . '/' . $truck['id_camion']; ?>')" data-toggle="modal" data-target="#form-content">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </a>
                     <a href="<?php echo site_url('camion/delete/' . $truck['id_camion']); ?>" onclick="return confirmDeletion();">

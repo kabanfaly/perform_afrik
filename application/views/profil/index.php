@@ -15,7 +15,7 @@
                 <td align="center">
                     <!--avoid deleting current connected user profile-->
                      <?php if( $_SESSION['user']['id_profil'] !== $profile['id_profil'] ) : ?>
-                        <a href="<?php echo $form_link . '/' . $profile['id_profil']; ?>" data-toggle="modal" data-target="#form-content">
+                        <a href="href="#" onclick="loadForm('<?php echo $form_link . '/' . $profile['id_profil']; ?>')" data-toggle="modal" data-target="#form-content">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
                         

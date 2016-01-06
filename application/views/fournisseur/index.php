@@ -17,7 +17,7 @@
                 <td><?php echo $supplier['telephone']; ?></td>
                 <td><?php echo $supplier['adresse']; ?></td>
                 <td align="center">
-                    <a href="<?php echo $form_link . '/' . $supplier['id_fournisseur']; ?>" data-toggle="modal" data-target="#form-content">
+                    <a href="href="#" onclick="loadForm('<?php echo $form_link . '/' . $supplier['id_fournisseur']; ?>')" data-toggle="modal" data-target="#form-content">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </a>
                     <a href="<?php echo site_url('fournisseur/delete/' . $supplier['id_fournisseur']); ?>" onclick="return confirmDeletion();">

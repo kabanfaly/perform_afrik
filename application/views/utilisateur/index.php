@@ -22,7 +22,7 @@
                 <td><?php echo $user['profil']; ?></td>              
                 <td><?php echo $user['statut']; ?></td>
                 <td align="center">
-                    <a href="<?php echo $form_link . '/' . $user['id_utilisateur']; ?>" data-toggle="modal" data-target="#form-content">
+                    <a href="#" onclick="loadForm('<?php echo $form_link . '/' . $user['id_utilisateur']; ?>')" data-toggle="modal" data-target="#form-content">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </a>
                     <!--avoid deleting current connected user-->

@@ -51,10 +51,24 @@ function confirmDeletion() {
 }
 
 
-function checkPassword(pwd, pwd2){
-    if($('#'+pwd).val() !== $('#'+pwd2).val()){
+function checkPassword(pwd, pwd2) {
+    if ($('#' + pwd).val() !== $('#' + pwd2).val()) {
         alert('Les mots de passe doivent être idendiques');
         return false;
     }
     return true;
+}
+
+/**
+ * load form modal 
+ * @param {string} link controller link to set form content
+ * @returns {undefined}
+ */
+function loadForm(link) {
+    $.ajax({
+        url: link,
+        success: function (result) {
+            $(".modal-content").html(result);
+        }
+    });
 }

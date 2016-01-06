@@ -100,9 +100,11 @@
                                 <!-- hide add button if configuration page --> 
                                 <?php
                                 if (!isset($configuration)) : ?>
-                                <p>
-                                    <a href="<?php echo $form_link; ?>" data-toggle="modal" data-target="#form-content" class="btn btn-primary btn-large"><?php echo lang('ADD'); ?></a>
-                                </p>
+                                <div class="pull-right">
+                                    <a href="#" onclick="loadForm('<?php echo $form_link; ?>')" data-toggle="modal" data-target="#form-content" class="btn btn-primary btn-large"><?php echo lang('ADD'); ?></a>
+                                </div>
+                                <div class="clearfix">
+                                </div>
                                 <?php endif;  ?>
                                 
                                 <div class="msg <?php echo!$error ? 'success' : 'alert-danger fade in'; ?>">
