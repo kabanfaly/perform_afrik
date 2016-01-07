@@ -91,6 +91,7 @@ $lang['TOTAL_BAGS'] = 'Total sacs';
 $lang['GROSS_WEIGHT'] = 'Poids brut';
 $lang['NET_WEIGHT'] = 'Poids net';
 $lang['REFRACTED_WEIGHT'] = 'Poids réfracté';
+$lang['REFRACTED_WEIGHT_LABEL'] = 'Poids réfracté <i>(calculé automatiquement mais modifiable)</i>';
 $lang['HUMIDITY'] = 'Humidité';
 $lang['SAVE_UNLOAD'] = 'Ajout d\'un déchargement';
 $lang['DATE_FORMAT'] = 'JJ/MM/AAAA';

@@ -72,3 +72,18 @@ function loadForm(link) {
         }
     });
 }
+
+function updateRefractedWeight() {
+
+    var goodBags = parseFloat($('#bon_sac').val());
+    var tornBags = parseFloat($('#sac_dechire').val());
+    var netWeight = parseFloat($('#poids_net').val());
+
+    goodBags = isNaN(goodBags) ? 0 : goodBags;
+    tornBags = isNaN(tornBags) ? 0 : tornBags;
+    netWeight = isNaN(netWeight) ? 0 : netWeight;
+
+    var refractedWeight = Math.abs((goodBags + tornBags * 8) - netWeight);
+    console.log(refractedWeight);
+    $('#poids_refracte').val(refractedWeight);
+}

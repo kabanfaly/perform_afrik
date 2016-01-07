@@ -153,9 +153,10 @@ class Dechargement extends Common_Controller
         $gross_weight = trim($this->input->post('poids_brut'));
         $net_weight = trim($this->input->post('poids_net'));
         $humidity = trim($this->input->post('humidite'));
-
+        $refracted_weight = trim($this->input->post('poids_refracte'));
         $total_bag = intval($good_bag) + intval($torn_bag);
-        $refracted_weight = $this->compute_refracted($good_bag, $torn_bag, $net_weight);
+        
+        //$refracted_weight = $this->compute_refracted($good_bag, $torn_bag, $net_weight);
 
         $data = array('id_camion' => $id_camion, 'id_ville' => $id_ville, 'id_fournisseur' => $id_fournisseur,
             'date' => $date, 'bon_sac' => $good_bag, 'sac_dechire' => $torn_bag, 'sac_total' => $total_bag,
