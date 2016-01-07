@@ -14,10 +14,10 @@
                 <td><?php echo $city['nom']; ?></td>
                 <td align="center">
                     <a href="#" onclick="loadForm('<?php echo $form_link . '/' . $city['id_ville']; ?>')" data-toggle="modal" data-target="#form-content">
-                        <span class="glyphicon glyphicon-pencil"></span>
+                        <span class="fa fa-fw fa-pencil"></span>
                     </a>
-                    <a href="<?php echo site_url('ville/delete/' . $city['id_ville']); ?>" onclick="return confirmDeletion();">
-                        <span class="glyphicon glyphicon-remove"></span> 
+                    <a href="#" onclick="if (confirmDeletion()){doAjax('<?php echo site_url('ville/delete/' . $city['id_ville']); ?>', 'body');};"> 
+                        <span class="fa fa-fw fa-remove"></span> 
                     </a>
                 </td>
             </tr>

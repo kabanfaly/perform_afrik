@@ -13,7 +13,6 @@ if (!defined('BASEPATH'))
  * @subpackage perform_afrik/application/controllers
  * @filesource utilisateur.php
  */
-
 include_once 'Common_Controller.php';
 
 class Utilisateur extends Common_Controller
@@ -34,7 +33,7 @@ class Utilisateur extends Common_Controller
      */
     public function index($msg = '', $error = FALSE)
     {
-        
+
         $data = array(
             'users' => $this->utilisateur_model->get_users(),
             'title' => lang('USERS_MANAGEMENT'),
@@ -43,7 +42,7 @@ class Utilisateur extends Common_Controller
             'active' => 'utilisateur',
             'form_link' => site_url('utilisateur/edit')
         );
-        
+
         $this->display($data, 'utilisateur/index');
     }
 
@@ -61,8 +60,8 @@ class Utilisateur extends Common_Controller
             'profiles' => $this->profil_model->get_profiles(),
             'form_action' => site_url('utilisateur/save')
         );
-        
-       
+
+
         // preset data for modification form
         if ($id_utilisateur !== NULL)
         {
@@ -74,7 +73,7 @@ class Utilisateur extends Common_Controller
             $data = array_merge_recursive($data, $utilisateur);
 
             $data['title'] = lang('EDIT_USER');
-            $data['form_action'] = site_url('utilisateur/update');        
+            $data['form_action'] = site_url('utilisateur/update');
         }
         $this->load->view('templates/form_header', $data);
         $this->load->view('utilisateur/form', $data);
@@ -113,7 +112,7 @@ class Utilisateur extends Common_Controller
             redirect('utilisateur/index/' . lang('SAVING_USER_SUCCESS'));
         } else
         {
-            redirect('utilisateur/index/' . lang('USER_EXISTS'). ': ' . $data['nom'].'/'.TRUE);
+            redirect('utilisateur/index/' . lang('USER_EXISTS') . ': ' . $data['nom'] . '/' . TRUE);
         }
     }
 
@@ -135,7 +134,7 @@ class Utilisateur extends Common_Controller
             redirect('utilisateur/index/' . lang('UPDATING_USER_SUCCESS'));
         } else
         {
-            redirect('utilisateur/index/' . lang('UPDATING_FAILED').'/'.TRUE);
+            redirect('utilisateur/index/' . lang('UPDATING_FAILED') . '/' . TRUE);
         }
     }
 
@@ -150,7 +149,18 @@ class Utilisateur extends Common_Controller
             redirect('utilisateur/index/' . lang('USER_DELETION_SUCCESS'));
         } else
         {
-            redirect('utilisateur/index/' . lang('DELETION_FAILED').'/'.TRUE);
+            redirect('utilisateur/index/' . lang('DELETION_FAILED') . '/' . TRUE);
         }
     }
+
+    public function set_status($id_utilisateur, $status)
+    {
+        $data = array('statut' => $status);
+        $where = array(Utilisateur_model::$PK => $id_utilisateur);
+        // set status
+        $this->utilisateur_model->update($data, $where);
+
+        redirect('utilisateur/index');
+    }
+
 }

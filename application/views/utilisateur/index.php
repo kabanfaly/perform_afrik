@@ -15,20 +15,31 @@
         <?php foreach ($users as $user): ?>
         
             <tr>
-                <td><?php echo $no++; ?></td>
+                <td><?php echo $no++;   ?></td>
                 <td><?php echo $user['nom']; ?></td>
                 <td><?php echo $user['prenom']; ?></td>
                 <td><?php echo $user['login']; ?></td>
                 <td><?php echo $user['profil']; ?></td>              
-                <td><?php echo $user['statut']; ?></td>
+                <td align="center"> 
+                    <?php 
+                        $new_status = $user['statut'] == 0 ? '1' : '0';
+                        $status_link = site_url('utilisateur/set_status/' . $user['id_utilisateur'] . '/' . $new_status) ; 
+                    ?>
+                    <!-- Avoid desabling current connected user -->
+                    <?php if($_SESSION['user']['id_utilisateur'] !== $user['id_utilisateur']) : ?>
+                    <a href="#" onclick="doAjax('<?php echo $status_link; ?>', 'body')">
+                            <span class="glyphicon <?php echo $user['statut'] == 0 ? 'glyphicon-unchecked': 'glyphicon-check'; ?>"></span>
+                        </a>
+                    <?php endif ; ?>
+                </td>
                 <td align="center">
                     <a href="#" onclick="loadForm('<?php echo $form_link . '/' . $user['id_utilisateur']; ?>')" data-toggle="modal" data-target="#form-content">
-                        <span class="glyphicon glyphicon-pencil"></span>
+                        <span class="fa fa-fw fa-pencil"></span>
                     </a>
                     <!--avoid deleting current connected user-->
                     <?php if($_SESSION['user']['id_utilisateur'] !== $user['id_utilisateur']): ?>
-                        <a href="<?php echo site_url('utilisateur/delete/' . $user['id_utilisateur']); ?>" onclick="return confirmDeletion();">
-                            <span class="glyphicon glyphicon-remove"></span> 
+                         <a href="#" onclick="if (confirmDeletion()){doAjax('<?php echo site_url('utilisateur/delete/' . $user['id_utilisateur']); ?>', 'body');};">
+                            <span class="fa fa-fw fa-remove"></span> 
                         </a>
                     <?php endif; ?>
                 </td>

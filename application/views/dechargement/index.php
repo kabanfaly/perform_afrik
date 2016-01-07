@@ -34,10 +34,10 @@
                 <td><?php echo $unloading['humidite']; ?> %</td>
                 <td align="center">
                     <a href="#" onclick="loadForm('<?php echo $form_link . '/' . $unloading['id_dechargement']; ?>')" data-toggle="modal" data-target="#form-content">
-                        <span class="glyphicon glyphicon-pencil"></span>
+                        <span class="fa fa-fw fa-pencil"></span>
                     </a>
-                    <a href="<?php echo site_url('dechargement/delete/' . $unloading['id_dechargement']); ?>" onclick="return confirmDeletion();">
-                        <span class="glyphicon glyphicon-remove"></span> 
+                    <a href="#" onclick="if (confirmDeletion()){doAjax('<?php echo site_url('dechargement/delete/' . $unloading['id_dechargement']); ?>', 'body');};">
+                        <span class="fa fa-fw fa-remove"></span> 
                     </a>
                 </td>
             </tr>

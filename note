@@ -1,16 +1,22 @@
+Install
+- Create a profile name manager
+- Create a user admin admin
+
 Description:
+  Rafrated weight = abs()
   Connection:
     - user status must be set to '1' grant him access to application
     - 
   Profile:
     - A user cannot delete or modify his own profile (while connected)
+    - Manager profile is immutable and cannot be deleted
    
   User management
     - An admin user can add a user for any profile
     - A non admin user can only add a user for its own profile
     - A connected user cannot delete himself while connected
-Bugs:
-remove delete link after deletion
+    - A connected user cannot desabled himself while connected
+
 
 Features:
 - add access right for user:

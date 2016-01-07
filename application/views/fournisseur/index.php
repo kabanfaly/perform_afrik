@@ -17,11 +17,11 @@
                 <td><?php echo $supplier['telephone']; ?></td>
                 <td><?php echo $supplier['adresse']; ?></td>
                 <td align="center">
-                    <a href="href="#" onclick="loadForm('<?php echo $form_link . '/' . $supplier['id_fournisseur']; ?>')" data-toggle="modal" data-target="#form-content">
-                        <span class="glyphicon glyphicon-pencil"></span>
+                    <a href="#" onclick="loadForm('<?php echo $form_link . '/' . $supplier['id_fournisseur']; ?>')" data-toggle="modal" data-target="#form-content">
+                        <span class="fa fa-fw fa-pencil"></span>
                     </a>
-                    <a href="<?php echo site_url('fournisseur/delete/' . $supplier['id_fournisseur']); ?>" onclick="return confirmDeletion();">
-                        <span class="glyphicon glyphicon-remove"></span> 
+                    <a href="#" onclick="if (confirmDeletion()){doAjax('<?php echo site_url('fournisseur/delete/' . $supplier['id_fournisseur']); ?>', 'body');};">
+                        <span class="fa fa-fw fa-remove"></span> 
                     </a>
                 </td>
             </tr>
