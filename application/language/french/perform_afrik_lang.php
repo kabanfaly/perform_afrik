@@ -130,4 +130,5 @@ $lang['ADMINISTRATION'] = 'Administration';
 $lang['PARAMETERS'] = 'Paramètres';
 $lang['PREFERENCES'] = 'Préférences';
 $lang['SITE_PARAMETERS'] = 'Paramètres du site';
+$lang['MY_ACCOUNT'] = 'Mon compte';
 $lang['SAVING_PARAMETERS_SUCCESS'] = 'Les paramètres ont été modifiés avec succès';

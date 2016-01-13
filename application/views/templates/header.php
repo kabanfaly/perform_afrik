@@ -32,7 +32,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $_SESSION['user']['profil'];?> <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="#"><i class="fa fa-fw fa-user"></i>  <?php echo lang('PROFILE'); ?></a>
+                                        <a href="<?php echo site_url("utilisateur/my_account/".$_SESSION['user']['id_utilisateur']); ?>"><i class="fa fa-fw fa-user"></i>  <?php echo lang('PROFILE'); ?></a>
                                     </li>
 <!--                                    <li>
                                         <a href="#"><i class="fa fa-fw fa-gear"></i>  <?php echo lang('SETTINGS'); ?></a>
@@ -87,7 +87,7 @@
                 <!-- /.navbar-collapse -->
             </nav>
         
-       
+        
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -107,7 +107,7 @@
                                 </div>
                                 <?php endif;  ?>
                                 
-                                <div class="msg <?php echo!$error ? 'success' : 'alert-danger fade in'; ?>">
-                                    <center><?php echo urldecode($msg); ?></center>
+                                <div class="msg <?php echo isset($error) && !$error ? 'success' : 'alert-danger fade in'; ?>">
+                                    <center><?php echo isset($msg)? urldecode($msg): ''; ?></center>
                                 </div>
                     <?php endif; ?>

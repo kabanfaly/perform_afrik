@@ -14,7 +14,7 @@
         <?php $no = 1; ?>
         <?php foreach ($users as $user): ?>
         
-            <tr>
+        <tr style="<?php if ($user['statut'] == 0) { echo 'color: red' ; }?>">
                 <td><?php echo $no++;   ?></td>
                 <td><?php echo $user['nom']; ?></td>
                 <td><?php echo $user['prenom']; ?></td>

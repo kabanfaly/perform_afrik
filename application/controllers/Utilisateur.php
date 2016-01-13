@@ -80,6 +80,38 @@ class Utilisateur extends Common_Controller
         $this->load->view('templates/form_footer', $data);
     }
 
+    public function my_account($id_utilisateur)
+    {
+        $data = array(
+            'title' => lang('MY_PROFILE'),
+            'form_name' => 'utilisateur',
+            'active' => 'utilisateur',
+            'configuration' => true,            
+            'profiles' => $this->profil_model->get_profiles(),
+            'form_action' => site_url('utilisateur/save')
+        );
+
+
+        // preset data for modification form
+        if ($id_utilisateur !== NULL)
+        {
+
+            //get utilisateur by id
+            $utilisateur = $this->utilisateur_model->get_users($id_utilisateur);
+
+            //merge row data with $data
+            $data = array_merge_recursive($data, $utilisateur);
+
+            $data['title'] = lang('MY_ACCOUNT');
+            $data['form_action'] = site_url('utilisateur/update');
+        }
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/form_header', $data);
+        $this->load->view('utilisateur/form', $data);
+        $this->load->view('templates/form_footer', $data);
+        $this->load->view('templates/footer', $data);
+    }
+
     /**
      * builds inputs value in an array
      * @return array
@@ -153,6 +185,11 @@ class Utilisateur extends Common_Controller
         }
     }
 
+    /**
+     * Change user status to either one
+     * @param int $id_utilisateur user id
+     * @param int $status new status
+     */
     public function set_status($id_utilisateur, $status)
     {
         $data = array('statut' => $status);
