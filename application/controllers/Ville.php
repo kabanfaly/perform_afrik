@@ -13,7 +13,6 @@ if (!defined('BASEPATH'))
  * @subpackage perform_afrik/application/controllers
  * @filesource ville.php
  */
-
 include_once 'Common_Controller.php';
 
 class Ville extends Common_Controller
@@ -59,23 +58,35 @@ class Ville extends Common_Controller
             'form_action' => site_url('ville/save')
         );
 
-        // preset data for modification form
-        if ($id_ville !== NULL)
+        //checks session
+        if (!$this->connected())
         {
+            $data = array(
+                'title' => lang('CONNECTION')
+            );
+            $this->load->view('templates/header', $data);
+            $this->load->view('connexion/index', $data);
+            $this->load->view('templates/footer');
+        } else
+        {
+            // preset data for modification form
+            if ($id_ville !== NULL)
+            {
 
-            //get city by id
-            $city = $this->ville_model->get_villes($id_ville);
+                //get city by id
+                $city = $this->ville_model->get_villes($id_ville);
 
-            //merge row data with $data
-            $data = array_merge_recursive($data, $city);
+                //merge row data with $data
+                $data = array_merge_recursive($data, $city);
 
-            $data['title'] = lang('EDIT_CITY');
-            $data['form_action'] = site_url('ville/update');
+                $data['title'] = lang('EDIT_CITY');
+                $data['form_action'] = site_url('ville/update');
+            }
+
+            $this->load->view('templates/form_header', $data);
+            $this->load->view('ville/form', $data);
+            $this->load->view('templates/form_footer', $data);
         }
-
-        $this->load->view('templates/form_header', $data);
-        $this->load->view('ville/form', $data);
-        $this->load->view('templates/form_footer', $data);
     }
 
     /**
@@ -98,16 +109,20 @@ class Ville extends Common_Controller
      */
     public function save()
     {
-        //get inputs
-        $data = $this->get_inputs();
+        //checks session
+        if ($this->connected())
+        {
+            //get inputs
+            $data = $this->get_inputs();
 
-        // save if the city number doesn't exist
-        if ($this->ville_model->save($data) !== FALSE)
-        {
-            redirect('ville/index/' . lang('SAVING_CITY_SUCCESS'));
-        } else
-        {
-            redirect('ville/index/' . lang('CITY_EXISTS'). ': ' . $data['nom'].'/'.TRUE);
+            // save if the city number doesn't exist
+            if ($this->ville_model->save($data) !== FALSE)
+            {
+                redirect('ville/index/' . lang('SAVING_CITY_SUCCESS'));
+            } else
+            {
+                redirect('ville/index/' . lang('CITY_EXISTS') . ': ' . $data['nom'] . '/' . TRUE);
+            }
         }
     }
 
@@ -116,20 +131,24 @@ class Ville extends Common_Controller
      */
     public function update()
     {
-        // get input values
-        $data = $this->get_inputs();
-
-        $id_ville = $this->input->post('id_ville');
-
-        $where = array(Ville_model::$PK => $id_ville);
-
-        // update
-        if ($this->ville_model->update($data, $where) !== FALSE)
+        //checks session
+        if ($this->connected())
         {
-            redirect('ville/index/' . lang('UPDATING_CITY_SUCCESS'));
-        } else
-        {
-            redirect('ville/index/' . lang('UPDATING_FAILED').'/'.TRUE);
+            // get input values
+            $data = $this->get_inputs();
+
+            $id_ville = $this->input->post('id_ville');
+
+            $where = array(Ville_model::$PK => $id_ville);
+
+            // update
+            if ($this->ville_model->update($data, $where) !== FALSE)
+            {
+                redirect('ville/index/' . lang('UPDATING_CITY_SUCCESS'));
+            } else
+            {
+                redirect('ville/index/' . lang('UPDATING_FAILED') . '/' . TRUE);
+            }
         }
     }
 
@@ -139,12 +158,17 @@ class Ville extends Common_Controller
      */
     public function delete($id_ville)
     {
-        if ($this->ville_model->delete(array(Ville_model::$PK => $id_ville)) !== FALSE)
+        //checks session
+        if ($this->connected())
         {
-            redirect('ville/index/' . lang('CITY_DELETION_SUCCESS'));
-        } else
-        {
-            redirect('ville/index/' . lang('DELETION_FAILED').'/'.TRUE);
+            if ($this->ville_model->delete(array(Ville_model::$PK => $id_ville)) !== FALSE)
+            {
+                redirect('ville/index/' . lang('CITY_DELETION_SUCCESS'));
+            } else
+            {
+                redirect('ville/index/' . lang('DELETION_FAILED') . '/' . TRUE);
+            }
         }
     }
+
 }

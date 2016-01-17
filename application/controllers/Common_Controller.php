@@ -22,7 +22,7 @@ class Common_Controller extends CI_Controller
     public function display($data, $page)
     {
         //checks admin session
-        if (!$this->session->has_userdata('user'))
+        if (!$this->connected())
         {
             $data = array(
                 'title' => lang('CONNECTION')
@@ -33,5 +33,15 @@ class Common_Controller extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view($page, $data);
         $this->load->view('templates/footer');
+    }
+    
+    /**
+     * Checks if a session is set
+     * @return type
+     */
+    public function connected(){
+                
+        return $this->session->has_userdata('user');
+            
     }
 }

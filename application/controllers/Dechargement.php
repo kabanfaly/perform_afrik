@@ -13,7 +13,6 @@ if (!defined('BASEPATH'))
  * @subpackage perform_afrik/application/controllers
  * @filesource dechargement.php
  */
-
 include_once 'Common_Controller.php';
 
 class Dechargement extends Common_Controller
@@ -78,24 +77,37 @@ class Dechargement extends Common_Controller
             'suppliers' => $this->fournisseur_model->get_fournisseurs(),
             'cities' => $this->ville_model->get_villes()
         );
-        // preset data for modification form
-        if ($id_dechargement !== NULL)
+
+        //checks admin session
+        if (!$this->connected())
         {
-            
-            //get unloading by id
-            $unloading = $this->dechargement_model->get_dechargements($id_dechargement);
+            $data = array(
+                'title' => lang('CONNECTION')
+            );
+            $this->load->view('templates/header', $data);
+            $this->load->view('connexion/index', $data);
+            $this->load->view('templates/footer');
+        } else
+        {
+            // preset data for modification form
+            if ($id_dechargement !== NULL)
+            {
 
-            //merge row data with $data
-            $data = array_merge_recursive($data, $unloading);
+                //get unloading by id
+                $unloading = $this->dechargement_model->get_dechargements($id_dechargement);
 
-            $data['title'] = lang('EDIT_UNLOADING');
-            $data['form_action'] = site_url('dechargement/update');
-            $data['date'] = $this->mk_app_date($data['date']);
+                //merge row data with $data
+                $data = array_merge_recursive($data, $unloading);
+
+                $data['title'] = lang('EDIT_UNLOADING');
+                $data['form_action'] = site_url('dechargement/update');
+                $data['date'] = $this->mk_app_date($data['date']);
+            }
+
+            $this->load->view('templates/form_header', $data);
+            $this->load->view('dechargement/form', $data);
+            $this->load->view('templates/form_footer', $data);
         }
-        
-        $this->load->view('templates/form_header', $data);
-        $this->load->view('dechargement/form', $data);
-        $this->load->view('templates/form_footer', $data);
     }
 
     /**
@@ -104,12 +116,16 @@ class Dechargement extends Common_Controller
      */
     public function delete($id_dechargement)
     {
-        if ($this->dechargement_model->delete(array(Dechargement_model::$PK => $id_dechargement)) !== FALSE)
+        //checks session
+        if ($this->connected())
         {
-            redirect('dechargement/index/' . lang('UNLOADING_DELETION_SUCCESS'));
-        } else
-        {
-            redirect('dechargement/index/' . lang('DELETION_FAILED') . '/' . TRUE);
+            if ($this->dechargement_model->delete(array(Dechargement_model::$PK => $id_dechargement)) !== FALSE)
+            {
+                redirect('dechargement/index/' . lang('UNLOADING_DELETION_SUCCESS'));
+            } else
+            {
+                redirect('dechargement/index/' . lang('DELETION_FAILED') . '/' . TRUE);
+            }
         }
     }
 
@@ -117,24 +133,26 @@ class Dechargement extends Common_Controller
      * Converts application date format (dd/mm/YYYY) to db date format (YYYY-mm-dd)
      * @param string $date
      */
-    private function mk_db_date($date){
-        
+    private function mk_db_date($date)
+    {
+
         //application date format is dd/mm/YYYY
-        
+
         $explode_date = explode('/', $date);
         return "{$explode_date[2]}-{$explode_date[1]}-{$explode_date[0]}";
-        
     }
+
     /**
      * Converts bd date format (YYYY-mm-dd) to application date format (dd/mm/YYYY)
      * @param string $date
      */
-    private function mk_app_date($date){
-        
+    private function mk_app_date($date)
+    {
+
         $explode_date = explode('-', $date);
         return "{$explode_date[2]}/{$explode_date[1]}/{$explode_date[0]}";
-        
     }
+
     /**
      * builds inputs value in an array
      * @return array
@@ -146,8 +164,8 @@ class Dechargement extends Common_Controller
         $id_camion = $this->input->post('id_camion');
         $id_fournisseur = $this->input->post('id_fournisseur');
         $id_ville = $this->input->post('id_ville');
-        
-        $date = $this->mk_db_date($this->input->post('date'));        
+
+        $date = $this->mk_db_date($this->input->post('date'));
         $good_bag = trim($this->input->post('bon_sac'));
         $torn_bag = trim($this->input->post('sac_dechire'));
         $gross_weight = trim($this->input->post('poids_brut'));
@@ -155,7 +173,7 @@ class Dechargement extends Common_Controller
         $humidity = trim($this->input->post('humidite'));
         $refracted_weight = trim($this->input->post('poids_refracte'));
         $total_bag = intval($good_bag) + intval($torn_bag);
-        
+
         //$refracted_weight = $this->compute_refracted($good_bag, $torn_bag, $net_weight);
 
         $data = array('id_camion' => $id_camion, 'id_ville' => $id_ville, 'id_fournisseur' => $id_fournisseur,
@@ -183,16 +201,20 @@ class Dechargement extends Common_Controller
      */
     public function save()
     {
-        //get inputs
-        $data = $this->get_inputs();
+        //checks session
+        if ($this->connected())
+        {
+            //get inputs
+            $data = $this->get_inputs();
 
-        // save unloading
-        if ($this->dechargement_model->save($data) !== FALSE)
-        {
-            redirect('dechargement/index/' . lang('SAVING_UNLOADING_SUCCESS'));
-        } else
-        {
-            redirect('dechargement/index/' . lang('SAVING_UNLOADING_FAILES') . '/' . TRUE);
+            // save unloading
+            if ($this->dechargement_model->save($data) !== FALSE)
+            {
+                redirect('dechargement/index/' . lang('SAVING_UNLOADING_SUCCESS'));
+            } else
+            {
+                redirect('dechargement/index/' . lang('SAVING_UNLOADING_FAILES') . '/' . TRUE);
+            }
         }
     }
 
@@ -201,20 +223,24 @@ class Dechargement extends Common_Controller
      */
     public function update()
     {
-        // get input values
-        $data = $this->get_inputs();
-        
-        $id_dechargement = $this->input->post('id_dechargement');
+        //checks session
+        if ($this->connected())
+        {
+            // get input values
+            $data = $this->get_inputs();
 
-        $where = array(Dechargement_model::$PK => $id_dechargement);
-        
-        // update
-        if ($this->dechargement_model->update($data, $where) !== FALSE)
-        {
-            redirect('dechargement/index/' . lang('UPDATING_UNLOADING_SUCCESS'));
-        } else
-        {
-            redirect('dechargement/index/' . lang('UPDATING_FAILED') . '/' . TRUE);
+            $id_dechargement = $this->input->post('id_dechargement');
+
+            $where = array(Dechargement_model::$PK => $id_dechargement);
+
+            // update
+            if ($this->dechargement_model->update($data, $where) !== FALSE)
+            {
+                redirect('dechargement/index/' . lang('UPDATING_UNLOADING_SUCCESS'));
+            } else
+            {
+                redirect('dechargement/index/' . lang('UPDATING_FAILED') . '/' . TRUE);
+            }
         }
     }
 

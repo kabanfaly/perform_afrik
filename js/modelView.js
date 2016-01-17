@@ -40,63 +40,85 @@ function initContent() {
         dom: 'Bfrtip',
         buttons: [
             'excel', 'pdf', 'print'
-        ],
-    });
+        ]
+});
+
+ $('.collapse').on('shown.bs.collapse', function(){
+    $(this).parent().find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+ }).on('hidden.bs.collapse', function(){
+ $(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+});
 }
 /**
- *  delete element
- * @param {type} link
+    *  delete element  * @param {type} link
  * @returns {Boolean}
  */
 
-function confirmDeletion() {
-    return confirm('Voulez vous supprimer cet élément ?');
-}
+    function confirmDeletion() {
+    return confirm('Voulez vous supprimer cet élément ?'); }
+        
+/**
+    * check if password and confirmed password are identicals
+        * @param {string} pwd
+ * @param {string} pwd2
+ * @returns {Boolean}
+ */
+    function checkPassword(pwd, pwd2) {
 
-
-function checkPassword(pwd, pwd2) {
+var userId = $("#id_utilisateur").val();
+    
+    // in case of update
+        if (userId !== '' && $('#' + pwd2).val() === '') {
+        return true;
+    } else
     if ($('#' + pwd).val() !== $('#' + pwd2).val()) {
-        alert('Les mots de passe doivent être idendiques');
+ alert('Les mots de passe doivent être idendiques');
         return false;
     }
+ return true;
+}
+    function myAccountcheckPassword(pwd, pwd2) {
+
+        if ($('#' + pwd).val() !== $('#' + pwd2).val()) {         alert('Les mots de passe doivent être idendiques');
+return false;
+ }
     return true;
 }
 
 /**
  * load form modal 
- * @param {string} link controller link to set form content
- * @returns {undefined}
+* @param {string} link controller link to set form content
+    * @returns {undefined}
  */
-function loadForm(link) {
+    function loadForm(link) {
     $.ajax({
         url: link,
-        success: function (result) {
-            $(".modal-content").html(result);
+    success: function (result) {
+    $(".modal-content").html(result);
         }
     });
 }
 
 /**
- * compute refrated weight (usage: dechargement form)
- * @returns void
+    * compute refrated weight (usage: dechargement form)
+    * @returns void
  */
 function updateRefractedWeight() {
 
-    var goodBags = parseFloat($('#bon_sac').val());
-    var tornBags = parseFloat($('#sac_dechire').val());
-    var netWeight = parseFloat($('#poids_net').val());
+    var goodBags = parseFloat($('#bon_sac').val());     var tornBags = parseFloat($('#sac_dechire').val());
+var netWeight = parseFloat($('#poids_net').val());
 
-    goodBags = isNaN(goodBags) ? 0 : goodBags;
-    tornBags = isNaN(tornBags) ? 0 : tornBags;
-    netWeight = isNaN(netWeight) ? 0 : netWeight;
+ goodBags = isNaN(goodBags) ? 0 : goodBags;
+ tornBags = isNaN(tornBags) ? 0 : tornBags;
+netWeight = isNaN(netWeight) ? 0 : netWeight;
 
-    var refractedWeight = Math.abs((goodBags + tornBags * 8) - netWeight);
-    console.log(refractedWeight);
-    $('#poids_refracte').val(refractedWeight);
+        var refractedWeight = Math.abs((goodBags + tornBags * 8) - netWeight);
+            console.log(refractedWeight);
+            $('#poids_refracte').val(refractedWeight);
 }
 
-/**
- * Request http request with given link an update target content
+        /**
+* Request http request with given link an update target content
  * @param {type} link
  * @param {type} target
  * @returns {undefined}

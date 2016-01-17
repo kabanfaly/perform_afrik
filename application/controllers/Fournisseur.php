@@ -13,7 +13,6 @@ if (!defined('BASEPATH'))
  * @subpackage perform_afrik/application/controllers
  * @filesource fournisseur.php
  */
-
 include_once 'Common_Controller.php';
 
 class Fournisseur extends Common_Controller
@@ -60,23 +59,35 @@ class Fournisseur extends Common_Controller
             'form_action' => site_url('fournisseur/save')
         );
 
-        // preset data for modification form
-        if ($id_fournisseur !== NULL)
+        //checks session
+        if (!$this->connected())
         {
+            $data = array(
+                'title' => lang('CONNECTION')
+            );
+            $this->load->view('templates/header', $data);
+            $this->load->view('connexion/index', $data);
+            $this->load->view('templates/footer');
+        } else
+        {
+            // preset data for modification form
+            if ($id_fournisseur !== NULL)
+            {
 
-            //get truck by id
-            $supplier = $this->fournisseur_model->get_fournisseurs($id_fournisseur);
+                //get truck by id
+                $supplier = $this->fournisseur_model->get_fournisseurs($id_fournisseur);
 
-            //merge row data with $data
-            $data = array_merge_recursive($data, $supplier);
+                //merge row data with $data
+                $data = array_merge_recursive($data, $supplier);
 
-            $data['title'] = lang('EDIT_SUPPLIER');
-            $data['form_action'] = site_url('fournisseur/update');
+                $data['title'] = lang('EDIT_SUPPLIER');
+                $data['form_action'] = site_url('fournisseur/update');
+            }
+
+            $this->load->view('templates/form_header', $data);
+            $this->load->view('fournisseur/form', $data);
+            $this->load->view('templates/form_footer', $data);
         }
-        
-        $this->load->view('templates/form_header', $data);
-        $this->load->view('fournisseur/form', $data);
-        $this->load->view('templates/form_footer', $data);
     }
 
     /**
@@ -101,16 +112,20 @@ class Fournisseur extends Common_Controller
      */
     public function save()
     {
-        //get inputs
-        $data = $this->get_inputs();
+        //checks session
+        if ($this->connected())
+        {
+            //get inputs
+            $data = $this->get_inputs();
 
-        // save if the supplier number doesn't exist
-        if ($this->fournisseur_model->save($data) !== FALSE)
-        {
-            redirect('fournisseur/index/' . lang('SAVING_SUPPLIER_SUCCESS'));
-        } else
-        {
-            redirect('fournisseur/index/' . lang('SUPPLIER_EXISTS'). ': ' . $data['nom'].'/'.TRUE);
+            // save if the supplier number doesn't exist
+            if ($this->fournisseur_model->save($data) !== FALSE)
+            {
+                redirect('fournisseur/index/' . lang('SAVING_SUPPLIER_SUCCESS'));
+            } else
+            {
+                redirect('fournisseur/index/' . lang('SUPPLIER_EXISTS') . ': ' . $data['nom'] . '/' . TRUE);
+            }
         }
     }
 
@@ -119,20 +134,24 @@ class Fournisseur extends Common_Controller
      */
     public function update()
     {
-        // get input values
-        $data = $this->get_inputs();
-
-        $id_fournisseur = $this->input->post('id_fournisseur');
-
-        $where = array(Fournisseur_model::$PK => $id_fournisseur);
-
-        // update
-        if ($this->fournisseur_model->update($data, $where) !== FALSE)
+        //checks session
+        if ($this->connected())
         {
-            redirect('fournisseur/index/' . lang('UPDATING_SUPPLIER_SUCCESS'));
-        } else
-        {
-            redirect('fournisseur/index/' . lang('UPDATING_FAILED').'/'.TRUE);
+            // get input values
+            $data = $this->get_inputs();
+
+            $id_fournisseur = $this->input->post('id_fournisseur');
+
+            $where = array(Fournisseur_model::$PK => $id_fournisseur);
+
+            // update
+            if ($this->fournisseur_model->update($data, $where) !== FALSE)
+            {
+                redirect('fournisseur/index/' . lang('UPDATING_SUPPLIER_SUCCESS'));
+            } else
+            {
+                redirect('fournisseur/index/' . lang('UPDATING_FAILED') . '/' . TRUE);
+            }
         }
     }
 
@@ -142,12 +161,16 @@ class Fournisseur extends Common_Controller
      */
     public function delete($id_fournisseur)
     {
-        if ($this->fournisseur_model->delete(array(Fournisseur_model::$PK => $id_fournisseur)) !== FALSE)
+        //checks session
+        if ($this->connected())
         {
-            redirect('fournisseur/index/' . lang('SUPPLIER_DELETION_SUCCESS'));
-        } else
-        {
-            redirect('fournisseur/index/' . lang('DELETION_FAILED').'/'.TRUE);
+            if ($this->fournisseur_model->delete(array(Fournisseur_model::$PK => $id_fournisseur)) !== FALSE)
+            {
+                redirect('fournisseur/index/' . lang('SUPPLIER_DELETION_SUCCESS'));
+            } else
+            {
+                redirect('fournisseur/index/' . lang('DELETION_FAILED') . '/' . TRUE);
+            }
         }
     }
 

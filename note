@@ -16,6 +16,7 @@ Description:
     - A non admin user can only add a user for its own profile
     - A connected user cannot delete himself while connected
     - A connected user cannot desabled himself while connected
+    - If edit re-password if is not required when it's empty
 
 
 Features:

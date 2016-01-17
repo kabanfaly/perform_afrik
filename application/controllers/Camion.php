@@ -58,23 +58,35 @@ class Camion extends Common_Controller
             'form_name' => 'camion',
             'form_action' => site_url('camion/save')
         );
-
-        // preset data for modification form
-        if ($id_camion !== NULL)
+        //checks admin session
+        if (!$this->connected())
+        {
+            $data = array(
+                'title' => lang('CONNECTION')
+            );
+            $this->load->view('templates/header', $data);
+            $this->load->view('connexion/index', $data);
+            $this->load->view('templates/footer');
+        } else
         {
 
-            //get truck by id
-            $truck = $this->camion_model->get_camions($id_camion);
+            // preset data for modification form
+            if ($id_camion !== NULL)
+            {
 
-            //merge row data with $data
-            $data = array_merge_recursive($data, $truck);
+                //get truck by id
+                $truck = $this->camion_model->get_camions($id_camion);
 
-            $data['title'] = lang('EDIT_TRUCK');
-            $data['form_action'] = site_url('camion/update');
+                //merge row data with $data
+                $data = array_merge_recursive($data, $truck);
+
+                $data['title'] = lang('EDIT_TRUCK');
+                $data['form_action'] = site_url('camion/update');
+            }
+            $this->load->view('templates/form_header', $data);
+            $this->load->view('camion/form', $data);
+            $this->load->view('templates/form_footer', $data);
         }
-        $this->load->view('templates/form_header', $data);
-        $this->load->view('camion/form', $data);
-        $this->load->view('templates/form_footer', $data);
     }
 
     /**
@@ -97,16 +109,20 @@ class Camion extends Common_Controller
      */
     public function save()
     {
-        //get inputs
-        $data = $this->get_inputs();
+        //checks session
+        if ($this->connected())
+        {
+            //get inputs
+            $data = $this->get_inputs();
 
-        // save if the truck number doesn't exist
-        if ($this->camion_model->save($data) !== FALSE)
-        {
-            redirect('camion/index/' . lang('SAVING_TRUCK_SUCCESS'));
-        } else
-        {
-            redirect('camion/index/' . lang('TRUCK_EXISTS'). ': ' . $data['numero'].'/'.TRUE);
+            // save if the truck number doesn't exist
+            if ($this->camion_model->save($data) !== FALSE)
+            {
+                redirect('camion/index/' . lang('SAVING_TRUCK_SUCCESS'));
+            } else
+            {
+                redirect('camion/index/' . lang('TRUCK_EXISTS') . ': ' . $data['numero'] . '/' . TRUE);
+            }
         }
     }
 
@@ -115,20 +131,24 @@ class Camion extends Common_Controller
      */
     public function update()
     {
-        //get inputs
-        $data = $this->get_inputs();
-
-        $id_camion = $this->input->post('id_camion');
-
-        $where = array(Camion_model::$PK => $id_camion);
-
-        // update
-        if ($this->camion_model->update($data, $where) !== FALSE)
+        //checks session
+        if ($this->connected())
         {
-            redirect('camion/index/' . lang('UPDATING_TRUCK_SUCCESS'));
-        } else
-        {
-            redirect('camion/index/' . lang('UPDATING_FAILED').'/'.TRUE);
+            //get inputs
+            $data = $this->get_inputs();
+
+            $id_camion = $this->input->post('id_camion');
+
+            $where = array(Camion_model::$PK => $id_camion);
+
+            // update
+            if ($this->camion_model->update($data, $where) !== FALSE)
+            {
+                redirect('camion/index/' . lang('UPDATING_TRUCK_SUCCESS'));
+            } else
+            {
+                redirect('camion/index/' . lang('UPDATING_FAILED') . '/' . TRUE);
+            }
         }
     }
 
@@ -138,13 +158,17 @@ class Camion extends Common_Controller
      */
     public function delete($id_camion)
     {
-        if ($this->camion_model->delete(array(Camion_model::$PK => $id_camion)) !== FALSE)
+        //checks session
+        if ($this->connected())
         {
-            redirect('camion/index/' . lang('TRUCK_DELETION_SUCCESS'));
-        } else
-        {
-            redirect('camion/index/' . lang('DELETION_FAILED').'/'.TRUE);
+            if ($this->camion_model->delete(array(Camion_model::$PK => $id_camion)) !== FALSE)
+            {
+                redirect('camion/index/' . lang('TRUCK_DELETION_SUCCESS'));
+            } else
+            {
+                redirect('camion/index/' . lang('DELETION_FAILED') . '/' . TRUE);
+            }
         }
     }
-    
+
 }

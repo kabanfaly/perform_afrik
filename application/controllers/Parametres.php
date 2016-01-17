@@ -13,7 +13,6 @@ if (!defined('BASEPATH'))
  * @subpackage perform_afrik/application/controllers
  * @filesource Parametres.php
  */
-
 include_once 'Common_Controller.php';
 
 class Parametres extends Common_Controller
@@ -24,7 +23,7 @@ class Parametres extends Common_Controller
         parent::__construct();
         $this->load->model('preference_model');
     }
-    
+
     /**
      * Displays parameters
      * 
@@ -41,32 +40,37 @@ class Parametres extends Common_Controller
             'configuration' => TRUE,
             'form_action' => site_url('parametres/update')
         );
-        
+
         $this->display($data, 'parametres/index');
     }
-    
+
     /**
      * Saves a city
      */
     public function update()
     {
-        //get inputs
-        $company = trim($this->input->post('COMPANY'));
-        $phone = trim($this->input->post('PHONE'));
-        $fax = trim($this->input->post('FAX'));
-        $email = trim($this->input->post('EMAIL'));
-        $address = trim($this->input->post('ADDRESS'));
-        
-        // build parameters array
-        $parameters = array('COMPANY' => $company, 'PHONE' => $phone, 'FAX' => $fax, 'EMAIL' => $email, 'ADDRESS' => $address);
-        
-        $data = array('valeur' => json_encode($parameters));
-
-        // save if the city number doesn't exist
-        if ($this->preference_model->update_parameters($data) !== FALSE)
+        //checks session
+        if ($this->connected())
         {
-            $this->session->set_userdata('parameters', $parameters);
-            redirect('parametres/index/' . lang('SAVING_PARAMETERS_SUCCESS'));
+            //get inputs
+            $company = trim($this->input->post('COMPANY'));
+            $phone = trim($this->input->post('PHONE'));
+            $fax = trim($this->input->post('FAX'));
+            $email = trim($this->input->post('EMAIL'));
+            $address = trim($this->input->post('ADDRESS'));
+
+            // build parameters array
+            $parameters = array('COMPANY' => $company, 'PHONE' => $phone, 'FAX' => $fax, 'EMAIL' => $email, 'ADDRESS' => $address);
+
+            $data = array('valeur' => json_encode($parameters));
+
+            // save if the city number doesn't exist
+            if ($this->preference_model->update_parameters($data) !== FALSE)
+            {
+                $this->session->set_userdata('parameters', $parameters);
+                redirect('parametres/index/' . lang('SAVING_PARAMETERS_SUCCESS'));
+            }
         }
     }
+
 }

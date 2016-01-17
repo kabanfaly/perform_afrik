@@ -13,7 +13,6 @@ if (!defined('BASEPATH'))
  * @subpackage perform_afrik/application/controllers
  * @filesource Profil.php
  */
-
 include_once 'Common_Controller.php';
 
 class Profil extends Common_Controller
@@ -59,23 +58,35 @@ class Profil extends Common_Controller
             'form_action' => site_url('profil/save')
         );
 
-        // preset data for modification form
-        if ($id_profil !== NULL)
+        //checks session
+        if (!$this->connected())
         {
+            $data = array(
+                'title' => lang('CONNECTION')
+            );
+            $this->load->view('templates/header', $data);
+            $this->load->view('connexion/index', $data);
+            $this->load->view('templates/footer');
+        } else
+        {
+            // preset data for modification form
+            if ($id_profil !== NULL)
+            {
 
-            //get profile by id
-            $profile = $this->profil_model->get_profiles($id_profil);
+                //get profile by id
+                $profile = $this->profil_model->get_profiles($id_profil);
 
-            //merge row data with $data
-            $data = array_merge_recursive($data, $profile);
+                //merge row data with $data
+                $data = array_merge_recursive($data, $profile);
 
-            $data['title'] = lang('EDIT_PROFILE');
-            $data['form_action'] = site_url('profil/update');
+                $data['title'] = lang('EDIT_PROFILE');
+                $data['form_action'] = site_url('profil/update');
+            }
+
+            $this->load->view('templates/form_header', $data);
+            $this->load->view('profil/form', $data);
+            $this->load->view('templates/form_footer', $data);
         }
-
-        $this->load->view('templates/form_header', $data);
-        $this->load->view('profil/form', $data);
-        $this->load->view('templates/form_footer', $data);
     }
 
     /**
@@ -98,16 +109,20 @@ class Profil extends Common_Controller
      */
     public function save()
     {
-        //get inputs
-        $data = $this->get_inputs();
+        //checks session
+        if ($this->connected())
+        {
+            //get inputs
+            $data = $this->get_inputs();
 
-        // save if the profil number doesn't exist
-        if ($this->profil_model->save($data) !== FALSE)
-        {
-            redirect('profil/index/' . lang('SAVING_PROFILE_SUCCESS'));
-        } else
-        {
-            redirect('profil/index/' . lang('PROFILE_EXISTS'). ': ' . $data['nom'].'/'.TRUE);
+            // save if the profil number doesn't exist
+            if ($this->profil_model->save($data) !== FALSE)
+            {
+                redirect('profil/index/' . lang('SAVING_PROFILE_SUCCESS'));
+            } else
+            {
+                redirect('profil/index/' . lang('PROFILE_EXISTS') . ': ' . $data['nom'] . '/' . TRUE);
+            }
         }
     }
 
@@ -116,20 +131,24 @@ class Profil extends Common_Controller
      */
     public function update()
     {
-        // get input values
-        $data = $this->get_inputs();
-
-        $id_profil = $this->input->post('id_profil');
-
-        $where = array(Profil_model::$PK => $id_profil);
-
-        // update
-        if ($this->profil_model->update($data, $where) !== FALSE)
+        //checks session
+        if ($this->connected())
         {
-            redirect('profil/index/' . lang('UPDATING_PROFILE_SUCCESS'));
-        } else
-        {
-            redirect('profil/index/' . lang('UPDATING_FAILED').'/'.TRUE);
+            // get input values
+            $data = $this->get_inputs();
+
+            $id_profil = $this->input->post('id_profil');
+
+            $where = array(Profil_model::$PK => $id_profil);
+
+            // update
+            if ($this->profil_model->update($data, $where) !== FALSE)
+            {
+                redirect('profil/index/' . lang('UPDATING_PROFILE_SUCCESS'));
+            } else
+            {
+                redirect('profil/index/' . lang('UPDATING_FAILED') . '/' . TRUE);
+            }
         }
     }
 
@@ -139,12 +158,17 @@ class Profil extends Common_Controller
      */
     public function delete($id_profil)
     {
-        if ($this->profil_model->delete(array(Profil_model::$PK => $id_profil)) !== FALSE)
+        //checks session
+        if ($this->connected())
         {
-            redirect('profil/index/' . lang('PROFILE_DELETION_SUCCESS'));
-        } else
-        {
-            redirect('profil/index/' . lang('DELETION_FAILED').'/'.TRUE);
+            if ($this->profil_model->delete(array(Profil_model::$PK => $id_profil)) !== FALSE)
+            {
+                redirect('profil/index/' . lang('PROFILE_DELETION_SUCCESS'));
+            } else
+            {
+                redirect('profil/index/' . lang('DELETION_FAILED') . '/' . TRUE);
+            }
         }
     }
+
 }

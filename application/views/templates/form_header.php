@@ -7,4 +7,4 @@
         <link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>css/style.css" >      
     </head>
     <body>
-        <form class="contact" name="<?php echo $form_name; ?>" action="<?php echo $form_action; ?>" method="POST">
+        <form name="<?php echo $form_name; ?>" action="<?php echo $form_action; ?>" method="POST">

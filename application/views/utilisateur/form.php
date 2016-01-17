@@ -1,5 +1,5 @@
 
-<input type="hidden" name="id_utilisateur" value="<?php echo !isset($id_utilisateur) ?'' : $id_utilisateur; ?>" />
+<input type="hidden" name="id_utilisateur" id="id_utilisateur" value="<?php echo !isset($id_utilisateur) ?'' : $id_utilisateur; ?>" />
 <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <h3><?php echo $title; ?></h3>
@@ -22,11 +22,11 @@
         <input type="password" name="mot_de_passe" value="<?php echo !isset($mot_de_passe) ?'' : $mot_de_passe; ?>" class="form-control" id="mot_de_passe" required placeholder="<?php echo lang('TYPE_PASSWORD'); ?>">
     </div>
     <div class="form-group">
-        <label for="re_mot_de_passe"><?php echo lang('RE_PASSWORD'); ?>*:</label>
-        <input type="password" name="re_mot_de_passe" value=""  class="form-control" id="re_mot_de_passe" required placeholder="<?php echo lang('TYPE_RE_PASSWORD'); ?>">
+        <label for="re_mot_de_passe"><?php echo lang('RE_PASSWORD'); ?>:</label>
+        <input type="password" name="re_mot_de_passe" value=""  class="form-control" id="re_mot_de_passe" placeholder="<?php echo lang('TYPE_RE_PASSWORD'); ?>">
     </div>
     <div class="form-group">
-        <label for="profil"><?php echo lang('SUPPLIER'); ?>*:</label>
+        <label for="profil"><?php echo lang('PROFILES'); ?>*:</label>
         <select type="text" name="id_profil" class="form-control" id="supplier" required >
             <option value=""><?php echo lang('SELECT_PROFILE'); ?></option>
             <?php
@@ -46,7 +46,7 @@
 </div>
 <div class="mandatory">* <?php echo lang('MANDATORY_FIELD'); ?> </div>
 <div class="modal-footer">
-    <input class="btn btn-primary" type="submit" onclick="return checkPassword('mot_de_passe', 're_mot_de_passe');" value="<?php echo lang('SUBMIT'); ?>" id="submit">
+    <input class="btn btn-primary" type="submit" value="<?php echo lang('SUBMIT'); ?>" id="submit">
     <button class="btn btn-default" data-dismiss="modal"><?php echo lang('CANCEL'); ?></button>
 </div>
       
