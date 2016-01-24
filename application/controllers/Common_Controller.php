@@ -29,7 +29,7 @@ class Common_Controller extends CI_Controller
             );
             $page = 'connexion/index';
         }
-
+        
         $this->load->view('templates/header', $data);
         $this->load->view($page, $data);
         $this->load->view('templates/footer');

@@ -17,28 +17,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `pa_admin`
---
-
-DROP TABLE IF EXISTS `pa_admin`;
-CREATE TABLE IF NOT EXISTS `pa_admin` (
-  `id_admin` int(11) NOT NULL AUTO_INCREMENT,
-  `login` varchar(45) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`id_admin`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Contenu de la table `pa_admin`
---
-
-INSERT INTO `pa_admin` (`id_admin`, `login`, `password`) VALUES
-(1, 'admin', 'admin'),
-(2, 'admin', 'admin');
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `pa_camion`
 --
 
@@ -240,8 +218,6 @@ ALTER TABLE `pa_dechargement`
   ADD CONSTRAINT `pa_dechargement_ibfk_1` FOREIGN KEY (`id_camion`) REFERENCES `pa_camion` (`id_camion`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `pa_dechargement_ibfk_2` FOREIGN KEY (`id_fournisseur`) REFERENCES `pa_fournisseur` (`id_fournisseur`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `pa_dechargement_ibfk_3` FOREIGN KEY (`id_ville`) REFERENCES `pa_ville` (`id_ville`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-ALTER TABLE `pa_admin` ADD `type` VARCHAR( 45 ) NOT NULL;
 
 
 --

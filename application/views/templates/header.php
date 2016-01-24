@@ -66,14 +66,17 @@
                             <li class="<?php echo $active == 'ville' ? 'active' : '' ?>">
                                 <a href="<?php echo site_url("ville"); ?>"><i class="fa fa-fw fa-building"></i>&nbsp;<?php echo lang('CITIES'); ?></a>
                             </li>
-<!--                            <li class="<?php echo $active == 'ville' ? 'active' : '' ?>">
-                                <a href="<?php echo site_url("ville"); ?>"><i class="fa fa-fw fa-gear"></i>&nbsp;<?php echo lang('ADMINISTRATION'); ?></a>
-                            </li>-->
+                            <li class="<?php echo $active == 'magasin' ? 'active' : '' ?>">
+                                <a href="<?php echo site_url("magasin"); ?>"><i class="fa fa-fw fa-home"></i>&nbsp;<?php echo lang('SHOPS'); ?></a>
+                            </li>
                             <li class="<?php echo $active == 'profil' ? 'active' : '' ?>">
                                 <a href="<?php echo site_url("profil"); ?>"><i class="fa fa-fw fa-user"></i>&nbsp;<?php echo lang('PROFILES'); ?></a>
                             </li>
                             <li class="<?php echo $active == 'utilisateur' ? 'active' : '' ?>">
                                 <a href="<?php echo site_url("utilisateur"); ?>"><i class="fa fa-fw fa-users"></i>&nbsp;<?php echo lang('USERS'); ?></a>
+                            </li>
+                            <li class="<?php echo $active == 'permission' ? 'active' : '' ?>">
+                                <a href="<?php echo site_url("permission"); ?>"><i class="fa fa-fw fa-asterisk"></i>&nbsp;<?php echo lang('RIGHTS'); ?></a>
                             </li>
                             <li class="<?php echo $active == 'parametres' ? 'active' : '' ?>">
                                 <a href="<?php echo site_url("parametres"); ?>"><i class="fa fa-fw fa-gear"></i>&nbsp;<?php echo lang('PARAMETERS'); ?></a>
