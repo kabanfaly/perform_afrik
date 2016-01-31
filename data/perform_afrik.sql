@@ -2,22 +2,22 @@
 -- version 3.4.10.1deb1
 -- http://www.phpmyadmin.net
 --
--- Client: localhost
--- Généré le : Lun 03 Août 2015 à 00:04
--- Version du serveur: 5.5.44
--- Version de PHP: 5.3.10-1ubuntu3.19
+-- Host: localhost
+-- Generation Time: Jan 31, 2016 at 02:58 AM
+-- Server version: 5.5.47
+-- PHP Version: 5.3.10-1ubuntu3.21
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Base de données: `perform_afrik`
+-- Database: `perform_afrik`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `pa_camion`
+-- Table structure for table `pa_camion`
 --
 
 DROP TABLE IF EXISTS `pa_camion`;
@@ -27,47 +27,8 @@ CREATE TABLE IF NOT EXISTS `pa_camion` (
   PRIMARY KEY (`id_camion`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
 
--- --------------------------------------------------------
-
 --
--- Structure de la table `pa_profil`
---
-
-DROP TABLE IF EXISTS `pa_profil`;
-CREATE TABLE IF NOT EXISTS `pa_profil` (
-  `id_profil` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(255) NOT NULL,
-  PRIMARY KEY (`id_profil`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
-
-INSERT INTO `pa_profil` (`id_profil`, `nom`) VALUES
-(1, 'Manger'),
-(2, 'Comptabilité'),
-(3, 'Transit'),
-(4, 'Magasin');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `pa_utilisateur`
---
-
-DROP TABLE IF EXISTS `pa_utilisateur`;
-CREATE TABLE IF NOT EXISTS `pa_utilisateur` (
-  `id_utilisateur` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(45) NOT NULL,
-  `prenom` varchar(45) NOT NULL,
-  `login` varchar(45) NOT NULL,
-  `mot_de_passe` varchar(45) NOT NULL,
-  `id_profil` int(11) NOT NULL,
-  PRIMARY KEY (`id_utilisateur`),
-  KEY `profil` (`id_profil`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
-
---
--- Contenu de la table `pa_camion`
+-- Dumping data for table `pa_camion`
 --
 
 INSERT INTO `pa_camion` (`id_camion`, `numero`) VALUES
@@ -95,7 +56,7 @@ INSERT INTO `pa_camion` (`id_camion`, `numero`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `pa_dechargement`
+-- Table structure for table `pa_dechargement`
 --
 
 DROP TABLE IF EXISTS `pa_dechargement`;
@@ -112,17 +73,28 @@ CREATE TABLE IF NOT EXISTS `pa_dechargement` (
   `poids_net` double NOT NULL,
   `poids_refracte` double NOT NULL,
   `humidite` double NOT NULL,
+  `qualite` double NOT NULL,
+  `prix` double NOT NULL,
+  `total` double NOT NULL,
   PRIMARY KEY (`id_dechargement`),
   KEY `id_camion` (`id_camion`,`id_ville`,`id_fournisseur`),
   KEY `id_camion_2` (`id_camion`),
   KEY `id_fournisseur` (`id_fournisseur`),
   KEY `id_ville` (`id_ville`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `pa_dechargement`
+--
+
+INSERT INTO `pa_dechargement` (`id_dechargement`, `id_camion`, `id_ville`, `id_fournisseur`, `date`, `bon_sac`, `sac_dechire`, `sac_total`, `poids_brut`, `poids_net`, `poids_refracte`, `humidite`, `qualite`, `prix`, `total`) VALUES
+(1, 1, 9, 1, '2015-12-08', 20, 10, 30, 125, 58040, 57940, 10, 0, 0, 0),
+(2, 19, 13, 8, '2015-08-06', 53, 2, 55, 125, 255, 186, 2, 0, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `pa_fournisseur`
+-- Table structure for table `pa_fournisseur`
 --
 
 DROP TABLE IF EXISTS `pa_fournisseur`;
@@ -135,11 +107,11 @@ CREATE TABLE IF NOT EXISTS `pa_fournisseur` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
--- Contenu de la table `pa_fournisseur`
+-- Dumping data for table `pa_fournisseur`
 --
 
 INSERT INTO `pa_fournisseur` (`id_fournisseur`, `nom`, `telephone`, `adresse`) VALUES
-(1, 'Kanté   Fatoumata', NULL, NULL),
+(1, 'Kanté   Fatoumata', '', ''),
 (2, 'Coulibaly Oumar', NULL, NULL),
 (3, 'Kone Ismael', NULL, NULL),
 (6, 'Yeo', '', ''),
@@ -155,7 +127,102 @@ INSERT INTO `pa_fournisseur` (`id_fournisseur`, `nom`, `telephone`, `adresse`) V
 -- --------------------------------------------------------
 
 --
--- Structure de la table `pa_ville`
+-- Table structure for table `pa_magasin`
+--
+
+DROP TABLE IF EXISTS `pa_magasin`;
+CREATE TABLE IF NOT EXISTS `pa_magasin` (
+  `id_magasin` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_magasin`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `pa_magasin`
+--
+
+INSERT INTO `pa_magasin` (`id_magasin`, `nom`) VALUES
+(1, 'Magasin 1'),
+(2, 'Magasin 2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pa_preference`
+--
+
+DROP TABLE IF EXISTS `pa_preference`;
+CREATE TABLE IF NOT EXISTS `pa_preference` (
+  `id_preference` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(45) NOT NULL,
+  `valeur` text NOT NULL,
+  PRIMARY KEY (`id_preference`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `pa_preference`
+--
+
+INSERT INTO `pa_preference` (`id_preference`, `nom`, `valeur`) VALUES
+(2, 'parameters', '{"COMPANY":"PERFORM WORLD","PHONE":"Tel: (+225) 20 22 57 02 \\/ 77 77 03 03","FAX":"","EMAIL":"performworld15@gmail.com","ADDRESS":"Plateau Immeuble du Mali, 21 BP 2924, Abidjan 21, C\\u00f4te D''Ivoire."}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pa_profil`
+--
+
+DROP TABLE IF EXISTS `pa_profil`;
+CREATE TABLE IF NOT EXISTS `pa_profil` (
+  `id_profil` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(255) NOT NULL,
+  `droits_colonnes_dechargement` text NOT NULL,
+  PRIMARY KEY (`id_profil`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `pa_profil`
+--
+
+INSERT INTO `pa_profil` (`id_profil`, `nom`, `droits_colonnes_dechargement`) VALUES
+(1, 'Manager', ''),
+(2, 'Comptabilité', '{"id_camion":true,"id_ville":true,"id_fournisseur":true,"date":true,"bon_sac":true,"sac_dechire":true,"poids_brut":true,"poids_net":true,"poids_refracte":true,"humidite":false,"qualite":false,"prix":true,"total":true}'),
+(3, 'Transit', '{"id_camion":true,"id_ville":false,"id_fournisseur":false,"date":false,"bon_sac":true,"sac_dechire":true,"poids_brut":true,"poids_net":true,"poids_refracte":true,"humidite":false,"qualite":false,"prix":false,"total":false}'),
+(4, 'Magasin', '{"id_camion":true,"id_ville":true,"id_fournisseur":true,"date":true,"bon_sac":true,"sac_dechire":true,"poids_brut":true,"poids_net":true,"poids_refracte":true,"humidite":true,"qualite":true,"prix":false,"total":false}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pa_utilisateur`
+--
+
+DROP TABLE IF EXISTS `pa_utilisateur`;
+CREATE TABLE IF NOT EXISTS `pa_utilisateur` (
+  `id_utilisateur` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(45) NOT NULL,
+  `prenom` varchar(45) NOT NULL,
+  `login` varchar(45) NOT NULL,
+  `mot_de_passe` varchar(45) NOT NULL,
+  `id_profil` int(11) NOT NULL,
+  `statut` tinyint(4) NOT NULL,
+  PRIMARY KEY (`id_utilisateur`),
+  UNIQUE KEY `login` (`login`),
+  KEY `profile` (`id_profil`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `pa_utilisateur`
+--
+
+INSERT INTO `pa_utilisateur` (`id_utilisateur`, `nom`, `prenom`, `login`, `mot_de_passe`, `id_profil`, `statut`) VALUES
+(2, 'Admin', 'Admin', 'admin', 'admin', 1, 1),
+(4, 'Transit', 'Transit', 'transit', 'transit', 3, 1),
+(6, 'Comptabilite', 'Comptabilite', 'compta', 'compta', 2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pa_ville`
 --
 
 DROP TABLE IF EXISTS `pa_ville`;
@@ -166,7 +233,7 @@ CREATE TABLE IF NOT EXISTS `pa_ville` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
--- Contenu de la table `pa_ville`
+-- Dumping data for table `pa_ville`
 --
 
 INSERT INTO `pa_ville` (`id_ville`, `nom`) VALUES
@@ -184,51 +251,20 @@ INSERT INTO `pa_ville` (`id_ville`, `nom`) VALUES
 (19, 'Dabakala'),
 (20, 'Odienne');
 
--- --------------------------------------------------------
-
--- --------------------------------------------------------
-
 --
--- Structure de la table `pa_preference`
---
-
-DROP TABLE IF EXISTS `pa_preference`;
-CREATE TABLE IF NOT EXISTS `pa_preference` (
-  `id_preference` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(45) NOT NULL,
-  `valeur` text NOT NULL,
-  PRIMARY KEY (`id_preference`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Contenu de la table `pa_preference`
---
-
-INSERT INTO `pa_preference` (`id_preference`, `nom`, `valeur`) VALUES
-(2, 'parameters', '{"COMPANY":"PERFORM WORLD","PHONE":"Tel: (+225) 20 22 57 02 \\/ 77 77 03 03","FAX":"","EMAIL":"performworld15@gmail.com","ADDRESS":"Plateau Immeuble du Mali, 21 BP 2924, Abidjan 21, C\\u00f4te D''Ivoire."}');
-
---
--- Contraintes pour les tables exportées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `pa_dechargement`
+-- Constraints for table `pa_dechargement`
 --
 ALTER TABLE `pa_dechargement`
   ADD CONSTRAINT `pa_dechargement_ibfk_1` FOREIGN KEY (`id_camion`) REFERENCES `pa_camion` (`id_camion`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `pa_dechargement_ibfk_2` FOREIGN KEY (`id_fournisseur`) REFERENCES `pa_fournisseur` (`id_fournisseur`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `pa_dechargement_ibfk_3` FOREIGN KEY (`id_ville`) REFERENCES `pa_ville` (`id_ville`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-
 --
--- Contraintes pour les tables exportées
---
-
---
--- Contraintes pour la table `pa_utilisateur`
+-- Constraints for table `pa_utilisateur`
 --
 ALTER TABLE `pa_utilisateur`
   ADD CONSTRAINT `pa_utilisateur_ibfk_2` FOREIGN KEY (`id_profil`) REFERENCES `pa_profil` (`id_profil`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `pa_utilisateur` ADD UNIQUE (`login`)
-
-ALTER TABLE `pa_utilisateur` ADD `statut` TINYINT NOT NULL ;

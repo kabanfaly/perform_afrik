@@ -75,9 +75,6 @@
                             <li class="<?php echo $active == 'utilisateur' ? 'active' : '' ?>">
                                 <a href="<?php echo site_url("utilisateur"); ?>"><i class="fa fa-fw fa-users"></i>&nbsp;<?php echo lang('USERS'); ?></a>
                             </li>
-                            <li class="<?php echo $active == 'permission' ? 'active' : '' ?>">
-                                <a href="<?php echo site_url("permission"); ?>"><i class="fa fa-fw fa-asterisk"></i>&nbsp;<?php echo lang('RIGHTS'); ?></a>
-                            </li>
                             <li class="<?php echo $active == 'parametres' ? 'active' : '' ?>">
                                 <a href="<?php echo site_url("parametres"); ?>"><i class="fa fa-fw fa-gear"></i>&nbsp;<?php echo lang('PARAMETERS'); ?></a>
                                 <!--<a href="<?php echo site_url("parametres"); ?>"><i class="fa fa-fw fa-wrench"></i>&nbsp;<?php echo lang('PARAMETERS'); ?></a>-->

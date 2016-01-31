@@ -3,6 +3,7 @@
         <tr>
             <th class="number"><?php echo lang('NO'); ?></th>
             <th><?php echo lang('PROFILE'); ?></th>
+            <th><?php echo lang('RIGHT'); ?></th>
             <th class="option"><?php echo lang('OPTIONS'); ?></th>
         </tr>
     </thead>
@@ -12,6 +13,14 @@
             <tr>
                 <td><?php echo $no++; ?></td>
                 <td><?php echo $profile['nom']; ?></td>
+               <td align="center">
+                    <!-- avoid editing manager name -->
+                    <?php if( strtolower($profile['nom']) !== 'manager' ) : ?>
+                        <a href="#" onclick="loadForm('<?php echo $right_link . '/' . $profile['id_profil']; ?>')" data-toggle="modal" data-target="#form-content">
+                            <span class="fa fa-fw fa-lock"></span>
+                        </a>
+                    <?php endif; ?>
+                </td>
                 <td align="center">
                     <!-- avoid editing manager name -->
                     <?php if( strtolower($profile['nom']) !== 'manager' ) : ?>
@@ -26,6 +35,7 @@
                         </a>
                     <?php endif; ?>
                 </td>
+                
             </tr>
         <?php endforeach; ?>
     </tbody>
