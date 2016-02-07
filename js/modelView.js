@@ -43,6 +43,7 @@ function initContent() {
         ]
     });
 
+    // For use profil management
     $('.collapse').on('shown.bs.collapse', function () {
         $(this).parent().find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
     }).on('hidden.bs.collapse', function () {
@@ -142,9 +143,9 @@ function doAjax(link, target) {
  * @returns {undefined}
  */
 function checkUncheckAll(name) {
-    
+
     var checkedLength = $('input[name*="' + name + '"]:checked').length;
-    
+
     if (checkedLength == 0) {
         $('input[name*="' + name + '"]').removeAttr('checked');
     } else {

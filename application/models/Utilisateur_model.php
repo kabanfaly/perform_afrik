@@ -43,7 +43,7 @@ class Utilisateur_model extends CI_Model
      */
     public function get_user_profile($login, $password, $check_status = true)
     {
-        $this->db->select('u.*, p.nom as profil');
+        $this->db->select('u.*, p.nom as profil, droits_colonnes_dechargement as authorized_columns');
         $this->db->join('pa_profil p', 'u.id_profil = p.id_profil', 'INNER');
 
         $where = array('login' => $login, 'mot_de_passe' => $password);

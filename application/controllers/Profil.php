@@ -29,6 +29,7 @@ class Profil extends Common_Controller
         "date" => false,
         "bon_sac" => false,
         "sac_dechire" => false,
+        "sac_total" => false,
         "poids_brut" => false,
         "poids_net" => false,
         "poids_refracte" => false,

@@ -25,7 +25,7 @@
                         $new_status = $user['statut'] == 0 ? '1' : '0';
                         $status_link = site_url('utilisateur/set_status/' . $user['id_utilisateur'] . '/' . $new_status) ; 
                     ?>
-                    <!-- Avoid desabling current connected user -->
+                    <!-- Avoid disabling current connected user -->
                     <?php if($_SESSION['user']['id_utilisateur'] !== $user['id_utilisateur']) : ?>
                     <a href="#" onclick="doAjax('<?php echo $status_link; ?>', 'body')">
                             <span class="glyphicon <?php echo $user['statut'] == 0 ? 'glyphicon-unchecked': 'glyphicon-check'; ?>"></span>

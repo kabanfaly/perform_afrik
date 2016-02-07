@@ -144,8 +144,8 @@ div.dataTables_info {
 
 /*  -------------------------------- */
 .myaccount-collapse-container{
-     background-color: #f7f7f7;
-     margin-bottom: 10px;
+    background-color: #f7f7f7;
+    margin-bottom: 10px;
 }
 .myaccount-collapse-container .myaccount-collapsable-header > a{
     color: white;
@@ -157,10 +157,16 @@ div.dataTables_info {
     padding: 10px;
 }
 .myaccount-collapsable-header{
-    
+
     background-color: #555555;
     margin-bottom: 10px;
 }
 .visbile-on-collapsed {
     margin-left: 10px;
 }
+
+.ui-autocomplete { 
+    cursor:pointer; 
+    height:120px; 
+    overflow-y:scroll;
+}    

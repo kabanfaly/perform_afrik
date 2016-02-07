@@ -42,14 +42,18 @@ class Dechargement_model extends CI_Model
      */
     public function get_dechargements($id_dechargement = false)
     {
+        $this->db->select('d.*, f.nom as fournisseur, c.numero as camion, v.nom as ville');
+        $this->db->join('pa_fournisseur f', 'd.id_fournisseur = f.id_fournisseur', 'INNER');
+        $this->db->join('pa_camion c', 'd.id_camion = c.id_camion', 'INNER');
+        $this->db->join('pa_ville v', 'd.id_ville = v.id_ville', 'INNER');
         if ($id_dechargement === false)
         {
 
-            $query = $this->db->get(self::$TABLE_NAME);
+            $query = $this->db->get(self::$TABLE_NAME . ' d');
             return $query->result_array();
         }
 
-        $query = $this->db->get_where(self::$TABLE_NAME, array(self::$PK => $id_dechargement));
+        $query = $this->db->get_where(self::$TABLE_NAME . ' d', array(self::$PK => $id_dechargement));
         return $query->row_array();
     }
 

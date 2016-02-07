@@ -43,17 +43,11 @@ class Dechargement extends Common_Controller
             'active' => 'dechargement',
             'form_link' => site_url('dechargement/edit')
         );
-
+    
         if ($data['unloadings'] !== NULL)
         {
             foreach ($data['unloadings'] as &$unloading)
             {
-                $trucks = $this->camion_model->get_camions($unloading['id_camion']);
-                $suppliers = $this->fournisseur_model->get_fournisseurs($unloading['id_fournisseur']);
-                $cities = $this->ville_model->get_villes($unloading['id_ville']);
-                $unloading['camion'] = $trucks['numero'];
-                $unloading['fournisseur'] = $suppliers['nom'];
-                $unloading['ville'] = $cities['nom'];
                 $unloading['date'] = $this->mk_app_date($unloading['date']);
             }
         }
