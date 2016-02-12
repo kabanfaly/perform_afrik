@@ -48,20 +48,29 @@ class Connexion extends CI_Controller
 
         $login = $this->input->post('login');
         $password = $this->input->post('password');
-        //get admin
+        //get user
         $user = $this->utilisateur_model->get_user_profile($login, $password);
         
         if ($user !== NULL)
         {
-            // save user's info in session
-            $this->session->set_userdata('user', $user);
-            
-            // save parameters in session
-            $parameters =  $this->preference_model->get_parameters();
-            
-            $this->session->set_userdata('parameters', $parameters);
-            redirect('dechargement/index');
-        }else{
+            // user account is disabled
+            if ($user['statut'] == 0)
+            {
+                $data['err_msg'] = lang('DISABLED_ACCOUNT');
+                $this->display($data, 'connexion/index');
+            } else
+            {
+                // save user's info in session
+                $this->session->set_userdata('user', $user);
+
+                // save parameters in session
+                $parameters = $this->preference_model->get_parameters();
+
+                $this->session->set_userdata('parameters', $parameters);
+                redirect('dechargement/index');
+            }
+        } else
+        {
             $data['err_msg'] = lang('INVALID_LOGIN_PASSWORD');
             $this->display($data, 'connexion/index');
         }

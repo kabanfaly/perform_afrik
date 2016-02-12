@@ -21,8 +21,9 @@ class Utilisateur extends Common_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('utilisateur_model');
-        $this->load->model('profil_model');
+        $this->load->model('utilisateur_model', 'user');
+        $this->load->model('profil_model', 'profile');
+        $this->load->model('magasin_model', 'shop');
     }
 
     /**
@@ -35,12 +36,13 @@ class Utilisateur extends Common_Controller
     {
 
         $data = array(
-            'users' => $this->utilisateur_model->get_users(),
+            'users' => $this->user->get_users(),
             'title' => lang('USERS_MANAGEMENT'),
             'msg' => $msg,
             'error' => $error,
             'active' => 'utilisateur',
-            'form_link' => site_url('utilisateur/edit')
+            'form_link' => site_url('utilisateur/edit'),
+            'form_association_link' => site_url('utilisateur/associate_user_to_shop')
         );
 
         $this->display($data, 'utilisateur/index');
@@ -57,7 +59,7 @@ class Utilisateur extends Common_Controller
         $data = array(
             'title' => lang('ADD_USER'),
             'form_name' => 'utilisateur',
-            'profiles' => $this->profil_model->get_profiles(),
+            'profiles' => $this->profile->get_profiles(),
             'form_action' => site_url('utilisateur/save')
         );
 
@@ -77,7 +79,7 @@ class Utilisateur extends Common_Controller
             {
 
                 //get utilisateur by id
-                $utilisateur = $this->utilisateur_model->get_users($id_utilisateur);
+                $utilisateur = $this->user->get_users($id_utilisateur);
 
                 //merge row data with $data
                 $data = array_merge_recursive($data, $utilisateur);
@@ -92,6 +94,73 @@ class Utilisateur extends Common_Controller
     }
 
     /**
+     * Form to associate user to shop
+     * @param int $id_utilisateur
+     */
+    public function associate_user_to_shop($id_utilisateur)
+    {
+        $data = array(
+            'title' => lang('ASSOCIATE_USER_SHOP'),
+            'form_name' => 'utilisateur',
+            'shops' => $this->shop->get_magasins(),
+            'id_utilisateur' => $id_utilisateur,
+            'form_action' => site_url('utilisateur/save_user_shop')
+        );
+
+        //checks session
+        if (!$this->connected())
+        {
+            $data = array(
+                'title' => lang('CONNECTION')
+            );
+            $this->load->view('templates/header', $data);
+            $this->load->view('connexion/index', $data);
+            $this->load->view('templates/footer');
+        } else
+        {
+            // merging user info
+            $user = $this->user->get_users($id_utilisateur);
+            $data = array_merge($data, $user);
+
+            $user_shop = $this->user->get_user_magasin($id_utilisateur);
+
+            if ($user_shop !== NULL)
+            {
+                $data = array_merge($data, $user_shop);
+            }
+
+            $this->load->view('templates/form_header', $data);
+            $this->load->view('utilisateur/form_utilisateur_magasin', $data);
+            $this->load->view('templates/form_footer', $data);
+        }
+    }
+
+    /**
+     * Save user shop association
+     */
+    public function save_user_shop()
+    {
+        $data['id_utilisateur'] = $this->input->post('id_utilisateur');
+        $id_magasin = $this->input->post('id_magasin');
+
+        if (!empty($id_magasin))
+        {
+            $data['id_magasin'] = $id_magasin;
+            // update
+            if ($this->user->save_user_magasin($data) !== FALSE)
+            {
+                redirect('utilisateur/index/' . lang('UPDATING_USER_SHOP_ASSOCIATION_SUCCESS'));
+            } else
+            {
+                redirect('utilisateur/index/' . lang('UPDATING_USER_SHOP_ASSOCIATION_FAILED') . '/' . TRUE);
+            }
+        } else
+        {
+            redirect('utilisateur/index/' . lang('UPDATING_USER_SHOP_ASSOCIATION_SUCCESS'));
+        }
+    }
+
+    /**
      * display user account page
      * @param type $id_utilisateur
      */
@@ -102,7 +171,7 @@ class Utilisateur extends Common_Controller
             'form_name' => 'utilisateur',
             'active' => 'utilisateur',
             'configuration' => true,
-            'profiles' => $this->profil_model->get_profiles(),
+            'profiles' => $this->profile->get_profiles(),
             'form_action' => site_url('utilisateur/save'),
             'msg' => $msg,
             'error' => $error
@@ -124,7 +193,7 @@ class Utilisateur extends Common_Controller
             {
 
                 //get utilisateur by id
-                $utilisateur = $this->utilisateur_model->get_users($id_utilisateur);
+                $utilisateur = $this->user->get_users($id_utilisateur);
 
                 //merge row data with $data
                 $data = array_merge_recursive($data, $utilisateur);
@@ -172,7 +241,7 @@ class Utilisateur extends Common_Controller
             $id_utilisateur = $this->input->post('id_utilisateur');
 
             //check user password
-            $utilisateur = $this->utilisateur_model->get_users($id_utilisateur);
+            $utilisateur = $this->user->get_users($id_utilisateur);
             if ($utilisateur['mot_de_passe'] === $data['mot_de_passe'])
             {
                 $this->update_user_info($id_utilisateur, $data, lang('UPDATING_USER_LOGIN_OK'));
@@ -196,14 +265,14 @@ class Utilisateur extends Common_Controller
             $id_utilisateur = $this->input->post('id_utilisateur');
 
             //check user current password
-            $utilisateur = $this->utilisateur_model->get_users($id_utilisateur);
+            $utilisateur = $this->user->get_users($id_utilisateur);
 
             if ($utilisateur['mot_de_passe'] === $current_password)
             {
                 $this->update_user_info($id_utilisateur, $data, lang('UPDATING_USER_PASSWORD_OK'));
             } else
             {
-                redirect('utilisateur/my_account/' . $id_utilisateur . '/' . lang('WRONG_CURRENT_PASSWORD'). '/'. TRUE);
+                redirect('utilisateur/my_account/' . $id_utilisateur . '/' . lang('WRONG_CURRENT_PASSWORD') . '/' . TRUE);
             }
         }
     }
@@ -228,7 +297,7 @@ class Utilisateur extends Common_Controller
      * @param int $id_utilisateur
      * @param array $data
      */
-    public function update_user_info($id_utilisateur, $data, $msg='', $error=FALSE)
+    public function update_user_info($id_utilisateur, $data, $msg = '', $error = FALSE)
     {
         //checks session
         if ($this->connected())
@@ -237,9 +306,9 @@ class Utilisateur extends Common_Controller
             $where = array(Utilisateur_model::$PK => $id_utilisateur);
 
             // update
-            if ($this->utilisateur_model->update($data, $where) !== FALSE)
+            if ($this->user->update($data, $where) !== FALSE)
             {
-                redirect('utilisateur/my_account/' . $id_utilisateur. '/' . $msg . '/'. $error);
+                redirect('utilisateur/my_account/' . $id_utilisateur . '/' . $msg . '/' . $error);
             }
         }
     }
@@ -248,8 +317,7 @@ class Utilisateur extends Common_Controller
      * builds inputs value in an array
      * @return array
      */
-    private function
-    get_inputs()
+    private function get_inputs()
     {
 
         // get input values
@@ -272,12 +340,12 @@ class Utilisateur extends Common_Controller
         $data = $this->get_inputs();
 
         // save if the utilisateur number doesn't exist
-        if ($this->utilisateur_model->save($data) !== FALSE)
+        if ($this->user->save($data) !== FALSE)
         {
             redirect('utilisateur/index/' . lang('SAVING_USER_SUCCESS'));
         } else
         {
-            redirect('utilisateur/index/' . lang('USER_EXISTS') . ': ' . $data['nom'] . '/' . TRUE);
+            redirect('utilisateur/index/' . lang('USER_LOGIN_EXISTS') . ': ' . $data['login'] . '/' . TRUE);
         }
     }
 
@@ -297,12 +365,12 @@ class Utilisateur extends Common_Controller
             $where = array(Utilisateur_model::$PK => $id_utilisateur);
 
             // update
-            if ($this->utilisateur_model->update($data, $where) !== FALSE)
+            if ($this->user->update($data, $where) !== NULL)
             {
                 redirect('utilisateur/index/' . lang('UPDATING_USER_SUCCESS'));
             } else
             {
-                redirect('utilisateur/index/' . lang('UPDATING_FAILED') . '/' . TRUE);
+                redirect('utilisateur/index/' . lang('USER_LOGIN_EXISTS') . ': ' . $data['login'] . '/' . TRUE);
             }
         }
     }
@@ -316,7 +384,7 @@ class Utilisateur extends Common_Controller
         //checks session
         if ($this->connected())
         {
-            if ($this->utilisateur_model->delete(array(Utilisateur_model::$PK => $id_utilisateur)) !== FALSE)
+            if ($this->user->delete(array(Utilisateur_model::$PK => $id_utilisateur)) !== FALSE)
             {
                 redirect('utilisateur/index/' . lang('USER_DELETION_SUCCESS'));
             } else
@@ -339,7 +407,7 @@ class Utilisateur extends Common_Controller
             $data = array('statut' => $status);
             $where = array(Utilisateur_model::$PK => $id_utilisateur);
             // set status
-            $this->utilisateur_model->update($data, $where);
+            $this->user->update($data, $where);
 
             redirect('utilisateur/index');
         }

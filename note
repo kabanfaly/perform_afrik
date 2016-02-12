@@ -12,12 +12,13 @@ Description:
     - Manager profile is immutable and cannot be deleted
    
   User management
-    - An admin user can add a user for any profile
-    - A non admin user can only add a user for its own profile
+    - An admin user can add a user for any profile    
     - A connected user cannot delete himself while connected
     - A connected user cannot desabled himself while connected
     - If edit re-password if is not required when it's empty
     - Click to enable/disable
+    - A user can edit his own account but cannot change his profile
+    - A user can be associated to zero or one shop
 
 
 Features:

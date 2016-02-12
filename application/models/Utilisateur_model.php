@@ -23,6 +23,12 @@ class Utilisateur_model extends CI_Model
     public static $TABLE_NAME = 'pa_utilisateur';
 
     /**
+     * Utilisateur-magasin (user-shop) associated table name
+     * @var String
+     */
+    public static $USER_SHOP_TABLE_NAME = 'pa_utilisateur_magasin';
+
+    /**
      * Utilisateur (user) table primary key
      * @var String
      */
@@ -38,19 +44,15 @@ class Utilisateur_model extends CI_Model
      * retreive user and his profile by his login and password
      * @param String $login
      * @param String $password
-     * @param bool $check_status whether to check status or not
      * @return array
      */
-    public function get_user_profile($login, $password, $check_status = true)
+    public function get_user_profile($login, $password)
     {
         $this->db->select('u.*, p.nom as profil, droits_colonnes_dechargement as authorized_columns');
         $this->db->join('pa_profil p', 'u.id_profil = p.id_profil', 'INNER');
 
         $where = array('login' => $login, 'mot_de_passe' => $password);
-        if ($check_status)
-        {
-            $where['statut'] = 1;
-        }
+
         $query = $this->db->get_where(self::$TABLE_NAME . ' u', $where);
         return $query->row_array();
     }
@@ -85,8 +87,15 @@ class Utilisateur_model extends CI_Model
      */
     public function update($data, $where)
     {
-        // do update
-        return $this->db->update(self::$TABLE_NAME, $data, $where);
+        //find user
+        $user = $this->find_by_login($data['login']);
+
+        if ($user !== NULL && $user['id_utilisateur'] == $where['id_utilisateur'])
+        {
+            // do update
+            return $this->db->update(self::$TABLE_NAME, $data, $where);
+        }
+        return NULL;
     }
 
     /**
@@ -125,6 +134,38 @@ class Utilisateur_model extends CI_Model
     {
         $query = $this->db->get_where(self::$TABLE_NAME, array('login' => $login));
         return $query->row_array();
+    }
+
+    /**
+     * Get a row from pa_utilisateur_magasin (user-shop) table identified by user id 
+     * @param int $id_utilisateur 
+     * @return NULL|array
+     */
+    public function get_user_magasin($id_utilisateur)
+    {   
+        $query = $this->db->get_where(self::$USER_SHOP_TABLE_NAME, array(self::$PK => $id_utilisateur));
+        return $query->row_array();
+    }
+
+    /**
+     * Insert or update in user-shop associated table
+     * @param array $data
+     * @return boolean
+     */
+    public function save_user_magasin($data)
+    {
+        $id_utilisateur = $data[self::$PK];
+        
+        // Check if user id is associated
+        $user_magasin = $this->get_user_magasin($id_utilisateur);
+        if ($user_magasin === NULL) // do insert
+        {
+            return $this->db->insert(self::$USER_SHOP_TABLE_NAME, $data);
+        } else  // do update
+        {
+            return $this->db->update(self::$TABLE_NAME, $data, array(self::$PK => $id_utilisateur));
+        }
+        return FALSE;
     }
 
 }

@@ -6,6 +6,7 @@
             <th><?php echo lang('LASTNAME'); ?></th>
             <th><?php echo lang('LOGIN'); ?></th>
             <th><?php echo lang('PROFILE'); ?></th>
+            <th><?php echo lang('SHOP'); ?></th>
             <th><?php echo lang('ACTIVATE'); ?></th>
             <th class="option"><?php echo lang('OPTIONS'); ?></th>
         </tr>
@@ -19,7 +20,9 @@
                 <td><?php echo $user['nom']; ?></td>
                 <td><?php echo $user['prenom']; ?></td>
                 <td><?php echo $user['login']; ?></td>
-                <td><?php echo $user['profil']; ?></td>              
+                <td><?php echo $user['profil']; ?></td>
+                <td></td>
+                
                 <td align="center"> 
                     <?php 
                         $new_status = $user['statut'] == 0 ? '1' : '0';
@@ -32,12 +35,19 @@
                         </a>
                     <?php endif ; ?>
                 </td>
+              
+                <!--avoid deleting or editing current connected user (edition has to be done from account profile) -->
                 <td align="center">
-                    <a href="#" onclick="loadForm('<?php echo $form_link . '/' . $user['id_utilisateur']; ?>')" data-toggle="modal" data-target="#form-content">
-                        <span class="fa fa-fw fa-pencil"></span>
-                    </a>
-                    <!--avoid deleting current connected user-->
                     <?php if($_SESSION['user']['id_utilisateur'] !== $user['id_utilisateur']): ?>
+                    
+                        <a href="#" onclick="loadForm('<?php echo $form_association_link . '/' . $user['id_utilisateur']; ?>')" data-toggle="modal" data-target="#form-content">
+                            <span class="fa fa-fw fa-cc-discover"></span>
+                        </a>
+                        <a href="#" onclick="loadForm('<?php echo $form_link . '/' . $user['id_utilisateur']; ?>')" data-toggle="modal" data-target="#form-content">
+                            <span class="fa fa-fw fa-pencil"></span>
+                        </a>
+                        
+                    
                          <a href="#" onclick="if (confirmDeletion()){doAjax('<?php echo site_url('utilisateur/delete/' . $user['id_utilisateur']); ?>', 'body');};">
                             <span class="fa fa-fw fa-remove"></span> 
                         </a>

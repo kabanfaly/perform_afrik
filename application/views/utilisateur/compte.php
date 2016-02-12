@@ -102,7 +102,7 @@
     </div>
     <!--  /end change password -->
     <!--  Begin change profile -->
-    <div class="myaccount-collapse-container background-default">
+    <!--div class="myaccount-collapse-container background-default">
         <div class="myaccount-collapsable-header">
             <a class="collapsed accordion-toggle" data-toggle="collapse" data-target="#myaccount-profile" href="#">
                 <div class="pull-right"><span class="glyphicon glyphicon-plus"></span></div>
@@ -134,7 +134,7 @@
                 </div>
             </form>
         </div>
-    </div>
-    <!--  /end change password -->
+    </div-->
+    <!--  Begin change profile -->
 
 </div>
