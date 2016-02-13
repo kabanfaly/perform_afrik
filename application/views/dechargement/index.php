@@ -13,6 +13,10 @@ if (!empty($_SESSION['user']['authorized_columns']))
             <?php if (isset($authorized_columns['date']) && $authorized_columns['date']) : ?>
                 <th><?php echo lang('DATE'); ?></th>
             <?php endif ?>
+                
+            <?php if (isset($authorized_columns['id_magasin']) && $authorized_columns['id_magasin']) : ?>
+                <th><?php echo lang('SHOP'); ?></th>
+            <?php endif ?>
 
             <?php if (isset($authorized_columns['id_fournisseur']) && $authorized_columns['id_fournisseur']) : ?>
                 <th><?php echo lang('SUPPLIER'); ?></th>
@@ -76,6 +80,9 @@ if (!empty($_SESSION['user']['authorized_columns']))
                 <td><?php echo $no++; ?></td>
                 <?php if (isset($authorized_columns['date']) && $authorized_columns['date']) : ?>
                     <td><?php echo $unloading['date']; ?></td>
+                <?php endif ?>
+                <?php if (isset($authorized_columns['id_magasin']) && $authorized_columns['id_magasin']) : ?>
+                    <td><?php echo $unloading['magasin']; ?></td>
                 <?php endif ?>
 
                 <?php if (isset($authorized_columns['id_fournisseur']) && $authorized_columns['id_fournisseur']) : ?>

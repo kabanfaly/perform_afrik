@@ -36,20 +36,30 @@ class Dechargement_model extends CI_Model
 
     /**
      * retreives all unloading if the input parameter (id_dechargement) is false, or 
-     * retreives the unloading identified by the input parameter value
-     * @param type $id_dechargement
-     * @return type array
+     * retreives the unloading identified by the input parameter value.
+     * Id the parameter id_magasin (shop id) is set to true retrieved data will be only defined shop
+     * @param int $id_dechargement
+     * @param int $id_magasin
+     * @return  array
      */
-    public function get_dechargements($id_dechargement = false)
+    public function get_dechargements($id_dechargement = false, $id_magasin = false)
     {
-        $this->db->select('d.*, f.nom as fournisseur, c.numero as camion, v.nom as ville');
+        $this->db->select('d.*, f.nom as fournisseur, c.numero as camion, v.nom as ville, m.nom as magasin');
+        $this->db->join('pa_magasin m', 'd.id_magasin = m.id_magasin', 'INNER');
         $this->db->join('pa_fournisseur f', 'd.id_fournisseur = f.id_fournisseur', 'INNER');
         $this->db->join('pa_camion c', 'd.id_camion = c.id_camion', 'INNER');
         $this->db->join('pa_ville v', 'd.id_ville = v.id_ville', 'INNER');
+        
         if ($id_dechargement === false)
         {
 
-            $query = $this->db->get(self::$TABLE_NAME . ' d');
+            if ($id_magasin)
+            {
+                $query = $this->db->get_where(self::$TABLE_NAME . ' d', array('d.id_magasin' => $id_magasin));
+            } else
+            {
+                $query = $this->db->get(self::$TABLE_NAME . ' d');
+            }
             return $query->result_array();
         }
 

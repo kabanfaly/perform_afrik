@@ -3,7 +3,7 @@
         <tr>
             <th class="number"><?php echo lang('NO'); ?></th>
             <th><?php echo lang('PROFILE'); ?></th>
-            <th><?php echo lang('RIGHT'); ?></th>
+            <th><?php echo lang('VISIBILITY_RIGHT'); ?></th>
             <th class="option"><?php echo lang('OPTIONS'); ?></th>
         </tr>
     </thead>

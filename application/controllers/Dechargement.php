@@ -23,6 +23,7 @@ class Dechargement extends Common_Controller
         parent::__construct();
         $this->load->model('dechargement_model');
         $this->load->model('camion_model');
+        $this->load->model('magasin_model');
         $this->load->model('fournisseur_model');
         $this->load->model('ville_model');
     }
@@ -35,8 +36,15 @@ class Dechargement extends Common_Controller
      */
     public function index($msg = '', $error = FALSE)
     {
+        $id_magasin = false;
+         if ($this->connected())
+        {
+             
+             $id_magasin = empty($_SESSION['user']['id_magasin']) ? false: $_SESSION['user']['id_magasin'];
+        }
+        
         $data = array(
-            'unloadings' => $this->dechargement_model->get_dechargements(),
+            'unloadings' => $this->dechargement_model->get_dechargements(false, $id_magasin),
             'title' => lang('UNLOADING_MANAGEMENT'),
             'msg' => $msg,
             'error' => $error,
@@ -67,6 +75,7 @@ class Dechargement extends Common_Controller
             'title' => lang('ADD_UNLOADING'),
             'form_action' => site_url('dechargement/save'),
             'form_name' => 'dechargement',
+            'shops' => $this->magasin_model->get_magasins(),
             'trucks' => $this->camion_model->get_camions(),
             'suppliers' => $this->fournisseur_model->get_fournisseurs(),
             'cities' => $this->ville_model->get_villes()
@@ -156,6 +165,7 @@ class Dechargement extends Common_Controller
 
         // get input values
         $id_camion = $this->input->post('id_camion');
+        $id_magasin = $this->input->post('id_magasin');
         $id_fournisseur = $this->input->post('id_fournisseur');
         $id_ville = $this->input->post('id_ville');
 
@@ -170,10 +180,14 @@ class Dechargement extends Common_Controller
 
         //$refracted_weight = $this->compute_refracted($good_bag, $torn_bag, $net_weight);
 
-        $data = array('id_camion' => $id_camion, 'id_ville' => $id_ville, 'id_fournisseur' => $id_fournisseur,
+        $data = array('id_camion' => $id_camion, 'id_magasin' => $id_magasin, 'id_ville' => $id_ville, 'id_fournisseur' => $id_fournisseur,
             'date' => $date, 'bon_sac' => $good_bag, 'sac_dechire' => $torn_bag, 'sac_total' => $total_bag,
             'poids_brut' => $gross_weight, 'poids_net' => $net_weight, 'poids_refracte' => $refracted_weight, 'humidite' => $humidity);
-
+        
+        $data['prix'] = intval(trim($this->input->post('prix')));
+        $data['qualite'] = intval(trim($this->input->post('qualite')));
+        $data['total'] = intval(trim($this->input->post('total')));
+        
         return $data;
     }
 

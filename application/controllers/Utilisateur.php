@@ -141,11 +141,12 @@ class Utilisateur extends Common_Controller
     public function save_user_shop()
     {
         $data['id_utilisateur'] = $this->input->post('id_utilisateur');
-        $id_magasin = $this->input->post('id_magasin');
-
-        if (!empty($id_magasin))
+        $data['id_magasin'] = $this->input->post('id_magasin');
+        
+      
+        if (!empty($data['id_magasin']))
         {
-            $data['id_magasin'] = $id_magasin;
+            
             // update
             if ($this->user->save_user_magasin($data) !== FALSE)
             {
@@ -156,6 +157,7 @@ class Utilisateur extends Common_Controller
             }
         } else
         {
+            $this->user->delete_user_magasin($data['id_utilisateur']);
             redirect('utilisateur/index/' . lang('UPDATING_USER_SHOP_ASSOCIATION_SUCCESS'));
         }
     }

@@ -21,7 +21,7 @@
                 <td><?php echo $user['prenom']; ?></td>
                 <td><?php echo $user['login']; ?></td>
                 <td><?php echo $user['profil']; ?></td>
-                <td></td>
+                <td><?php echo empty($user['magasin']) ?  lang('ALL_SHOPS'): $user['magasin']; ?></td>
                 
                 <td align="center"> 
                     <?php 
@@ -36,17 +36,15 @@
                     <?php endif ; ?>
                 </td>
               
-                <!--avoid deleting or editing current connected user (edition has to be done from account profile) -->
                 <td align="center">
-                    <?php if($_SESSION['user']['id_utilisateur'] !== $user['id_utilisateur']): ?>
-                    
-                        <a href="#" onclick="loadForm('<?php echo $form_association_link . '/' . $user['id_utilisateur']; ?>')" data-toggle="modal" data-target="#form-content">
-                            <span class="fa fa-fw fa-cc-discover"></span>
-                        </a>
+                    <a href="#" onclick="loadForm('<?php echo $form_association_link . '/' . $user['id_utilisateur']; ?>')" data-toggle="modal" data-target="#form-content">
+                        <span class="fa fa-fw fa-plug" title="<?php echo lang('ASSOCIATE_SHOP') ;?>"></span>
+                    </a>
+                     <!--avoid deleting or editing current connected user (edition has to be done from account profile) -->
+                     <?php if($_SESSION['user']['id_utilisateur'] !== $user['id_utilisateur']): ?>
                         <a href="#" onclick="loadForm('<?php echo $form_link . '/' . $user['id_utilisateur']; ?>')" data-toggle="modal" data-target="#form-content">
                             <span class="fa fa-fw fa-pencil"></span>
                         </a>
-                        
                     
                          <a href="#" onclick="if (confirmDeletion()){doAjax('<?php echo site_url('utilisateur/delete/' . $user['id_utilisateur']); ?>', 'body');};">
                             <span class="fa fa-fw fa-remove"></span> 

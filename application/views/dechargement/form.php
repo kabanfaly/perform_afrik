@@ -7,11 +7,32 @@ if (!empty($_SESSION['user']['authorized_columns']))
 }
 ?>
 <input type="hidden" name="id_dechargement" value="<?php echo!isset($id_dechargement) ? '' : $id_dechargement; ?>" />
+
+<!--if a connected user's profile is magasin-->
+<?php if(!empty($_SESSION['user']['id_magasin'])) :?>
+    <input type="hidden" name="id_magasin" value="<?php echo $_SESSION['user']['id_magasin']; ?>" />
+<?php endif ; ?>
+    
 <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <h3><?php echo $title ?></h3>
 </div>
 <div class="modal-body">
+    <?php if (isset($authorized_columns['id_magasin']) && $authorized_columns['id_magasin']) : ?>
+        <div class="form-group">
+            <label for="id_magasin"><?php echo lang('SHOP'); ?>*:</label>
+            <select type="text" name="id_magasin" class="form-control" id="id_magasin" required >
+                <option value=""><?php echo lang('SELECT_SHOP'); ?></option>
+                <?php
+                foreach ($shops as $shop)
+                {
+                    $selected = isset($id_magasin) && $shop['id_magasin'] === $id_magasin ? 'selected' : '';
+                    echo "<option value='{$shop['id_magasin']}' $selected>{$shop['nom']}</option>";
+                }
+                ?>
+            </select>
+        </div>
+    <?php endif ?>
     <?php if (isset($authorized_columns['id_camion']) && $authorized_columns['id_camion']) : ?>
         <div class="form-group">
             <label for="id_camion"><?php echo lang('TRUCK'); ?>*:</label>
@@ -112,21 +133,21 @@ if (!empty($_SESSION['user']['authorized_columns']))
     <?php if (isset($authorized_columns['qualite']) && $authorized_columns['qualite']) : ?>
         <div class="form-group">
             <label for="qualite"><?php echo lang('QUALITY'); ?>:</label>
-            <input type="text" name="qualite" value="<?php echo !isset($qualite) ? '' : $qualite; ?>" class="form-control" id="qualite" placeholder="<?php echo lang('TYPE_QUALITY'); ?>"/>
+            <input type="text" name="qualite" value="<?php echo !isset($qualite) ? 0 : $qualite; ?>" class="form-control" id="qualite" placeholder="<?php echo lang('TYPE_QUALITY'); ?>"/>
         </div>
     <?php endif ?>
 
-    <?php if (isset($authorized_columns['price']) && $authorized_columns['price']) : ?>
+    <?php if (isset($authorized_columns['prix']) && $authorized_columns['prix']) : ?>
         <div class="form-group">
-            <label for="price"><?php echo lang('PRICE'); ?>:</label>
-            <input type="text" name="price" value="<?php echo !isset($price) ? '' : $price; ?>" class="form-control" id="price" placeholder="<?php echo lang('TYPE_PRICE'); ?>"/>
+            <label for="prix"><?php echo lang('PRICE'); ?>:</label>
+            <input type="text" name="prix" value="<?php echo !isset($prix) ? 0 : $prix; ?>" class="form-control" id="prix" placeholder="<?php echo lang('TYPE_PRICE'); ?>"/>
         </div>
     <?php endif ?>
 
     <?php if (isset($authorized_columns['total']) && $authorized_columns['total']) : ?>
         <div class="form-group">
             <label for="total"><?php echo lang('TOTAL'); ?>:</label>
-            <input type="text" name="total" value="<?php echo !isset($total) ? '' : $total; ?>" class="form-control" id="total" placeholder="<?php echo lang('TYPE_TOTAL'); ?>"/>
+            <input type="text" name="total" value="<?php echo !isset($total) ? 0 : $total; ?>" class="form-control" id="total" placeholder="<?php echo lang('TYPE_TOTAL'); ?>"/>
         </div>
     <?php endif ?>
 </div>

@@ -6,7 +6,7 @@
 </div>
 <div class="modal-body">
     <div class="form-group">
-        <label for="user"><?php echo lang('ASSOCIATE'); ?>: <?php echo "$nom $prenom"; ?></label>
+        <label for="user"><?php echo lang('ASSOCIATE'); ?></label>: <?php echo "$nom $prenom"; ?>
     </div>
     <div class="form-group">
         <label for="magasin"><?php echo lang('TO_SHOP'); ?>:</label>
@@ -22,7 +22,6 @@
         </select>
     </div>
 </div>
-<div class="mandatory">* <?php echo lang('MANDATORY_FIELD'); ?> </div>
 <div class="modal-footer">
     <input class="btn btn-primary" type="submit" value="<?php echo lang('SUBMIT'); ?>" id="submit">
     <button class="btn btn-default" data-dismiss="modal"><?php echo lang('CANCEL'); ?></button>

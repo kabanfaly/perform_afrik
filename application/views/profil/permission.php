@@ -4,7 +4,7 @@
     <a class="close" data-dismiss="modal">×</a>
     <h3><?php echo lang("PROFILE") . ": $nom"; ?></h3>
     <h4><?php echo $title; ?></h4>
-    <i><?php echo lang("COLUMNS_RIGHTS_HELP") ; ?></i>
+    <i><?php echo lang("UNLOADING_COLUMNS_RIGHTS_HELP") ; ?></i>
 </div>
 <table class="table table-striped table-bordered table-hover">
 <!--    <tr>

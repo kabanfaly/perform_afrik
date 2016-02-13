@@ -48,8 +48,10 @@ class Utilisateur_model extends CI_Model
      */
     public function get_user_profile($login, $password)
     {
-        $this->db->select('u.*, p.nom as profil, droits_colonnes_dechargement as authorized_columns');
+        $this->db->select('u.*, p.nom as profil, droits_colonnes_dechargement as authorized_columns, m.id_magasin, m.nom as magasin');
         $this->db->join('pa_profil p', 'u.id_profil = p.id_profil', 'INNER');
+        $this->db->join('pa_utilisateur_magasin um', 'u.id_utilisateur = um.id_utilisateur', 'LEFT');
+        $this->db->join('pa_magasin m', 'um.id_magasin = m.id_magasin', 'LEFT');
 
         $where = array('login' => $login, 'mot_de_passe' => $password);
 
@@ -65,8 +67,10 @@ class Utilisateur_model extends CI_Model
      */
     public function get_users($id_utilisateur = false)
     {
-        $this->db->select('u.*, p.nom as profil');
+        $this->db->select('u.*, p.nom as profil, m.nom as magasin, m.id_magasin');
         $this->db->join('pa_profil p', 'u.id_profil = p.id_profil', 'INNER');
+        $this->db->join('pa_utilisateur_magasin um', 'u.id_utilisateur = um.id_utilisateur', 'LEFT');
+        $this->db->join('pa_magasin m', 'um.id_magasin = m.id_magasin', 'LEFT');
 
         if ($id_utilisateur === false)
         {
@@ -74,7 +78,7 @@ class Utilisateur_model extends CI_Model
             return $query->result_array();
         }
 
-        $query = $this->db->get_where(self::$TABLE_NAME . ' u', array(self::$PK => $id_utilisateur));
+        $query = $this->db->get_where(self::$TABLE_NAME . ' u', array('u.' . self::$PK => $id_utilisateur));
         return $query->row_array();
     }
 
@@ -158,14 +162,23 @@ class Utilisateur_model extends CI_Model
         
         // Check if user id is associated
         $user_magasin = $this->get_user_magasin($id_utilisateur);
+        
         if ($user_magasin === NULL) // do insert
         {
             return $this->db->insert(self::$USER_SHOP_TABLE_NAME, $data);
         } else  // do update
         {
-            return $this->db->update(self::$TABLE_NAME, $data, array(self::$PK => $id_utilisateur));
+            return $this->db->update(self::$USER_SHOP_TABLE_NAME, $data, array(self::$PK => $id_utilisateur));
         }
         return FALSE;
     }
-
+    
+    /**
+     * Deletes a user from user-shop assaciation table
+     * @param int $id_utilisateur user id
+     * @return boolean
+     */
+    public function delete_user_magasin($id_utilisateur){
+        return $this->db->delete(self::$USER_SHOP_TABLE_NAME, array(self::$PK => $id_utilisateur));
+    }
 }

@@ -28,7 +28,9 @@
                         <ul class="nav navbar-right top-nav">
 
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $_SESSION['user']['profil'];?> <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 
+                                    <?php echo $_SESSION['user']['prenom'].' ('. $_SESSION['user']['profil'].')';?> <b class="caret"></b>
+                                </a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="<?php echo site_url("utilisateur/my_account/".$_SESSION['user']['id_utilisateur']); ?>"><i class="fa fa-fw fa-user"></i>  <?php echo lang('PROFILE'); ?></a>
@@ -91,12 +93,17 @@
         
         <div id="page-wrapper">
             <div class="container-fluid">
+                <?php if (isset($_SESSION['user'])) : ?>
+                
                 <div class="row">
-                    <?php
-                    if (isset($_SESSION['user'])) : ?>
+                    <b><?php echo lang('SHOP'); ?></b>:&nbsp;<?php echo empty($_SESSION['user']['magasin']) ? lang('ALL_SHOPS'): $_SESSION['user']['magasin'];?>
+                </div>
+                <div class="row">
+                   
                         <div class="col-lg-12">
                             <div class="content clearfix">
-                                <!--<div class="title"><h3><?php echo $title; ?></h3></div>-->
+                                
+                                
                                 
                                 <!-- hide add button if configuration page --> 
                                 <?php

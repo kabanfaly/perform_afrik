@@ -24,6 +24,7 @@ class Profil extends Common_Controller
      */
     public static $UNLOADING_COLUMNS_RIGHTS = array(
         "id_camion" => false,
+        "id_magasin" => false,
         "id_ville" => false,
         "id_fournisseur" => false,
         "date" => false,
