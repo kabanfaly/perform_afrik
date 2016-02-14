@@ -91,7 +91,7 @@ class Profil_model extends CI_Model
      */
     public function update($data, $where)
     {
-        // do update
+        // do update        
         return $this->db->update(self::$TABLE_NAME, $data, $where);
     }
 

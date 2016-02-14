@@ -402,14 +402,14 @@ class Utilisateur extends Common_Controller
      * @param int $status new status
      */
     public function set_status($id_utilisateur, $status)
-    {
+    {       
         //checks session
         if ($this->connected())
         {
-            $data = array('statut' => $status);
+            $data = array('statut' => $status);            
             $where = array(Utilisateur_model::$PK => $id_utilisateur);
             // set status
-            $this->user->update($data, $where);
+            $this->user->update_status($data, $where);
 
             redirect('utilisateur/index');
         }

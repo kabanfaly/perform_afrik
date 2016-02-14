@@ -83,7 +83,7 @@ class Utilisateur_model extends CI_Model
     }
 
     /**
-     * Updates a user
+     * Updates a user info
      * 
      * @param array $data
      * @param array $where
@@ -94,12 +94,25 @@ class Utilisateur_model extends CI_Model
         //find user
         $user = $this->find_by_login($data['login']);
 
+        //check if the login is not defined for another user
         if ($user !== NULL && $user['id_utilisateur'] == $where['id_utilisateur'])
         {
             // do update
             return $this->db->update(self::$TABLE_NAME, $data, $where);
         }
         return NULL;
+    }
+
+    /**
+     * Updates user status
+     * @param type $data
+     * @param type $where
+     * @return type
+     */
+    public function update_status($data, $where)
+    {
+        // do update
+        return $this->db->update(self::$TABLE_NAME, $data, $where);
     }
 
     /**
@@ -146,7 +159,7 @@ class Utilisateur_model extends CI_Model
      * @return NULL|array
      */
     public function get_user_magasin($id_utilisateur)
-    {   
+    {
         $query = $this->db->get_where(self::$USER_SHOP_TABLE_NAME, array(self::$PK => $id_utilisateur));
         return $query->row_array();
     }
@@ -159,10 +172,10 @@ class Utilisateur_model extends CI_Model
     public function save_user_magasin($data)
     {
         $id_utilisateur = $data[self::$PK];
-        
+
         // Check if user id is associated
         $user_magasin = $this->get_user_magasin($id_utilisateur);
-        
+
         if ($user_magasin === NULL) // do insert
         {
             return $this->db->insert(self::$USER_SHOP_TABLE_NAME, $data);
@@ -172,13 +185,15 @@ class Utilisateur_model extends CI_Model
         }
         return FALSE;
     }
-    
+
     /**
      * Deletes a user from user-shop assaciation table
      * @param int $id_utilisateur user id
      * @return boolean
      */
-    public function delete_user_magasin($id_utilisateur){
+    public function delete_user_magasin($id_utilisateur)
+    {
         return $this->db->delete(self::$USER_SHOP_TABLE_NAME, array(self::$PK => $id_utilisateur));
     }
+
 }
