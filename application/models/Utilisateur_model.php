@@ -48,12 +48,33 @@ class Utilisateur_model extends CI_Model
      */
     public function get_user_profile($login, $password)
     {
+        return $this->get_user($login, $password);
+    }
+
+    /**
+     * Get user by login
+     * @param type $login
+     * @return type
+     */
+    public function get_user_profile_by_login($login)
+    {
+
+       return $this->get_user($login);
+    }
+
+    private function get_user($login, $password = FALSE)
+    {
+
         $this->db->select('u.*, p.nom as profil, droits_colonnes_dechargement as authorized_columns, m.id_magasin, m.nom as magasin');
         $this->db->join('pa_profil p', 'u.id_profil = p.id_profil', 'INNER');
         $this->db->join('pa_utilisateur_magasin um', 'u.id_utilisateur = um.id_utilisateur', 'LEFT');
         $this->db->join('pa_magasin m', 'um.id_magasin = m.id_magasin', 'LEFT');
 
-        $where = array('login' => $login, 'mot_de_passe' => $password);
+        $where = array('login' => $login);
+        if ($password)
+        {
+            $where['mot_de_passe'] = $password;
+        }
 
         $query = $this->db->get_where(self::$TABLE_NAME . ' u', $where);
         return $query->row_array();

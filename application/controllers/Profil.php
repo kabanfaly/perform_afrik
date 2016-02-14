@@ -184,7 +184,9 @@ class Profil extends Common_Controller
 
             // update
             if ($this->profil_model->update($data, $where) !== FALSE)
-            {
+            {   
+                //update current user's session
+                $this->update_user_session();
                 redirect('profil/index/' . lang('UPDATING_PROFILE_RIGHTS_SUCCESS'));
             } else
             {

@@ -60,6 +60,7 @@ class Connexion extends CI_Controller
                 $this->display($data, 'connexion/index');
             } else
             {
+                unset($user['mot_de_passe']);
                 // save user's info in session
                 $this->session->set_userdata('user', $user);
 

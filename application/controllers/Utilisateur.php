@@ -150,6 +150,8 @@ class Utilisateur extends Common_Controller
             // update
             if ($this->user->save_user_magasin($data) !== FALSE)
             {
+                 //update current user's session
+                $this->update_user_session();
                 redirect('utilisateur/index/' . lang('UPDATING_USER_SHOP_ASSOCIATION_SUCCESS'));
             } else
             {
@@ -157,7 +159,10 @@ class Utilisateur extends Common_Controller
             }
         } else
         {
+            
             $this->user->delete_user_magasin($data['id_utilisateur']);
+            //update current user's session
+            $this->update_user_session();
             redirect('utilisateur/index/' . lang('UPDATING_USER_SHOP_ASSOCIATION_SUCCESS'));
         }
     }
@@ -227,6 +232,7 @@ class Utilisateur extends Common_Controller
             $id_utilisateur = $this->input->post('id_utilisateur');
 
             $this->update_user_info($id_utilisateur, $data, lang('UPDATING_USER_NAME_OK'));
+            
         }
     }
 
@@ -313,6 +319,8 @@ class Utilisateur extends Common_Controller
             // update
             if ($this->user->update($data, $where) !== FALSE)
             {
+                //update current user's session
+                $this->update_user_session();
                 redirect('utilisateur/my_account/' . $id_utilisateur . '/' . $msg . '/' . $error);
             } else
             {
