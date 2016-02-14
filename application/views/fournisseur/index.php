@@ -17,10 +17,10 @@
                 <td><?php echo $supplier['telephone']; ?></td>
                 <td><?php echo $supplier['adresse']; ?></td>
                 <td align="center">
-                    <a href="#" onclick="loadForm('<?php echo $form_link . '/' . $supplier['id_fournisseur']; ?>')" data-toggle="modal" data-target="#form-content">
+                    <a href="#" title="<?php echo lang('EDIT');  ?>" onclick="loadForm('<?php echo $form_link . '/' . $supplier['id_fournisseur']; ?>')" data-toggle="modal" data-target="#form-content">
                         <span class="fa fa-fw fa-pencil"></span>
                     </a>
-                    <a href="#" onclick="if (confirmDeletion()){doAjax('<?php echo site_url('fournisseur/delete/' . $supplier['id_fournisseur']); ?>', 'body');};">
+                    <a href="#" title="<?php echo lang('REMOVE');  ?>" onclick="if (confirmDeletion()){doAjax('<?php echo site_url('fournisseur/delete/' . $supplier['id_fournisseur']); ?>', 'body');};">
                         <span class="fa fa-fw fa-remove"></span> 
                     </a>
                 </td>

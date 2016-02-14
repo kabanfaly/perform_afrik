@@ -91,26 +91,27 @@ class Utilisateur_model extends CI_Model
      */
     public function update($data, $where)
     {
-        //find user
-        $user = $this->find_by_login($data['login']);
 
-        //check if the login is not defined for another user
-        if ($user !== NULL && $user['id_utilisateur'] == $where['id_utilisateur'])
+        //do update with uniq login
+        if (isset($data['login']))
         {
-            // do update
-            return $this->db->update(self::$TABLE_NAME, $data, $where);
-        }
-        return NULL;
-    }
+            //find user
+            $user = $this->find_by_login($data['login']);
 
-    /**
-     * Updates user status
-     * @param type $data
-     * @param type $where
-     * @return type
-     */
-    public function update_status($data, $where)
-    {
+            //check whether the login is not defined for another user
+            if ($user !== NULL)
+            {
+                // same user
+                if ($user['id_utilisateur'] == $where['id_utilisateur'])
+                {
+                    // do update
+                    return $this->db->update(self::$TABLE_NAME, $data, $where);
+                } else
+                {
+                    return FALSE;
+                }
+            }
+        }
         // do update
         return $this->db->update(self::$TABLE_NAME, $data, $where);
     }

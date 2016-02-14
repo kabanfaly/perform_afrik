@@ -92,6 +92,8 @@ $lang['USER_EXISTS'] = 'L utilisateur saisi existe déjà';
 $lang['USER_DELETION_SUCCESS'] = 'L utilisateur a été supprimé avec succès.';
 $lang['UPDATING_USER_SHOP_ASSOCIATION_SUCCESS'] = 'L utilisateur a été affecté au magasin avec succès.';
 $lang['UPDATING_USER_SHOP_ASSOCIATION_FAILED'] = 'L affectation au magasin a échoué.';
+$lang['CLICK_ENABLE'] = 'Cliquez pour activer';
+$lang['CLICK_DISABLE'] = 'Cliquez pour désactiver';
 
 $lang['UNLOADING_MANAGEMENT'] = 'Gestion des déchargements';
 $lang['UNLOADING_VIEW'] = 'Déchargement';
@@ -188,4 +190,7 @@ $lang['SHOP'] = 'Magasin';
 $lang['ASSOCIATE'] = 'Affecter l\'utilisateur';
 $lang['TO_SHOP'] = 'Au magasin';
 $lang['ASSOCIATE_SHOP'] = 'Affecté à un magasin';
+$lang['REMOVE'] = 'Supprimer';
+$lang['EDIT'] = 'Modifier';
+$lang['EDIT_COLUMNS_RIGHTS'] = 'Modifier les permission d\'accès aux colonnes';
 

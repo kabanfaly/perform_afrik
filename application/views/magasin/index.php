@@ -13,10 +13,10 @@
                 <td><?php echo $no++; ?></td>
                 <td><?php echo $magasin['nom']; ?></td>
                 <td align="center">
-                    <a href="#" onclick="loadForm('<?php echo $form_link . '/' . $magasin['id_magasin']; ?>')" data-toggle="modal" data-target="#form-content">
+                    <a href="#" title="<?php echo lang('EDIT');  ?>" onclick="loadForm('<?php echo $form_link . '/' . $magasin['id_magasin']; ?>')" data-toggle="modal" data-target="#form-content">
                         <span class="fa fa-fw fa-pencil"></span>
                     </a>
-                    <a href="#" onclick="if (confirmDeletion()){doAjax('<?php echo site_url('magasin/delete/' . $magasin['id_magasin']); ?>', 'body');};"> 
+                    <a href="#" title="<?php echo lang('REMOVE');  ?>" onclick="if (confirmDeletion()){doAjax('<?php echo site_url('magasin/delete/' . $magasin['id_magasin']); ?>', 'body');};"> 
                         <span class="fa fa-fw fa-remove"></span> 
                     </a>
                 </td>

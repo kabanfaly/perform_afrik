@@ -30,7 +30,7 @@
                     ?>
                     <!-- Avoid disabling current connected user -->
                     <?php if($_SESSION['user']['id_utilisateur'] !== $user['id_utilisateur']) : ?>
-                    <a href="#" onclick="doAjax('<?php echo $status_link; ?>', 'body')">
+                    <a href="#" onclick="doAjax('<?php echo $status_link; ?>', 'body')" title="<?php echo  $user['statut'] == 0? lang('CLICK_ENABLE'): lang('CLICK_DISABLE'); ?>">
                             <span class="glyphicon <?php echo $user['statut'] == 0 ? 'glyphicon-unchecked': 'glyphicon-check'; ?>"></span>
                         </a>
                     <?php endif ; ?>
@@ -42,11 +42,11 @@
                     </a>
                      <!--avoid deleting or editing current connected user (edition has to be done from account profile) -->
                      <?php if($_SESSION['user']['id_utilisateur'] !== $user['id_utilisateur']): ?>
-                        <a href="#" onclick="loadForm('<?php echo $form_link . '/' . $user['id_utilisateur']; ?>')" data-toggle="modal" data-target="#form-content">
+                        <a href="#" title="<?php echo lang('EDIT');  ?>" onclick="loadForm('<?php echo $form_link . '/' . $user['id_utilisateur']; ?>')" data-toggle="modal" data-target="#form-content">
                             <span class="fa fa-fw fa-pencil"></span>
                         </a>
                     
-                         <a href="#" onclick="if (confirmDeletion()){doAjax('<?php echo site_url('utilisateur/delete/' . $user['id_utilisateur']); ?>', 'body');};">
+                     <a href="#" title="<?php echo lang('REMOVE');  ?>" onclick="if (confirmDeletion()){doAjax('<?php echo site_url('utilisateur/delete/' . $user['id_utilisateur']); ?>', 'body');};">
                             <span class="fa fa-fw fa-remove"></span> 
                         </a>
                     <?php endif; ?>

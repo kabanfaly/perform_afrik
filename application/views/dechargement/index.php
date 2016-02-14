@@ -138,10 +138,10 @@ if (!empty($_SESSION['user']['authorized_columns']))
                 <?php endif ?>
 
                 <td align="center">
-                    <a href="#" onclick="loadForm('<?php echo $form_link . '/' . $unloading['id_dechargement']; ?>')" data-toggle="modal" data-target="#form-content">
+                    <a href="#" title="<?php echo lang('EDIT');  ?>" onclick="loadForm('<?php echo $form_link . '/' . $unloading['id_dechargement']; ?>')" data-toggle="modal" data-target="#form-content">
                         <span class="fa fa-fw fa-pencil"></span>
                     </a>
-                    <a href="#" onclick="if (confirmDeletion()) {
+                    <a href="#" title="<?php echo lang('REMOVE');  ?>" onclick="if (confirmDeletion()) {
                                     doAjax('<?php echo site_url('dechargement/delete/' . $unloading['id_dechargement']); ?>', 'body');
                                 }
                                 ;">

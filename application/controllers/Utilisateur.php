@@ -142,11 +142,11 @@ class Utilisateur extends Common_Controller
     {
         $data['id_utilisateur'] = $this->input->post('id_utilisateur');
         $data['id_magasin'] = $this->input->post('id_magasin');
-        
-      
+
+
         if (!empty($data['id_magasin']))
         {
-            
+
             // update
             if ($this->user->save_user_magasin($data) !== FALSE)
             {
@@ -246,7 +246,10 @@ class Utilisateur extends Common_Controller
             $utilisateur = $this->user->get_users($id_utilisateur);
             if ($utilisateur['mot_de_passe'] === $data['mot_de_passe'])
             {
-                $this->update_user_info($id_utilisateur, $data, lang('UPDATING_USER_LOGIN_OK'));
+                if (!$this->update_user_info($id_utilisateur, $data, lang('UPDATING_USER_LOGIN_OK')))
+                {
+                    redirect('utilisateur/my_account/' . $id_utilisateur . '/' . lang('USER_LOGIN_EXISTS') . ': ' . $data['login'] . '/' . TRUE);
+                }
             } else
             {
                 redirect('utilisateur/my_account/' . $id_utilisateur . '/' . lang('WRONG_PASSWORD') . '/' . TRUE);
@@ -311,6 +314,9 @@ class Utilisateur extends Common_Controller
             if ($this->user->update($data, $where) !== FALSE)
             {
                 redirect('utilisateur/my_account/' . $id_utilisateur . '/' . $msg . '/' . $error);
+            } else
+            {
+                return FALSE;
             }
         }
     }
@@ -367,7 +373,7 @@ class Utilisateur extends Common_Controller
             $where = array(Utilisateur_model::$PK => $id_utilisateur);
 
             // update
-            if ($this->user->update($data, $where) !== NULL)
+            if ($this->user->update($data, $where) !== FALSE)
             {
                 redirect('utilisateur/index/' . lang('UPDATING_USER_SUCCESS'));
             } else
@@ -402,14 +408,14 @@ class Utilisateur extends Common_Controller
      * @param int $status new status
      */
     public function set_status($id_utilisateur, $status)
-    {       
+    {
         //checks session
         if ($this->connected())
         {
-            $data = array('statut' => $status);            
+            $data = array('statut' => $status);
             $where = array(Utilisateur_model::$PK => $id_utilisateur);
             // set status
-            $this->user->update_status($data, $where);
+            $this->user->update($data, $where);
 
             redirect('utilisateur/index');
         }
