@@ -36,13 +36,14 @@ class Dechargement extends Common_Controller
      */
     public function index($msg = '', $error = FALSE)
     {
+        // Get user shop id 
         $id_magasin = false;
          if ($this->connected())
         {
              
              $id_magasin = empty($_SESSION['user']['id_magasin']) ? false: $_SESSION['user']['id_magasin'];
         }
-        
+                
         $data = array(
             'unloadings' => $this->dechargement_model->get_dechargements(false, $id_magasin),
             'title' => lang('UNLOADING_MANAGEMENT'),

@@ -150,7 +150,7 @@ class Utilisateur extends Common_Controller
             // update
             if ($this->user->save_user_magasin($data) !== FALSE)
             {
-                 //update current user's session
+                //update current user's session
                 $this->update_user_session();
                 redirect('utilisateur/index/' . lang('UPDATING_USER_SHOP_ASSOCIATION_SUCCESS'));
             } else
@@ -159,7 +159,7 @@ class Utilisateur extends Common_Controller
             }
         } else
         {
-            
+
             $this->user->delete_user_magasin($data['id_utilisateur']);
             //update current user's session
             $this->update_user_session();
@@ -232,7 +232,6 @@ class Utilisateur extends Common_Controller
             $id_utilisateur = $this->input->post('id_utilisateur');
 
             $this->update_user_info($id_utilisateur, $data, lang('UPDATING_USER_NAME_OK'));
-            
         }
     }
 
@@ -245,12 +244,13 @@ class Utilisateur extends Common_Controller
         if ($this->connected())
         {
             $data['login'] = trim($this->input->post('login'));
-            $data['mot_de_passe'] = $this->input->post('mot_de_passe');
+            $data['mot_de_passe'] = md5($this->input->post('mot_de_passe'));
+
             $id_utilisateur = $this->input->post('id_utilisateur');
 
             //check user password
             $utilisateur = $this->user->get_users($id_utilisateur);
-            if ($utilisateur['mot_de_passe'] === $data['mot_de_passe'])
+            if ($utilisateur['mot_de_passe'] === md5($data['mot_de_passe']))
             {
                 if (!$this->update_user_info($id_utilisateur, $data, lang('UPDATING_USER_LOGIN_OK')))
                 {
@@ -271,8 +271,8 @@ class Utilisateur extends Common_Controller
         //checks session
         if ($this->connected())
         {
-            $current_password = $this->input->post('mot_de_passe');
-            $data['mot_de_passe'] = $this->input->post('new_mot_de_passe');
+            $current_password = md5($this->input->post('mot_de_passe'));
+            $data['mot_de_passe'] = md5($this->input->post('new_mot_de_passe'));
             $id_utilisateur = $this->input->post('id_utilisateur');
 
             //check user current password
@@ -340,7 +340,11 @@ class Utilisateur extends Common_Controller
         $data['nom'] = ucfirst(strtolower(trim($this->input->post('nom'))));
         $data['prenom'] = ucfirst(strtolower(trim($this->input->post('prenom'))));
         $data['login'] = trim($this->input->post('login'));
-        $data['mot_de_passe'] = $this->input->post('mot_de_passe');
+        $pwd = $this->input->post('mot_de_passe');
+        if (!empty($pwd))
+        {
+            $data['mot_de_passe'] = md5($pwd);
+        }
         $data['id_profil'] = $this->input->post('id_profil');
         $data['statut'] = $this->input->post('statut');
 

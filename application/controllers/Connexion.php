@@ -47,7 +47,7 @@ class Connexion extends CI_Controller
         );
 
         $login = $this->input->post('login');
-        $password = $this->input->post('password');
+        $password = md5($this->input->post('password'));
         //get user
         $user = $this->utilisateur_model->get_user_profile($login, $password);
         

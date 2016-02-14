@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `pa_utilisateur` (
   `nom` varchar(45) NOT NULL,
   `prenom` varchar(45) NOT NULL,
   `login` varchar(45) NOT NULL,
-  `mot_de_passe` varchar(45) NOT NULL,
+  `mot_de_passe` varchar(255) NOT NULL,
   `id_profil` int(11) NOT NULL,
   `statut` tinyint(4) NOT NULL,
   PRIMARY KEY (`id_utilisateur`),
