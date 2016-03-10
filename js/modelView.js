@@ -117,8 +117,20 @@ function updateRefractedWeight() {
     netWeight = isNaN(netWeight) ? 0 : netWeight;
 
     var refractedWeight = Math.abs((goodBags + tornBags * 8) - netWeight);
-    console.log(refractedWeight);
+    
     $('#poids_refracte').val(refractedWeight);
+}
+
+/**
+ * compute total price
+ * @returns void
+ */
+function computeTotal(){
+    var price = parseFloat($('#prix').val());
+    var refractedWeight = parseFloat($('#poids_refracte').val());
+    
+    var total = price * refractedWeight;
+    $('#total').val(total);
 }
 
 /**

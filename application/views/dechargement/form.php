@@ -119,7 +119,7 @@ if (!empty($_SESSION['user']['authorized_columns']))
     <?php if (isset($authorized_columns['poids_refracte']) && $authorized_columns['poids_refracte']) : ?>
         <div class="form-group">
             <label for="poids_refracte"><?php echo lang('REFRACTED_WEIGHT_LABEL'); ?>:</label>
-            <input type="text" name="poids_refracte" value="<?php echo !isset($poids_refracte) ? '' : $poids_refracte; ?>" class="form-control" id="poids_refracte" placeholder="0"/>
+            <input type="text" name="poids_refracte" value="<?php echo !isset($poids_refracte) ? 0 : $poids_refracte; ?>" class="form-control" id="poids_refracte" placeholder="0"/>
         </div>
     <?php endif ?>
 
@@ -159,6 +159,9 @@ if (!empty($_SESSION['user']['authorized_columns']))
 <script type="text/javascript">
     $('#bon_sac, #sac_dechire, #poids_net').on('change', function () {
         updateRefractedWeight();
+    });
+    $('#prix, #poids_refracte').on('change', function () {
+        computeTotal();
     });
 </script>
 
