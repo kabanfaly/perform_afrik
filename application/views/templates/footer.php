@@ -1,5 +1,4 @@
-<?php
-if (isset($_SESSION['user'])) :  ?>
+<?php if (isset($_SESSION['user'])) : ?>
     </div>
     <!-- /.content clearfix-->
     </div>
@@ -10,8 +9,7 @@ if (isset($_SESSION['user'])) :  ?>
 </div>
 <!-- /#page-wrapper -->
 </div>
-<?php
-    if (isset($_SESSION['user']) && isset($_SESSION['parameters'])) : ?>
+<?php if (isset($_SESSION['user']) && isset($_SESSION['parameters'])) : ?>
     <footer>
         <div id="footer" class="panel-footer">
             <div class="row">
@@ -20,16 +18,16 @@ if (isset($_SESSION['user'])) :  ?>
                     <small>
                         <p>
                             <i class="fa fa-fw fa-home"></i>
-                            <?php echo $_SESSION['parameters']['ADDRESS']; ?> 
+    <?php echo $_SESSION['parameters']['ADDRESS']; ?> 
                             <br>
                             <i class="fa fa-fw fa-envelope"></i>
-                            <?php echo $_SESSION['parameters']['EMAIL']; ?> 
+    <?php echo $_SESSION['parameters']['EMAIL']; ?> 
                             <br>
                             <i class="fa fa-fw fa-phone"></i>
-                            <?php echo $_SESSION['parameters']['PHONE']; ?> 
+    <?php echo $_SESSION['parameters']['PHONE']; ?> 
                             <br>
                             <i class="fa fa-fw fa-fax"></i>
-                            <?php echo $_SESSION['parameters']['FAX']; ?> 
+    <?php echo $_SESSION['parameters']['FAX']; ?> 
 
                         </p> 
                     </small>
@@ -38,7 +36,7 @@ if (isset($_SESSION['user'])) :  ?>
             <div class="row">
                 <div class="col-lg-12">
                     <p>
-                        <small><?php echo lang('COPYRIGHT').$_SESSION['parameters']['COMPANY'] ; ?> </small>
+                        <small><?php echo lang('COPYRIGHT') . $_SESSION['parameters']['COMPANY']; ?> </small>
                     </p>
                 </div>
             </div>
@@ -66,6 +64,6 @@ echo <<<EOF
             </script>
 EOF;
 ?>
+<script type="text/javascript" data-main="<?php echo base_url(); ?>js/main.js?<?php echo time(); ?>" src="<?php echo base_url(); ?>assets/requirejs/require.js"></script>
 </body>
-<script type="text/javascript" data-main="<?php echo base_url(); ?>js/main?<?php echo time(); ?>" src="<?php echo base_url(); ?>assets/requirejs/require.js"></script>
 </html>
