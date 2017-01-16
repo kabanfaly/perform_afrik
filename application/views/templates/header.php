@@ -58,7 +58,10 @@
                             <li class="<?php echo $active == 'dechargement' ? 'active' : '' ?>">
                                 <a href="<?php echo site_url("dechargement"); ?>"><i class="fa fa-fw fa-download"></i>&nbsp;<?php echo lang('UNLOADINGS'); ?></a>
                             </li>
-                            <li  class="<?php echo $active == 'camion' ? 'active' : ' ' ?>">
+                            <li  class="<?php echo $active == 'produit' ? 'active' : '' ?>">
+                                <a href="<?php echo site_url("produit"); ?>"><i class="fa fa-fw fa-square"></i>&nbsp;<?php echo lang('PRODUCTS'); ?></a>
+                            </li>
+                            <li  class="<?php echo $active == 'camion' ? 'active' : '' ?>">
                                 <a href="<?php echo site_url("camion"); ?>"><i class="fa fa-fw fa-truck"></i>&nbsp;<?php echo lang('TRUCKS'); ?></a>
                             </li>
                             <li class="<?php echo $active == 'fournisseur' ? 'active' : '' ?>">

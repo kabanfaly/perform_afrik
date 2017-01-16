@@ -7,7 +7,7 @@ if (!defined('BASEPATH'))
  * Preference model
  *
  * @author Kaba N'faly
- * @since 25/12/2015
+ * @since 12/25/2015
  * @version 1.0
  * @package perform_afrik
  * @subpackage perform_afrik/application/models

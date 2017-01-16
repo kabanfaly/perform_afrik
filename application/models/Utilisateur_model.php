@@ -81,8 +81,8 @@ class Utilisateur_model extends CI_Model
     }
 
     /**
-     * retreives all users if the input parameter (id_utilisateur) is false, or 
-     * retreives the user identified by the input parameter value
+     * retrieves all users if the input parameter (id_utilisateur) is false, or 
+     * retrieves the user identified by the input parameter value
      * @param type $id_utilisateur
      * @return type array
      */

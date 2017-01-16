@@ -17,7 +17,7 @@ $lang['TRUCK_EXISTS'] = 'Le numéro de camion saisi existe déjà';
 $lang['TRUCK_DELETION_SUCCESS'] = 'Le camion a été supprimé avec succès';
 
 $lang['SUPPLIERS_MANAGEMENT'] = 'Gestion des fournisseurs';
-$lang['EDIT_SUPPLIER'] = 'Ajout d\'un fournisseur';
+$lang['EDIT_SUPPLIER'] = 'Modification d\'un fournisseur';
 $lang['ADD_SUPPLIER'] = 'Ajout d\'un fournisseur';
 $lang['SUPPLIER'] = 'Fournisseur';
 $lang['SUPPLIERS'] = 'Fournisseurs';
@@ -28,6 +28,17 @@ $lang['SAVING_SUPPLIER_SUCCESS'] = 'Le fournisseur a été enrégistré avec suc
 $lang['UPDATING_SUPPLIER_SUCCESS'] = 'Le fournisseur a été modifié avec succès.';
 $lang['SUPPLIER_EXISTS'] = 'Le nom du fournisseur saisi existe déjà';
 $lang['SUPPLIER_DELETION_SUCCESS'] = 'Le fournisseur a été supprimé avec succès.';
+
+$lang['PRODUCTS_MANAGEMENT'] = 'Gestion des produits';
+$lang['EDIT_PRODUCT'] = 'Modification d\'un produit';
+$lang['ADD_PRODUCT'] = 'Ajout d\'un fournisseur';
+$lang['PRODUCT'] = 'Produit';
+$lang['PRODUCTS'] = 'Produits';
+$lang['PRODUCT_NAME'] = 'Saisir le nom du produit';
+$lang['SAVING_PRODUCT_SUCCESS'] = 'Le produit a été enrégistré avec succès.';
+$lang['UPDATING_PRODUCT_SUCCESS'] = 'Le produit a été modifié avec succès.';
+$lang['PRODUCT_EXISTS'] = 'Le nom du produit saisi existe déjà';
+$lang['PRODUCT_DELETION_SUCCESS'] = 'Le produit a été supprimé avec succès.';
 
 $lang['CITIES_MANAGEMENT'] = 'Gestion des villes';
 $lang['ADD_CITY'] = 'Ajout d\'une ville';

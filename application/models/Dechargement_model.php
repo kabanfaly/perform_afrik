@@ -35,8 +35,8 @@ class Dechargement_model extends CI_Model
     }
 
     /**
-     * retreives all unloading if the input parameter (id_dechargement) is false, or 
-     * retreives the unloading identified by the input parameter value.
+     * retrieves all unloading if the input parameter (id_dechargement) is false, or 
+     * retrieves the unloading identified by the input parameter value.
      * Id the parameter id_magasin (shop id) is set to true retrieved data will be only defined shop
      * @param int $id_dechargement
      * @param int $id_magasin

@@ -14,7 +14,7 @@ Description:
   User management
     - An admin user can add a user for any profile    
     - A connected user cannot delete himself while connected
-    - A connected user cannot desabled himself while connected
+    - A connected user cannot disable himself while connected
     - If edit re-password if is not required when it's empty
     - Click to enable/disable
     - A user can edit his own account but cannot change his profile
@@ -28,3 +28,6 @@ Features:
     - COMPTABILITE
     - TRANSIT
 
+
+Product:
+    - Name

@@ -4,59 +4,57 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 /**
- * Fournisseur controller
+ * Produit controller
  *
  * @author Kaba N'faly
- * @since 07/14/15
+ * @since 28/12/16
  * @version 1.0
  * @package perform_afrik
  * @subpackage perform_afrik/application/controllers
- * @filesource fournisseur.php
+ * @filesource produit.php
  */
 include_once 'Common_Controller.php';
 
-class Fournisseur extends Common_Controller
-{
+class Produit extends Common_Controller {
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
-        $this->load->model('fournisseur_model');
+        $this->load->model('produit_model');        
     }
-
-    /**
-     * get fournisseurs (suppliers)
+    
+     /**
+     * Display all produits (products)
      * 
      * @param String $msg message to display
      * @param boolean $error if $msg is an error message
      */
     public function index($msg = '', $error = FALSE)
     {
-
+       
         $data = array(
-            'suppliers' => $this->fournisseur_model->get_fournisseurs(),
-            'title' => lang('SUPPLIERS_MANAGEMENT'),
+            'produits' => $this->produit_model->get_produits(),
+            'title' => lang('PRODUCTS_MANAGEMENT'),
             'msg' => $msg,
             'error' => $error,
-            'active' => 'fournisseur',
-            'form_link' => site_url('fournisseur/edit')
+            'active' => 'produit',
+            'form_link' => site_url('produit/edit')
         );
 
-        $this->display($data, 'fournisseur/index');
+        $this->display($data, 'produit/index');
     }
-
+    
     /**
      * Displays a form to add or edit a supplier
      * 
-     * @param int $id_fournisseur supplier id to modify
+     * @param int $id_produit product id to modify
      */
-    public function edit($id_fournisseur = NULL)
+    public function edit($id_produit = NULL)
     {
 
         $data = array(
-            'title' => lang('ADD_SUPPLIER'),
-            'form_name' => 'fournisseur',
-            'form_action' => site_url('fournisseur/save')
+            'title' => lang('ADD_PRODUCT'),
+            'form_name' => 'produit',
+            'form_action' => site_url('produit/save')
         );
 
         //checks session
@@ -71,21 +69,21 @@ class Fournisseur extends Common_Controller
         } else
         {
             // preset data for modification form
-            if ($id_fournisseur !== NULL)
+            if ($id_produit !== NULL)
             {
 
                 //get truck by id
-                $supplier = $this->fournisseur_model->get_fournisseurs($id_fournisseur);
+                $supplier = $this->produit_model->get_produits($id_produit);
 
                 //merge row data with $data
                 $data = array_merge_recursive($data, $supplier);
 
-                $data['title'] = lang('EDIT_SUPPLIER');
-                $data['form_action'] = site_url('fournisseur/update');
+                $data['title'] = lang('EDIT_PRODUCT');
+                $data['form_action'] = site_url('produit/update');
             }
 
             $this->load->view('templates/form_header', $data);
-            $this->load->view('fournisseur/form', $data);
+            $this->load->view('produit/form', $data);
             $this->load->view('templates/form_footer', $data);
         }
     }
@@ -99,10 +97,8 @@ class Fournisseur extends Common_Controller
 
         // get input values
         $name = trim(ucwords(strtolower($this->input->post('nom'))));
-        $phone = trim($this->input->post('telephone'));
-        $address = trim($this->input->post('adresse'));
 
-        $data = array('nom' => $name, 'telephone' => $phone, 'adresse' => $address);
+        $data = array('nom' => $name);
 
         return $data;
     }
@@ -118,12 +114,12 @@ class Fournisseur extends Common_Controller
             //get inputs
             $data = $this->get_inputs();
             
-            if ($this->fournisseur_model->save($data) !== FALSE)
+            if ($this->produit_model->save($data) !== FALSE)
             {
-                redirect('fournisseur/index/' . lang('SAVING_SUPPLIER_SUCCESS'));
+                redirect('produit/index/' . lang('SAVING_PRODUCT_SUCCESS'));
             } else
             {
-                redirect('fournisseur/index/' . lang('SUPPLIER_EXISTS') . ': ' . $data['nom'] . '/' . TRUE);
+                redirect('produit/index/' . lang('PRODUCT_EXISTS') . ': ' . $data['nom'] . '/' . TRUE);
             }
         }
     }
@@ -139,36 +135,36 @@ class Fournisseur extends Common_Controller
             // get input values
             $data = $this->get_inputs();
 
-            $id_fournisseur = $this->input->post('id_fournisseur');
+            $id_produit = $this->input->post('id_produit');
 
-            $where = array(Fournisseur_model::$PK => $id_fournisseur);
+            $where = array(Produit_model::$PK => $id_produit);
 
             // update
-            if ($this->fournisseur_model->update($data, $where) !== FALSE)
+            if ($this->produit_model->update($data, $where) !== FALSE)
             {
-                redirect('fournisseur/index/' . lang('UPDATING_SUPPLIER_SUCCESS'));
+                redirect('produit/index/' . lang('UPDATING_PRODUCT_SUCCESS'));
             } else
             {
-                redirect('fournisseur/index/' . lang('UPDATING_FAILED') . '/' . TRUE);
+                redirect('produit/index/' . lang('UPDATING_FAILED') . '/' . TRUE);
             }
         }
     }
 
     /**
      * Deletes a supplier
-     * @param int $id_fournisseur
+     * @param int $id_produit
      */
-    public function delete($id_fournisseur)
+    public function delete($id_produit)
     {
         //checks session
         if ($this->connected())
         {
-            if ($this->fournisseur_model->delete(array(Fournisseur_model::$PK => $id_fournisseur)) !== FALSE)
+            if ($this->produit_model->delete(array(Produit_model::$PK => $id_produit)) !== FALSE)
             {
-                redirect('fournisseur/index/' . lang('SUPPLIER_DELETION_SUCCESS'));
+                redirect('produit/index/' . lang('PRODUCT_DELETION_SUCCESS'));
             } else
             {
-                redirect('fournisseur/index/' . lang('DELETION_FAILED') . '/' . TRUE);
+                redirect('produit/index/' . lang('DELETION_FAILED') . '/' . TRUE);
             }
         }
     }

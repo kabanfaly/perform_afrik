@@ -35,8 +35,8 @@ class Camion_model extends CI_Model
     }
 
     /**
-     * retreives all trucks if the input parameter (id_camion) is false, or 
-     * retreives the truck identified by the input parameter value
+     * retrieves all trucks if the input parameter (id_camion) is false, or 
+     * retrieves the truck identified by the input parameter value
      * @param type $id_camion
      * @return type array
      */

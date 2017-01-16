@@ -46,7 +46,7 @@ class Common_Controller extends CI_Controller
     }
 
     /**
-     * Updats current user's session infos
+     * Updates current user's session infos
      */
     public function update_user_session()
     {

@@ -7,7 +7,7 @@ if (!defined('BASEPATH'))
  * Magasin model
  *
  * @author Kaba N'faly
- * @since 24/01/16
+ * @since 01/24/16
  * @version 1.0
  * @package perform_afrik
  * @subpackage perform_afrik/application/models
@@ -35,8 +35,8 @@ class Magasin_model extends CI_Model
     }
 
     /**
-     * retreives all shops if the input parameter (id_magasin) is false, or 
-     * retreives the shop identified by the input parameter value
+     * retrieves all shops if the input parameter (id_magasin) is false, or 
+     * retrieves the shop identified by the input parameter value
      * @param type $id_magasin
      * @return type array
      */

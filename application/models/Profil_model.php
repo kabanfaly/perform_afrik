@@ -7,7 +7,7 @@ if (!defined('BASEPATH'))
  * Profil model
  *
  * @author Kaba N'faly
- * @since 25/12/2015
+ * @since 12/25/2015
  * @version 1.0
  * @package perform_afrik
  * @subpackage perform_afrik/application/models
@@ -35,8 +35,8 @@ class Profil_model extends CI_Model
     }
 
     /**
-     * retreives all profiles if the input parameter (id_profil) is false, or 
-     * retreives the profile identified by the input parameter value
+     * retrieves all profiles if the input parameter (id_profil) is false, or 
+     * retrieves the profile identified by the input parameter value
      * @param type $id_profil
      * @return type array
      */
