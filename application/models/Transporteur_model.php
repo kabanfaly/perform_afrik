@@ -4,29 +4,29 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 /**
- * Fournisseur model
+ * Transporteur model
  *
  * @author Kaba N'faly
- * @since 07/14/15
+ * @since 01/24/17
  * @version 1.0
  * @package perform_afrik
  * @subpackage perform_afrik/application/models
- * @filesource fournisseur_model.php
+ * @filesource transporteur_model.php
  */
-class Fournisseur_model extends CI_Model
+class Transporteur_model extends CI_Model
 {
 
     /**
-     * Fournisseur (supplier) table name
+     * Transporteur (carrier) table name
      * @var String
      */
-    public static $TABLE_NAME = 'pa_fournisseur';
+    public static $TABLE_NAME = 'pa_transporteur';
 
     /**
-     * Fournisseur (supplier) table primary key
+     * Transporteur (carrier) table primary key
      * @var String
      */
-    public static $PK = 'id_fournisseur';
+    public static $PK = 'id_transporteur';
 
     public function __construct()
     {
@@ -35,26 +35,26 @@ class Fournisseur_model extends CI_Model
     }
 
     /**
-     * retrieves all suppliers if the input parameter (id_fournisseur) is false, or 
-     * retrieves the supplier identified by the input parameter value
-     * @param type $id_fournisseur
+     * retrieves all carriers if the input parameter (id_transporteur) is false, or 
+     * retrieves the carrier identified by the input parameter value
+     * @param type $id_transporteur
      * @return type array
      */
-    public function get_fournisseurs($id_fournisseur = false)
+    public function get_transporteurs($id_transporteur = false)
     {
-        if ($id_fournisseur === false)
+        if ($id_transporteur === false)
         {
 
             $query = $this->db->get(self::$TABLE_NAME);
             return $query->result_array();
         }
 
-        $query = $this->db->get_where(self::$TABLE_NAME, array(self::$PK => $id_fournisseur));
+        $query = $this->db->get_where(self::$TABLE_NAME, array(self::$PK => $id_transporteur));
         return $query->row_array();
     }
 
     /**
-     * Finds a supplier by name
+     * Finds a carrier by name
      * 
      * @param String $name
      * @return mixed
@@ -67,14 +67,14 @@ class Fournisseur_model extends CI_Model
     }
 
     /**
-     * Saves a supplier if it doesn't exist
+     * Saves a carrier if it doesn't exist
      * 
      * @param array $data
      * @return boolean
      */
     public function save($data)
     {
-        //find supplier
+        //find carrier
         if ($this->find_by_name($data['nom']) === NULL)
         {
             return $this->db->insert(self::$TABLE_NAME, $data);
@@ -83,7 +83,7 @@ class Fournisseur_model extends CI_Model
     }
 
     /**
-     * Updates a supplier
+     * Updates a carrier
      * 
      * @param array $data
      * @param array $where
@@ -96,7 +96,7 @@ class Fournisseur_model extends CI_Model
     }
 
     /**
-     * Delete a supplier
+     * Delete a carrier
      * 
      * @param array $where
      * @return boolean

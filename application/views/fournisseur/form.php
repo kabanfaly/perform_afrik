@@ -14,8 +14,7 @@
     </div>
     <div class="form-group">
         <label for="adresse"><?php echo lang('ADDRESS'); ?>:</label>
-        <textarea name="adresse" class="form-control" id="adresse" placeholder="<?php echo lang('TYPE_SUPPLIER_ADDRESS'); ?>"><?php echo !isset($adresse) ?'' : $adresse; ?>
-        </textarea>
+        <textarea name="adresse" class="form-control" id="adresse" placeholder="<?php echo lang('TYPE_SUPPLIER_ADDRESS'); ?>"><?php echo !isset($adresse) ?'' : $adresse; ?></textarea>
     </div>
 </div>
 <div class="mandatory">* <?php echo lang('MANDATORY_FIELD'); ?> </div>

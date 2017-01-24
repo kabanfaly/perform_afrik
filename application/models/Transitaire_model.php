@@ -4,29 +4,29 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 /**
- * Fournisseur model
+ * Transitaire model
  *
  * @author Kaba N'faly
- * @since 07/14/15
+ * @since 01/23/17
  * @version 1.0
  * @package perform_afrik
  * @subpackage perform_afrik/application/models
- * @filesource fournisseur_model.php
+ * @filesource transitaire_model.php
  */
-class Fournisseur_model extends CI_Model
+class Transitaire_model extends CI_Model
 {
 
     /**
-     * Fournisseur (supplier) table name
+     * Transitaire (forwarding agent) table name
      * @var String
      */
-    public static $TABLE_NAME = 'pa_fournisseur';
+    public static $TABLE_NAME = 'pa_transitaire';
 
     /**
-     * Fournisseur (supplier) table primary key
+     * Transitaire (forwarding agent) table primary key
      * @var String
      */
-    public static $PK = 'id_fournisseur';
+    public static $PK = 'id_transitaire';
 
     public function __construct()
     {
@@ -35,26 +35,26 @@ class Fournisseur_model extends CI_Model
     }
 
     /**
-     * retrieves all suppliers if the input parameter (id_fournisseur) is false, or 
-     * retrieves the supplier identified by the input parameter value
-     * @param type $id_fournisseur
+     * retrieves all forwarding agents if the input parameter (id_transitaire) is false, or 
+     * retrieves the forwarding agent identified by the input parameter value
+     * @param type $id_transitaire
      * @return type array
      */
-    public function get_fournisseurs($id_fournisseur = false)
+    public function get_transitaires($id_transitaire = false)
     {
-        if ($id_fournisseur === false)
+        if ($id_transitaire === false)
         {
 
             $query = $this->db->get(self::$TABLE_NAME);
             return $query->result_array();
         }
 
-        $query = $this->db->get_where(self::$TABLE_NAME, array(self::$PK => $id_fournisseur));
+        $query = $this->db->get_where(self::$TABLE_NAME, array(self::$PK => $id_transitaire));
         return $query->row_array();
     }
 
     /**
-     * Finds a supplier by name
+     * Finds a forwarding agent by name
      * 
      * @param String $name
      * @return mixed
@@ -67,14 +67,14 @@ class Fournisseur_model extends CI_Model
     }
 
     /**
-     * Saves a supplier if it doesn't exist
+     * Saves a forwarding agent if it doesn't exist
      * 
      * @param array $data
      * @return boolean
      */
     public function save($data)
     {
-        //find supplier
+        //find forwarding agent
         if ($this->find_by_name($data['nom']) === NULL)
         {
             return $this->db->insert(self::$TABLE_NAME, $data);
@@ -83,7 +83,7 @@ class Fournisseur_model extends CI_Model
     }
 
     /**
-     * Updates a supplier
+     * Updates a forwarding agent
      * 
      * @param array $data
      * @param array $where
@@ -96,7 +96,7 @@ class Fournisseur_model extends CI_Model
     }
 
     /**
-     * Delete a supplier
+     * Delete a forwarding agent
      * 
      * @param array $where
      * @return boolean

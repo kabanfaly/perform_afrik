@@ -67,7 +67,7 @@ if (!empty($_SESSION['user']['authorized_columns']))
 
     <?php if (isset($authorized_columns['id_ville']) && $authorized_columns['id_ville']) : ?>
         <div class="form-group">
-            <label for="city"><?php echo lang('CITY'); ?>*:</label>
+            <label for="city"><?php echo lang('CITY_FROM'); ?>*:</label>
             <select type="text" name="id_ville" class="form-control" id="id_ville" required >
                 <option value=""><?php echo lang('SELECT_CITY'); ?></option>
                 <?php

@@ -23,7 +23,7 @@ if (!empty($_SESSION['user']['authorized_columns']))
             <?php endif ?>
 
             <?php if (isset($authorized_columns['id_ville']) && $authorized_columns['id_ville']) : ?>
-                <th><?php echo lang('CITY'); ?></th>
+                <th><?php echo lang('CITY_FROM'); ?></th>
             <?php endif ?>
 
             <?php if (isset($authorized_columns['id_camion']) && $authorized_columns['id_camion']) : ?>

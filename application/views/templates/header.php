@@ -8,7 +8,7 @@
     </head>
     <body>
         <div id="wrapper">
-        <!-- Navigation -->
+            <!-- Navigation -->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -24,37 +24,37 @@
                     </a>
                 </div>
                 <!-- Top Menu Items -->
-                 <?php if (isset($_SESSION['user'])): ?>
-                        <ul class="nav navbar-right top-nav">
+                <?php if (isset($_SESSION['user'])): ?>
+                    <ul class="nav navbar-right top-nav">
 
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 
-                                    <?php echo $_SESSION['user']['prenom'].' ('. $_SESSION['user']['profil'].')';?> <b class="caret"></b>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="<?php echo site_url("utilisateur/my_account/".$_SESSION['user']['id_utilisateur']); ?>"><i class="fa fa-fw fa-user"></i>  <?php echo lang('PROFILE'); ?></a>
-                                    </li>
-<!--                                    <li>
-                                        <a href="#"><i class="fa fa-fw fa-gear"></i>  <?php echo lang('SETTINGS'); ?></a>
-                                    </li>-->
-                                    <li class="divider"></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 
+                                <?php echo $_SESSION['user']['prenom'] . ' (' . $_SESSION['user']['profil'] . ')'; ?> <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="<?php echo site_url("utilisateur/my_account/" . $_SESSION['user']['id_utilisateur']); ?>"><i class="fa fa-fw fa-user"></i>  <?php echo lang('PROFILE'); ?></a>
+                                </li>
+                                <!--                                    <li>
+                                                                        <a href="#"><i class="fa fa-fw fa-gear"></i>  <?php echo lang('SETTINGS'); ?></a>
+                                                                    </li>-->
+                                <li class="divider"></li>
 
-                                    <li>
-                                        <a href="<?php echo site_url("connexion/logout"); ?>"><span class="fa fa-fw fa-sign-out">
-                                            </span> <?php echo lang('LOGOUT'); ?> 
-                                        </a>
-                                    </li>
+                                <li>
+                                    <a href="<?php echo site_url("connexion/logout"); ?>"><span class="fa fa-fw fa-sign-out">
+                                        </span> <?php echo lang('LOGOUT'); ?> 
+                                    </a>
+                                </li>
 
-                                </ul>
-                            </li>
-                        </ul>
-                <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-                <!--<div id="sidebar-wrapper">-->
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+                    <!--<div id="sidebar-wrapper">-->
                     <div class="collapse navbar-collapse navbar-ex1-collapse">
 
                         <ul class="nav navbar-nav side-nav">
-                          
+
                             <li class="<?php echo $active == 'dechargement' ? 'active' : '' ?>">
                                 <a href="<?php echo site_url("dechargement"); ?>"><i class="fa fa-fw fa-download"></i>&nbsp;<?php echo lang('UNLOADINGS'); ?></a>
                             </li>
@@ -70,7 +70,16 @@
                             <li class="<?php echo $active == 'ville' ? 'active' : '' ?>">
                                 <a href="<?php echo site_url("ville"); ?>"><i class="fa fa-fw fa-building"></i>&nbsp;<?php echo lang('CITIES'); ?></a>
                             </li>
-                             <?php if (strtolower($_SESSION['user']['profil']) === 'manager') : ?>
+                            <li class="<?php echo $active == 'client' ? 'active' : '' ?>">
+                                <a href="<?php echo site_url("client"); ?>"><i class="fa fa-fw fa-circle"></i>&nbsp;<?php echo lang('CUSTOMERS'); ?></a>
+                            </li>
+                            <li class="<?php echo $active == 'transitaire' ? 'active' : '' ?>">
+                                <a href="<?php echo site_url("transitaire"); ?>"><i class="fa fa-fw fa-circle"></i>&nbsp;<?php echo lang('FORWARDING_AGENTS'); ?></a>
+                            </li>
+                            <li class="<?php echo $active == 'transporteur' ? 'active' : '' ?>">
+                                <a href="<?php echo site_url("transporteur"); ?>"><i class="fa fa-fw fa-circle"></i>&nbsp;<?php echo lang('CARRIERS'); ?></a>
+                            </li>
+                            <?php if (strtolower($_SESSION['user']['profil']) === 'manager') : ?>
                                 <li class="<?php echo $active == 'magasin' ? 'active' : '' ?>">
                                     <a href="<?php echo site_url("magasin"); ?>"><i class="fa fa-fw fa-home"></i>&nbsp;<?php echo lang('SHOPS'); ?></a>
                                 </li>
@@ -88,37 +97,36 @@
 
                         </ul>
                     </div>
-                   <?php endif; ?>
+                <?php endif; ?>
                 <!--</div>-->
                 <!-- /.navbar-collapse -->
             </nav>
-        
-        
-        <div id="page-wrapper">
-            <div class="container-fluid">
-                <?php if (isset($_SESSION['user'])) : ?>
-                
-                <div class="row">
-                    <b><?php echo lang('SHOP'); ?></b>:&nbsp;<?php echo empty($_SESSION['user']['magasin']) ? lang('ALL_SHOPS'): $_SESSION['user']['magasin'];?>
-                </div>
-                <div class="row">
-                   
-                        <div class="col-lg-12">
-                            <div class="content clearfix">
-                                
-                                
-                                
-                                <!-- hide add button if configuration page --> 
-                                <?php
-                                if (!isset($configuration)) : ?>
-                                <div class="pull-right">
-                                    <a href="#" onclick="loadForm('<?php echo $form_link; ?>')" data-toggle="modal" data-target="#form-content" class="btn btn-primary btn-large"><?php echo lang('ADD'); ?></a>
-                                </div>
-                                <div class="clearfix">
-                                </div>
-                                <?php endif;  ?>
-                                
-                                <div class="msg <?php echo isset($error) && !$error ? 'success' : 'alert-danger fade in'; ?>">
-                                    <center><?php echo isset($msg)? urldecode($msg): ''; ?></center>
-                                </div>
-                    <?php endif; ?>
+
+
+            <div id="page-wrapper">
+                <div class="container-fluid">
+                    <?php if (isset($_SESSION['user'])) : ?>
+
+                        <div class="row">
+                            <b><?php echo lang('SHOP'); ?></b>:&nbsp;<?php echo empty($_SESSION['user']['magasin']) ? lang('ALL_SHOPS') : $_SESSION['user']['magasin']; ?>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-lg-12">
+                                <div class="content clearfix">
+
+
+
+                                    <!-- hide add button if configuration page --> 
+                                    <?php if (!isset($configuration)) : ?>
+                                        <div class="pull-right">
+                                            <a href="#" onclick="loadForm('<?php echo $form_link; ?>')" data-toggle="modal" data-target="#form-content" class="btn btn-primary btn-large"><?php echo lang('ADD'); ?></a>
+                                        </div>
+                                        <div class="clearfix">
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <div class="msg <?php echo isset($error) && !$error ? 'success' : 'alert-danger fade in'; ?>">
+                                        <center><?php echo isset($msg) ? urldecode($msg) : ''; ?></center>
+                                    </div>
+                                <?php endif; ?>
