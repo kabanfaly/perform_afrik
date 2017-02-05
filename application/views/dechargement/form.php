@@ -51,7 +51,7 @@ if (!empty($_SESSION['user']['authorized_columns']))
 
     <?php if (isset($authorized_columns['id_fournisseur']) && $authorized_columns['id_fournisseur']) : ?>
         <div class="form-group">
-            <label for="ci"><?php echo lang('SUPPLIER'); ?>*:</label>
+            <label for="id_fournisseur"><?php echo lang('SUPPLIER'); ?>*:</label>
             <select type="text" name="id_fournisseur" class="form-control" id="id_fournisseur" required >
                 <option value=""><?php echo lang('SELECT_SUPPLIER'); ?></option>
                 <?php
@@ -64,10 +64,26 @@ if (!empty($_SESSION['user']['authorized_columns']))
             </select>
         </div>
     <?php endif ?>
+    
+    <?php if (isset($authorized_columns['id_produit']) && $authorized_columns['id_produit']) : ?>
+        <div class="form-group">
+            <label for="id_produit"><?php echo lang('PRODUCT'); ?>*:</label>
+            <select type="text" name="id_produit" class="form-control" id="id_produit" required >
+                <option value=""><?php echo lang('SELECT_PRODUCT'); ?></option>
+                <?php
+                foreach ($products as $product)
+                {
+                    $selected = isset($id_produit) && $product['id_produit'] === $id_produit ? 'selected' : '';
+                    echo "<option value='{$product['id_produit']}' $selected>{$product['nom']}</option>";
+                }
+                ?>
+            </select>
+        </div>
+    <?php endif ?>
 
     <?php if (isset($authorized_columns['id_ville']) && $authorized_columns['id_ville']) : ?>
         <div class="form-group">
-            <label for="city"><?php echo lang('CITY_FROM'); ?>*:</label>
+            <label for="id_ville"><?php echo lang('CITY_FROM'); ?>*:</label>
             <select type="text" name="id_ville" class="form-control" id="id_ville" required >
                 <option value=""><?php echo lang('SELECT_CITY'); ?></option>
                 <?php
@@ -123,7 +139,7 @@ if (!empty($_SESSION['user']['authorized_columns']))
         </div>
     <?php endif ?>
 
-    <?php if (isset($authorized_columns['humitide']) && $authorized_columns['humitide']) : ?>
+    <?php if (isset($authorized_columns['humidite']) && $authorized_columns['humidite']) : ?>
         <div class="form-group">
             <label for="humitide"><?php echo lang('HUMIDITY'); ?>:</label>
             <input type="text" name="humidite" value="<?php echo !isset($humidite) ? '' : $humidite; ?>" class="form-control" id="humidite" placeholder="<?php echo lang('TYPE_HUMIDITY'); ?>"/>

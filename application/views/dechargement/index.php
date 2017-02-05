@@ -21,6 +21,10 @@ if (!empty($_SESSION['user']['authorized_columns']))
             <?php if (isset($authorized_columns['id_fournisseur']) && $authorized_columns['id_fournisseur']) : ?>
                 <th><?php echo lang('SUPPLIER'); ?></th>
             <?php endif ?>
+                
+            <?php if (isset($authorized_columns['id_produit']) && $authorized_columns['id_produit']) : ?>
+                <th><?php echo lang('PRODUCT'); ?></th>
+            <?php endif ?>
 
             <?php if (isset($authorized_columns['id_ville']) && $authorized_columns['id_ville']) : ?>
                 <th><?php echo lang('CITY_FROM'); ?></th>
@@ -87,6 +91,10 @@ if (!empty($_SESSION['user']['authorized_columns']))
 
                 <?php if (isset($authorized_columns['id_fournisseur']) && $authorized_columns['id_fournisseur']) : ?>
                     <td><?php echo $unloading['fournisseur']; ?></td>
+                <?php endif ?>
+                    
+                <?php if (isset($authorized_columns['id_produit']) && $authorized_columns['id_produit']) : ?>
+                    <td><?php echo $unloading['produit']; ?></td>
                 <?php endif ?>
 
                 <?php if (isset($authorized_columns['id_ville']) && $authorized_columns['id_ville']) : ?>

@@ -27,6 +27,7 @@ class Profil extends Common_Controller
         "id_magasin" => false,
         "id_ville" => false,
         "id_fournisseur" => false,
+        "id_produit" => false,
         "date" => false,
         "bon_sac" => false,
         "sac_dechire" => false,

@@ -44,10 +44,11 @@ class Dechargement_model extends CI_Model
      */
     public function get_dechargements($id_dechargement = false, $id_magasin = false)
     {
-        $this->db->select('d.*, f.nom as fournisseur, c.numero as camion, v.nom as ville, m.nom as magasin');
+        $this->db->select('d.*, f.nom as fournisseur, c.numero as camion, v.nom as ville, m.nom as magasin, p.nom as produit');
         $this->db->join('pa_magasin m', 'd.id_magasin = m.id_magasin', 'INNER');
         $this->db->join('pa_fournisseur f', 'd.id_fournisseur = f.id_fournisseur', 'INNER');
         $this->db->join('pa_camion c', 'd.id_camion = c.id_camion', 'INNER');
+        $this->db->join('pa_produit p', 'd.id_produit = p.id_produit', 'INNER');
         $this->db->join('pa_ville v', 'd.id_ville = v.id_ville', 'INNER');
         
         if ($id_dechargement === false)

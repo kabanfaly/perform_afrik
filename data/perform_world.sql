@@ -384,3 +384,6 @@ ALTER TABLE `pa_utilisateur`
 ALTER TABLE `pa_utilisateur_magasin`
   ADD CONSTRAINT `pa_utilisateur_magasin_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `pa_utilisateur` (`id_utilisateur`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `pa_utilisateur_magasin_ibfk_2` FOREIGN KEY (`id_magasin`) REFERENCES `pa_magasin` (`id_magasin`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+ALTER TABLE `pa_dechargement` ADD FOREIGN KEY (`id_produit`) REFERENCES `pa_produit`(`id_produit`) ON DELETE CASCADE ON UPDATE CASCADE;

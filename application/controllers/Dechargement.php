@@ -26,6 +26,7 @@ class Dechargement extends Common_Controller
         $this->load->model('magasin_model');
         $this->load->model('fournisseur_model');
         $this->load->model('ville_model');
+        $this->load->model('produit_model');
     }
 
     /**
@@ -79,6 +80,7 @@ class Dechargement extends Common_Controller
             'shops' => $this->magasin_model->get_magasins(),
             'trucks' => $this->camion_model->get_camions(),
             'suppliers' => $this->fournisseur_model->get_fournisseurs(),
+            'products' => $this->produit_model->get_produits(),
             'cities' => $this->ville_model->get_villes()
         );
 
@@ -169,6 +171,7 @@ class Dechargement extends Common_Controller
         $id_magasin = $this->input->post('id_magasin');
         $id_fournisseur = $this->input->post('id_fournisseur');
         $id_ville = $this->input->post('id_ville');
+        $id_produit = $this->input->post('id_produit');
 
         $date = $this->mk_db_date($this->input->post('date'));
         $good_bag = trim($this->input->post('bon_sac'));
@@ -181,7 +184,7 @@ class Dechargement extends Common_Controller
 
         //$refracted_weight = $this->compute_refracted($good_bag, $torn_bag, $net_weight);
 
-        $data = array('id_camion' => $id_camion, 'id_magasin' => $id_magasin, 'id_ville' => $id_ville, 'id_fournisseur' => $id_fournisseur,
+        $data = array('id_camion' => $id_camion, 'id_magasin' => $id_magasin, 'id_ville' => $id_ville, 'id_fournisseur' => $id_fournisseur, 'id_produit' => $id_produit,
             'date' => $date, 'bon_sac' => $good_bag, 'sac_dechire' => $torn_bag, 'sac_total' => $total_bag,
             'poids_brut' => $gross_weight, 'poids_net' => $net_weight, 'poids_refracte' => $refracted_weight, 'humidite' => $humidity);
         
@@ -241,7 +244,7 @@ class Dechargement extends Common_Controller
             $id_dechargement = $this->input->post('id_dechargement');
 
             $where = array(Dechargement_model::$PK => $id_dechargement);
-
+           
             // update
             if ($this->dechargement_model->update($data, $where) !== FALSE)
             {
