@@ -389,3 +389,5 @@ ALTER TABLE `pa_utilisateur_magasin`
 ALTER TABLE `pa_dechargement` ADD FOREIGN KEY (`id_produit`) REFERENCES `pa_produit`(`id_produit`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `pa_dechargement` CHANGE `date` `date` TIMESTAMP NOT NULL;
+
+ALTER TABLE `pa_profil` ADD `droits_operations` TEXT NOT NULL AFTER `droits_colonnes_dechargement`;

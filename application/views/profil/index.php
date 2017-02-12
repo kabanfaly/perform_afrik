@@ -4,6 +4,7 @@
             <th class="number"><?php echo lang('NO'); ?></th>
             <th><?php echo lang('PROFILE'); ?></th>
             <th><?php echo lang('VISIBILITY_RIGHT'); ?></th>
+            <th><?php echo lang('OPERATIONS_RIGHTS'); ?></th>
             <th class="option"><?php echo lang('OPTIONS'); ?></th>
         </tr>
     </thead>
@@ -14,8 +15,14 @@
                 <td><?php echo $no++; ?></td>
                 <td><?php echo $profile['nom']; ?></td>
                 <td align="center">
-                    <!-- column access right -->
-                    <a href="#" title="<?php echo lang('EDIT_COLUMNS_RIGHTS');  ?>" onclick="loadForm('<?php echo $right_link . '/' . $profile['id_profil']; ?>')" data-toggle="modal" data-target="#form-content">
+                    <!-- columns access rights -->
+                    <a href="#" title="<?php echo lang('EDIT_COLUMNS_RIGHTS');  ?>" onclick="loadForm('<?php echo $columns_rights_link . '/' . $profile['id_profil']; ?>')" data-toggle="modal" data-target="#form-content">
+                        <span class="fa fa-fw fa-lock"></span>
+                    </a>
+                </td>
+                <td align="center">
+                    <!-- operations rights -->
+                    <a href="#" title="<?php echo lang('EDIT_OPERATIONS_RIGHTS');  ?>" onclick="loadForm('<?php echo $operations_rights_link . '/' . $profile['id_profil']; ?>')" data-toggle="modal" data-target="#form-content">
                         <span class="fa fa-fw fa-lock"></span>
                     </a>
                 </td>

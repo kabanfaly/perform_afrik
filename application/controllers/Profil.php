@@ -41,6 +41,11 @@ class Profil extends Common_Controller
         "total" => false
     );
 
+    public static $OPERATIONS_RIGHTS = array(
+      'add' => false,
+      'edit' => false,
+      'delete' => false
+    );
     public function __construct()
     {
         parent::__construct();
@@ -62,7 +67,8 @@ class Profil extends Common_Controller
             'error' => $error,
             'active' => 'profil',
             'form_link' => site_url('profil/edit'),
-            'right_link' => site_url('profil/right'),
+            'columns_rights_link' => site_url('profil/columns_rights'),
+            'operations_rights_link' => site_url('profil/operations_rights'),
         );
 
         $this->display($data, 'profil/index');
@@ -114,15 +120,15 @@ class Profil extends Common_Controller
     }
 
     /**
-     * retreive profile restrictions on unloading table
+     * retrieve profile restrictions on unloading table
      * @param type $id_profil
      */
-    public function right($id_profil)
+    public function columns_rights($id_profil)
     {
         $data = array(
             'title' => lang('EDIT_RIGHT'),
-            'form_name' => 'right',
-            'form_action' => site_url('profil/update_right')
+            'form_name' => 'column_right',
+            'form_action' => site_url('profil/update_columns_rights')
         );
 
         //checks session
@@ -157,11 +163,55 @@ class Profil extends Common_Controller
         $this->load->view('profil/permission', $data);
         $this->load->view('templates/form_footer', $data);
     }
+    /**
+     * retrieve profile restrictions on unloading table
+     * @param type $id_profil
+     */
+    public function operations_rights($id_profil)
+    {
+        $data = array(
+            'title' => lang('EDIT_OPERATIONS'),
+            'form_name' => 'operation_right',
+            'form_action' => site_url('profil/update_operations_rights')
+        );
+
+        //checks session
+        if (!$this->connected())
+        {
+            $data = array(
+                'title' => lang('CONNECTION')
+            );
+            $this->load->view('templates/header', $data);
+            $this->load->view('connexion/index', $data);
+            $this->load->view('templates/footer');
+        } else
+        {
+            // Retreive profile's rights (restrictions)
+            $profile = $this->profil_model->get_profiles($id_profil);
+            
+            //merge row data with $data
+            $data = array_merge_recursive($data, $profile);
+
+            if (empty($profile['droits_operations']))
+            {
+                $data['operations_rights'] = self::$OPERATIONS_RIGHTS;
+            } else
+            {
+                $profile_operations_rights = json_decode($profile['droits_operations'], TRUE);
+                // merging columns 
+                $data['operations_rights'] = array_merge(self::$OPERATIONS_RIGHTS, $profile_operations_rights);
+            }
+            
+        }
+        $this->load->view('templates/form_header', $data);
+        $this->load->view('profil/operation_right', $data);
+        $this->load->view('templates/form_footer', $data);
+    }
 
     /**
      * Update profile rights on unloading table's columns
      */
-    public function update_right()
+    public function update_columns_rights()
     {
         //checks session
         if ($this->connected())
@@ -188,10 +238,47 @@ class Profil extends Common_Controller
             {   
                 //update current user's session
                 $this->update_user_session();
-                redirect('profil/index/' . lang('UPDATING_PROFILE_RIGHTS_SUCCESS'));
+                redirect('profil/index/' . lang('UPDATING_PROFILE_COLUMNS_RIGHTS_SUCCESS'));
             } else
             {
-                redirect('profil/index/' . lang('UPDATING_PROFILE_RIGHTS_FAILED') . '/' . TRUE);
+                redirect('profil/index/' . lang('UPDATING_PROFILE_COLUMNS_RIGHTS_FAILED') . '/' . TRUE);
+            }
+        }
+    }
+    /**
+     * Update profile rights on unloading table's columns
+     */
+    public function update_operations_rights()
+    {
+        //checks session
+        if ($this->connected())
+        {
+            $id_profil = $this->input->post('id_profil');
+
+            // get authorized columns (checked)
+            $authorized_operations = $this->input->post('authorized_operations');
+
+            // get restrictions
+            $profile_rights = self::$OPERATIONS_RIGHTS;
+
+            // set to true authorized columns
+            foreach ($authorized_operations as $au)
+            {
+                $profile_rights[$au] = TRUE;
+            }
+
+            $data['droits_operations'] = json_encode($profile_rights);
+            $where = array(Profil_model::$PK => $id_profil);
+
+            // update
+            if ($this->profil_model->update($data, $where) !== FALSE)
+            {   
+                //update current user's session
+                $this->update_user_session();
+                redirect('profil/index/' . lang('UPDATING_PROFILE_OPERATIONS_RIGHTS_SUCCESS'));
+            } else
+            {
+                redirect('profil/index/' . lang('UPDATING_PROFILE_OPERATIONS_RIGHTS_FAILED') . '/' . TRUE);
             }
         }
     }
