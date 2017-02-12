@@ -58,7 +58,10 @@ class Dechargement extends Common_Controller
         {
             foreach ($data['unloadings'] as &$unloading)
             {
-                $unloading['date'] = $this->mk_app_date($unloading['date']);
+                if(strpos($unloading['date'], '-') !== FALSE){
+                    $unloading['date'] = $this->dateToTime($unloading['date']);
+                }
+                $unloading['date'] = date("d/m/Y H:i", $unloading['date']);
             }
         }
 
@@ -107,7 +110,6 @@ class Dechargement extends Common_Controller
 
                 $data['title'] = lang('EDIT_UNLOADING');
                 $data['form_action'] = site_url('dechargement/update');
-                $data['date'] = $this->mk_app_date($data['date']);
             }
 
             $this->load->view('templates/form_header', $data);
@@ -158,6 +160,16 @@ class Dechargement extends Common_Controller
         $explode_date = explode('-', $date);
         return "{$explode_date[2]}/{$explode_date[1]}/{$explode_date[0]}";
     }
+    
+    /**
+     * Converts bd date format (YYYY-mm-dd) to time
+     * @param string $date
+     */
+    
+    private function dateToTime($date){
+        $explode_date = explode('-', $date);
+        return mktime(0, 0, 0, $explode_date[1], $explode_date[2], $explode_date[0]);
+    }
 
     /**
      * builds inputs value in an array
@@ -173,7 +185,6 @@ class Dechargement extends Common_Controller
         $id_ville = $this->input->post('id_ville');
         $id_produit = $this->input->post('id_produit');
 
-        $date = $this->mk_db_date($this->input->post('date'));
         $good_bag = trim($this->input->post('bon_sac'));
         $torn_bag = trim($this->input->post('sac_dechire'));
         $gross_weight = trim($this->input->post('poids_brut'));
@@ -185,7 +196,7 @@ class Dechargement extends Common_Controller
         //$refracted_weight = $this->compute_refracted($good_bag, $torn_bag, $net_weight);
 
         $data = array('id_camion' => $id_camion, 'id_magasin' => $id_magasin, 'id_ville' => $id_ville, 'id_fournisseur' => $id_fournisseur, 'id_produit' => $id_produit,
-            'date' => $date, 'bon_sac' => $good_bag, 'sac_dechire' => $torn_bag, 'sac_total' => $total_bag,
+            'bon_sac' => $good_bag, 'sac_dechire' => $torn_bag, 'sac_total' => $total_bag,
             'poids_brut' => $gross_weight, 'poids_net' => $net_weight, 'poids_refracte' => $refracted_weight, 'humidite' => $humidity);
         
         $data['prix'] = intval(trim($this->input->post('prix')));
@@ -218,6 +229,7 @@ class Dechargement extends Common_Controller
         {
             //get inputs
             $data = $this->get_inputs();
+            $data['date'] = time();
 
             // save unloading
             if ($this->dechargement_model->save($data) !== FALSE)

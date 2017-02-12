@@ -97,13 +97,6 @@ if (!empty($_SESSION['user']['authorized_columns']))
         </div>
     <?php endif ?>
 
-    <?php if (isset($authorized_columns['date']) && $authorized_columns['date']) : ?>
-        <div class="form-group">
-            <label for="date"><?php echo lang('DATE'); ?>*:</label>
-            <input type="text" name="date" value="<?php echo !isset($date) ? '' : $date; ?>" class="form-control" id="datetimepicker" required placeholder="<?php echo lang('DATE_FORMAT'); ?>"/>
-        </div>
-    <?php endif ?>
-
     <?php if (isset($authorized_columns['bon_sac']) && $authorized_columns['bon_sac']) : ?>
         <div class="form-group">
             <label for="bon_sac"><?php echo lang('GOOD_BAGS'); ?>:</label>
