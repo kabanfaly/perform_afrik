@@ -58,10 +58,7 @@ class Dechargement extends Common_Controller
         {
             foreach ($data['unloadings'] as &$unloading)
             {
-                if(strpos($unloading['date'], '-') !== FALSE){
-                    $unloading['date'] = $this->dateToTime($unloading['date']);
-                }
-                $unloading['date'] = date("d/m/Y H:i", $unloading['date']);
+                $unloading['date'] =  $unloading['date'] = $this->mk_app_date($unloading['date']);
             }
         }
 
@@ -141,36 +138,24 @@ class Dechargement extends Common_Controller
      * Converts application date format (dd/mm/YYYY) to db date format (YYYY-mm-dd)
      * @param string $date
      */
-    private function mk_db_date($date)
+    private function mk_db_date($time)
     {
 
-        //application date format is dd/mm/YYYY
-
-        $explode_date = explode('/', $date);
-        return "{$explode_date[2]}-{$explode_date[1]}-{$explode_date[0]}";
+        return date("Y-m-d H:i:s", $time);
     }
 
     /**
-     * Converts bd date format (YYYY-mm-dd) to application date format (dd/mm/YYYY)
+     * Converts bd date format (YYYY-mm-dd HH:i:s) to application date format (dd/mm/YYYY)
      * @param string $date
      */
     private function mk_app_date($date)
     {
-
-        $explode_date = explode('-', $date);
-        return "{$explode_date[2]}/{$explode_date[1]}/{$explode_date[0]}";
+        $explode_ts = explode(' ', $date);
+        $explode_date = explode('-', $explode_ts[0]);
+        
+        return "{$explode_date[2]}/{$explode_date[1]}/{$explode_date[0]} {$explode_ts[1]}";
     }
     
-    /**
-     * Converts bd date format (YYYY-mm-dd) to time
-     * @param string $date
-     */
-    
-    private function dateToTime($date){
-        $explode_date = explode('-', $date);
-        return mktime(0, 0, 0, $explode_date[1], $explode_date[2], $explode_date[0]);
-    }
-
     /**
      * builds inputs value in an array
      * @return array
@@ -229,7 +214,7 @@ class Dechargement extends Common_Controller
         {
             //get inputs
             $data = $this->get_inputs();
-            $data['date'] = time();
+            $data['date'] = $this->mk_db_date(time());
 
             // save unloading
             if ($this->dechargement_model->save($data) !== FALSE)
