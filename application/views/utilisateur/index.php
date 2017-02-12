@@ -8,7 +8,7 @@
             <th><?php echo lang('PROFILE'); ?></th>
             <th><?php echo lang('SHOP'); ?></th>
             <th><?php echo lang('ACTIVATE'); ?></th>
-            <th class="option"><?php echo lang('OPTIONS'); ?></th>
+            <th class="option"><?php echo lang('OPERATIONS'); ?></th>
         </tr>
     </thead>
     <tbody>

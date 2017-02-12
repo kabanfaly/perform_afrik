@@ -115,15 +115,25 @@
                             <div class="col-lg-12">
                                 <div class="content clearfix">
 
-
-
                                     <!-- hide add button if configuration page --> 
                                     <?php if (!isset($configuration)) : ?>
-                                        <div class="pull-right">
-                                            <a href="#" onclick="loadForm('<?php echo $form_link; ?>')" data-toggle="modal" data-target="#form-content" class="btn btn-primary btn-large"><?php echo lang('ADD'); ?></a>
-                                        </div>
-                                        <div class="clearfix">
-                                        </div>
+                                    
+                                        <?php
+                                        $authorized_operations = array();
+
+                                        if (!empty($_SESSION['user']['authorized_operations']))
+                                        {
+                                            $authorized_operations = json_decode($_SESSION['user']['authorized_operations'], true);
+                                        }
+
+                                        ?>
+                                        <?php if (isset($authorized_operations['delete']) && $authorized_operations['delete']) : ?>
+                                            <div class="pull-right">
+                                                <a href="#" onclick="loadForm('<?php echo $form_link; ?>')" data-toggle="modal" data-target="#form-content" class="btn btn-primary btn-large"><?php echo lang('ADD'); ?></a>
+                                            </div>
+                                            <div class="clearfix">
+                                            </div>
+                                        <?php endif ?>
                                     <?php endif; ?>
 
                                     <div class="msg <?php echo isset($error) && !$error ? 'success' : 'alert-danger fade in'; ?>">

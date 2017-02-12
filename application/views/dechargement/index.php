@@ -1,9 +1,14 @@
 <?php
 $authorized_columns = array();
-
 if (!empty($_SESSION['user']['authorized_columns']))
 {
     $authorized_columns = json_decode($_SESSION['user']['authorized_columns'], true);
+}
+
+$authorized_operations = array();
+if (!empty($_SESSION['user']['authorized_operations']))
+{
+    $authorized_operations = json_decode($_SESSION['user']['authorized_operations'], true);
 }
 ?>
 <table id="tableContent" class="table table-striped table-bordered table-hover">
@@ -74,7 +79,9 @@ if (!empty($_SESSION['user']['authorized_columns']))
                 <th><?php echo lang('TOTAL'); ?></th>
             <?php endif ?>
 
-            <th class="option"><?php echo lang('OPTIONS'); ?></th>
+            <?php if ((isset($authorized_operations['edit']) && $authorized_operations['edit']) || (isset($authorized_operations['delete']) && $authorized_operations['delete'])) : ?>
+                <th class="option"><?php echo lang('OPERATIONS'); ?></th>
+            <?php endif ?>
         </tr>
     </thead>
     <tbody>
@@ -144,18 +151,24 @@ if (!empty($_SESSION['user']['authorized_columns']))
                 <?php if (isset($authorized_columns['total']) && $authorized_columns['total']) : ?>
                     <td><?php echo $unloading['total']; ?></td>
                 <?php endif ?>
-
-                <td align="center">
-                    <a href="#" title="<?php echo lang('EDIT');  ?>" onclick="loadForm('<?php echo $form_link . '/' . $unloading['id_dechargement']; ?>')" data-toggle="modal" data-target="#form-content">
-                        <span class="fa fa-fw fa-pencil"></span>
-                    </a>
-                    <a href="#" title="<?php echo lang('REMOVE');  ?>" onclick="if (confirmDeletion()) {
-                                    doAjax('<?php echo site_url('dechargement/delete/' . $unloading['id_dechargement']); ?>', 'body');
-                                }
-                                ;">
-                        <span class="fa fa-fw fa-remove"></span> 
-                    </a>
-                </td>
+                
+                <?php if ((isset($authorized_operations['edit']) && $authorized_operations['edit']) || (isset($authorized_operations['delete']) && $authorized_operations['delete'])) : ?>
+                    <td align="center">
+                        <?php if (isset($authorized_operations['edit']) && $authorized_operations['edit']) : ?>
+                            <a href="#" title="<?php echo lang('EDIT');  ?>" onclick="loadForm('<?php echo $form_link . '/' . $unloading['id_dechargement']; ?>')" data-toggle="modal" data-target="#form-content">
+                                <span class="fa fa-fw fa-pencil"></span>
+                            </a>
+                        <?php endif ?>
+                        <?php if (isset($authorized_operations['delete']) && $authorized_operations['delete']) : ?>
+                            <a href="#" title="<?php echo lang('REMOVE');  ?>" onclick="if (confirmDeletion()) {
+                                            doAjax('<?php echo site_url('dechargement/delete/' . $unloading['id_dechargement']); ?>', 'body');
+                                        }
+                                        ;">
+                                <span class="fa fa-fw fa-remove"></span> 
+                            </a>
+                        <?php endif ?>
+                    </td>
+                <?php endif ?>
             </tr>
         <?php endforeach; ?>
     </tbody>

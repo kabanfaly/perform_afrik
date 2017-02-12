@@ -200,7 +200,7 @@ $lang['SAVING_UNLOADING_SUCCESS'] = 'La déchargement a été enrégistré avec 
 $lang['UPDATING_UNLOADING_SUCCESS'] = 'Le déchargement a été modifié avec succès.';
 $lang['UNLOADING_DELETION_SUCCESS'] = 'Le déchargement a été supprimé avec succès';
 
-$lang['OPTIONS'] = 'Options';
+$lang['OPERATIONS'] = 'Opérations';
 $lang['NO'] = 'N°';
 $lang['NUMBER'] = 'Numéro';
 $lang['PHONE'] = 'Téléphone';

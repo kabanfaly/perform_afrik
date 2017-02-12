@@ -5,7 +5,7 @@
             <th><?php echo lang('PROFILE'); ?></th>
             <th><?php echo lang('VISIBILITY_RIGHT'); ?></th>
             <th><?php echo lang('OPERATIONS_RIGHTS'); ?></th>
-            <th class="option"><?php echo lang('OPTIONS'); ?></th>
+            <th class="option"><?php echo lang('OPERATIONS'); ?></th>
         </tr>
     </thead>
     <tbody>

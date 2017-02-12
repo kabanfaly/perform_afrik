@@ -65,7 +65,7 @@ class Utilisateur_model extends CI_Model
     private function get_user($login, $password = FALSE)
     {
 
-        $this->db->select('u.*, p.nom as profil, droits_colonnes_dechargement as authorized_columns, m.id_magasin, m.nom as magasin');
+        $this->db->select('u.*, p.nom as profil, droits_colonnes_dechargement as authorized_columns, droits_operations as authorized_operations, m.id_magasin, m.nom as magasin');
         $this->db->join('pa_profil p', 'u.id_profil = p.id_profil', 'INNER');
         $this->db->join('pa_utilisateur_magasin um', 'u.id_utilisateur = um.id_utilisateur', 'LEFT');
         $this->db->join('pa_magasin m', 'um.id_magasin = m.id_magasin', 'LEFT');
