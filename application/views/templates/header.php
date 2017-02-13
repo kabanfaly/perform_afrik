@@ -54,32 +54,39 @@
                     <div class="collapse navbar-collapse navbar-ex1-collapse">
 
                         <ul class="nav navbar-nav side-nav">
-
+                            <?php $user_profil = strtolower($_SESSION['user']['profil']); ?>
                             <li class="<?php echo $active == 'dechargement' ? 'active' : '' ?>">
-                                <a href="<?php echo site_url("dechargement"); ?>"><i class="fa fa-fw fa-download"></i>&nbsp;<?php echo lang('UNLOADINGS'); ?></a>
+                                <?php
+                                 $unloading_title = strpos($user_profil, 'compta') === 0 ? lang('SELLING') : lang('UNLOADINGS');
+                                ?>
+                                <a href="<?php echo site_url("dechargement"); ?>"><i class="fa fa-fw fa-download"></i>&nbsp;
+                                    <?php echo $unloading_title; ?></a>
                             </li>
-                            <li  class="<?php echo $active == 'produit' ? 'active' : '' ?>">
-                                <a href="<?php echo site_url("produit"); ?>"><i class="fa fa-fw fa-square"></i>&nbsp;<?php echo lang('PRODUCTS'); ?></a>
-                            </li>
-                            <li  class="<?php echo $active == 'camion' ? 'active' : '' ?>">
-                                <a href="<?php echo site_url("camion"); ?>"><i class="fa fa-fw fa-truck"></i>&nbsp;<?php echo lang('TRUCKS'); ?></a>
-                            </li>
-                            <li class="<?php echo $active == 'fournisseur' ? 'active' : '' ?>">
-                                <a href="<?php echo site_url("fournisseur"); ?>"><i class="fa fa-fw fa-car"></i>&nbsp;<?php echo lang('SUPPLIERS'); ?></a>
-                            </li>
-                            <li class="<?php echo $active == 'ville' ? 'active' : '' ?>">
-                                <a href="<?php echo site_url("ville"); ?>"><i class="fa fa-fw fa-building"></i>&nbsp;<?php echo lang('CITIES'); ?></a>
-                            </li>
-                            <li class="<?php echo $active == 'client' ? 'active' : '' ?>">
-                                <a href="<?php echo site_url("client"); ?>"><i class="fa fa-fw fa-circle"></i>&nbsp;<?php echo lang('CUSTOMERS'); ?></a>
-                            </li>
-                            <li class="<?php echo $active == 'transitaire' ? 'active' : '' ?>">
-                                <a href="<?php echo site_url("transitaire"); ?>"><i class="fa fa-fw fa-circle"></i>&nbsp;<?php echo lang('FORWARDING_AGENTS'); ?></a>
-                            </li>
-                            <li class="<?php echo $active == 'transporteur' ? 'active' : '' ?>">
-                                <a href="<?php echo site_url("transporteur"); ?>"><i class="fa fa-fw fa-circle"></i>&nbsp;<?php echo lang('CARRIERS'); ?></a>
-                            </li>
-                            <?php if (strtolower($_SESSION['user']['profil']) === 'manager') : ?>
+                            
+                             <?php if ((strpos($user_profil, 'compta') !== 0) && (strpos($user_profil, 'transit') !== 0)) : ?>                            
+                                <li  class="<?php echo $active == 'produit' ? 'active' : '' ?>">
+                                    <a href="<?php echo site_url("produit"); ?>"><i class="fa fa-fw fa-square"></i>&nbsp;<?php echo lang('PRODUCTS'); ?></a>
+                                </li>
+                                <li  class="<?php echo $active == 'camion' ? 'active' : '' ?>">
+                                    <a href="<?php echo site_url("camion"); ?>"><i class="fa fa-fw fa-truck"></i>&nbsp;<?php echo lang('TRUCKS'); ?></a>
+                                </li>
+                                <li class="<?php echo $active == 'fournisseur' ? 'active' : '' ?>">
+                                    <a href="<?php echo site_url("fournisseur"); ?>"><i class="fa fa-fw fa-car"></i>&nbsp;<?php echo lang('SUPPLIERS'); ?></a>
+                                </li>
+                                <li class="<?php echo $active == 'ville' ? 'active' : '' ?>">
+                                    <a href="<?php echo site_url("ville"); ?>"><i class="fa fa-fw fa-building"></i>&nbsp;<?php echo lang('CITIES'); ?></a>
+                                </li>
+                                <li class="<?php echo $active == 'client' ? 'active' : '' ?>">
+                                    <a href="<?php echo site_url("client"); ?>"><i class="fa fa-fw fa-circle"></i>&nbsp;<?php echo lang('CUSTOMERS'); ?></a>
+                                </li>
+                                <li class="<?php echo $active == 'transitaire' ? 'active' : '' ?>">
+                                    <a href="<?php echo site_url("transitaire"); ?>"><i class="fa fa-fw fa-circle"></i>&nbsp;<?php echo lang('FORWARDING_AGENTS'); ?></a>
+                                </li>
+                                <li class="<?php echo $active == 'transporteur' ? 'active' : '' ?>">
+                                    <a href="<?php echo site_url("transporteur"); ?>"><i class="fa fa-fw fa-circle"></i>&nbsp;<?php echo lang('CARRIERS'); ?></a>
+                                </li>
+                             <?php endif; ?>
+                            <?php if ($user_profil === 'manager') : ?>
                                 <li class="<?php echo $active == 'magasin' ? 'active' : '' ?>">
                                     <a href="<?php echo site_url("magasin"); ?>"><i class="fa fa-fw fa-home"></i>&nbsp;<?php echo lang('SHOPS'); ?></a>
                                 </li>

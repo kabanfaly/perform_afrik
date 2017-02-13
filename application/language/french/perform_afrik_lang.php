@@ -257,4 +257,5 @@ $lang['REMOVE'] = 'Supprimer';
 $lang['EDIT'] = 'Modifier';
 $lang['EDIT_COLUMNS_RIGHTS'] = 'Modifier les permissions d\'accès aux colonnes';
 $lang['EDIT_OPERATIONS_RIGHTS'] = 'Modifier les permissions d\'opérations';
+$lang['SELLING'] = 'Ventes';
 
