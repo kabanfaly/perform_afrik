@@ -57,7 +57,7 @@
                             <?php $user_profil = strtolower($_SESSION['user']['profil']); ?>
                             <li class="<?php echo $active == 'dechargement' ? 'active' : '' ?>">
                                 <?php
-                                 $unloading_title = strpos($user_profil, 'compta') === 0 ? lang('SELLING') : lang('UNLOADINGS');
+                                 $unloading_title = strpos($user_profil, 'compta') === 0 ? lang('BUYING') : lang('UNLOADINGS');
                                 ?>
                                 <a href="<?php echo site_url("dechargement"); ?>"><i class="fa fa-fw fa-download"></i>&nbsp;
                                     <?php echo $unloading_title; ?></a>
