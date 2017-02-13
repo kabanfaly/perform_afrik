@@ -236,7 +236,7 @@ div.dataTables_info {
 }
 .btn-primary:hover,
 .btn-primary:focus {
-    background-image: linear-gradient(to bottom, #ea81100px, #ea8110 100%);
+    background-image: linear-gradient(to bottom, #ea8110 100px, #ea8110 100%);
     background-color: #ea8110!important;
     border-color: #ea8110!important;
 }
@@ -264,6 +264,11 @@ div.dataTables_info {
 
 .fa-fw {
     color: #ea8110 !important;
+}
+
+.myaccount-collapsable-header {
+    background-color: #0076bb;
+    margin-bottom: 10px;
 }
 /* -------------- overriding dataTable  -------------- */ 
 
