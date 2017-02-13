@@ -170,3 +170,124 @@ div.dataTables_info {
     height:120px; 
     overflow-y:scroll;
 }    
+
+/*------------------- overriding Bootstrap ---------------- */ 
+
+.navbar-inverse {
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#0076bb),to(#0076bb));
+}
+.navbar-header, .dropdown-toggle, .navbar .navbar-collapse, .navbar .side-nav, .top-nav> .open> .dropdown-menu {
+    background-color: #0076bb;
+    border-color: #0076bb;
+}
+.navbar-inverse .navbar-toggle:hover,.navbar-inverse .navbar-toggle:focus{
+    border-color: #ff8500;
+    background-color: #ff8500;
+}
+
+.top-nav > li > a:hover,
+.top-nav > li > a:focus, 
+.navbar-right > li > a:hover,
+.navbar-right > li > a:focus, 
+.top-nav > .open > a, 
+.top-nav > .open > a:hover, 
+.top-nav > .open > a:focus,
+
+.top-nav > .open > .dropdown-menu,
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus,
+.navbar-inverse .side-nav > li > a:hover,
+.navbar-inverse .side-nav > li > a:focus {
+    color: #0076bb !important;
+    background-color: #fff !important;
+}
+
+.dropdown > a:hover,
+.dropdown > a:focus {
+    border-bottom-color: #fff;
+}
+
+.top-nav> .open> .dropdown-menu{
+    border-top-color: #fff;
+}
+
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus{
+    color: #fff !important;
+    background-color: #0076bb !important;
+    background-image: linear-gradient(to bottom, #0076bb 0px, #0076bb 100%);
+}
+.navbar-inverse .navbar-nav > li > a ,
+.navbar-inverse .navbar-right > li > a {
+    color: #fff;
+    text-shadow: none;
+}
+
+.navbar-inverse .navbar-nav > .active > a, 
+.navbar-inverse .navbar-nav > .open > a {
+    background-image: linear-gradient(to bottom, #fff 0px, #fff 100%);
+    color: #0076bb;
+}
+.btn-primary {
+    background-image: linear-gradient(to bottom, #ff8500 0px, #ff8500 100%);
+    border-color: #ff8500; 
+    color: #fff;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+    background-image: linear-gradient(to bottom, #ea81100px, #ea8110 100%);
+    background-color: #ea8110!important;
+    border-color: #ea8110!important;
+}
+.btn-primary:active,
+.btn-primary.active {
+    background-color: #ff8500;
+    border-color: #ff8500;
+}
+
+.modal-header {
+    color: #fff;
+    background-color: #0076bb;
+}
+
+.btn-default{
+    color: #0076bb;
+}
+@media (min-width: 768px) {
+    .navbar-nav > li > a,
+    .dropdown-menu > li > a {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+}
+
+.fa-fw {
+    color: #ea8110 !important;
+}
+/* -------------- overriding dataTable  -------------- */ 
+
+.pagination > .active > a, 
+.pagination > .active > a:focus, 
+.pagination > .active > a:hover,
+.pagination > .active > span, 
+.pagination > .active > span:focus,
+.pagination > .active > span:hover
+{
+
+    background-color: #ff8500;
+    border-color: #ff8500;
+}
+
+.pagination > li > a, .pagination > li > span {
+    color: #ff8500;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+#tableContent .odd {
+    /*background-color: #fff !important;*/
+}
+
+.filter-title{
+    font-weight: bold;
+}
