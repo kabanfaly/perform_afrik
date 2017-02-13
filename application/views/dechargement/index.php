@@ -159,7 +159,7 @@ if (!empty($_SESSION['user']['authorized_operations']))
                         || (isset($authorized_operations['transfert']) && $authorized_operations['transfert']))) : ?>
                     <td align="center">
                         <?php if (isset($authorized_operations['transfert']) && $authorized_operations['transfert']) : ?>
-                            <a href="#" title="<?php echo lang('TRANSFERT');  ?>" onclick="loadForm('<?php echo $form_link . '/' . $unloading['id_dechargement']; ?>')" data-toggle="modal" data-target="#form-content">
+                            <a href="#" title="<?php echo lang('TRANSFERT');  ?>" onclick="loadForm('<?php echo $transfert_link . '/' . $unloading['id_dechargement']; ?>')" data-toggle="modal" data-target="#form-content">
                                 <span class="fa fa-fw fa-mail-forward"></span>
                             </a>
                         <?php endif ?>

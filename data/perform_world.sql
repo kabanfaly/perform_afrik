@@ -247,7 +247,7 @@ CREATE TABLE `pa_profil` (
 --
 
 INSERT INTO `pa_profil` (`id_profil`, `nom`, `droits_colonnes_dechargement`, `droits_operations`) VALUES
-(1, 'Manager', '{"id_camion":true,"id_magasin":true,"id_ville":true,"id_fournisseur":true,"id_produit":true,"date":true,"bon_sac":true,"sac_dechire":true,"sac_total":true,"poids_brut":true,"poids_net":true,"poids_refracte":true,"humidite":true,"qualite":true,"prix":true,"total":true}', '{"add":true,"edit":true,"delete":true}'),
+(1, 'Manager', '{"id_camion":true,"id_magasin":true,"id_ville":true,"id_fournisseur":true,"id_produit":true,"date":true,"bon_sac":true,"sac_dechire":true,"sac_total":true,"poids_brut":true,"poids_net":true,"poids_refracte":true,"humidite":true,"qualite":true,"prix":true,"total":true}', '{"add":true,"edit":true,"delete":true,"transfert":true}'),
 (2, 'Comptabilité', '{"id_camion":true,"id_ville":true,"id_fournisseur":true,"date":true,"bon_sac":true,"sac_dechire":true,"sac_total":true,"poids_brut":true,"poids_net":true,"poids_refracte":true,"humidite":false,"qualite":false,"prix":true,"total":true}', '{"add":false,"edit":false,"delete":false}'),
 (3, 'Transit', '{"id_camion":true,"id_ville":false,"id_fournisseur":false,"date":false,"bon_sac":true,"sac_dechire":true,"sac_total":true,"poids_brut":true,"poids_net":true,"poids_refracte":true,"humidite":false,"qualite":false,"prix":false,"total":false}', ''),
 (4, 'Magasin', '{"id_camion":true,"id_magasin":false,"id_ville":true,"id_fournisseur":true,"id_produit":false,"date":true,"bon_sac":true,"sac_dechire":true,"sac_total":true,"poids_brut":true,"poids_net":true,"poids_refracte":true,"humidite":true,"qualite":true,"prix":false,"total":false}', '{"add":true,"edit":true,"delete":false}');

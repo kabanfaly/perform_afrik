@@ -99,63 +99,63 @@ if (!empty($_SESSION['user']['authorized_columns']))
 
     <?php if (isset($authorized_columns['bon_sac']) && $authorized_columns['bon_sac']) : ?>
         <div class="form-group">
-            <label for="bon_sac"><?php echo lang('GOOD_BAGS'); ?>:</label>
+            <label for="bon_sac"><?php echo lang('GOOD_BAGS'); if(isset($current_bon_sac)) echo " ($current_bon_sac)"; ?>:</label>
             <input type="text" name="bon_sac" value="<?php echo !isset($bon_sac) ? '' : $bon_sac; ?>" class="form-control" id="bon_sac" placeholder="<?php echo lang('TYPE_GOOD_BAGS'); ?>"/>
         </div>
     <?php endif ?>
 
     <?php if (isset($authorized_columns['sac_dechire']) && $authorized_columns['sac_dechire']) : ?>
         <div class="form-group">
-            <label for="sac_dechire"><?php echo lang('TORN_BAGS'); ?>:</label>
+            <label for="sac_dechire"><?php echo lang('TORN_BAGS'); if(isset($current_sac_dechire)) echo " ($current_sac_dechire)"; ?>:</label>
             <input type="text" name="sac_dechire" value="<?php echo !isset($sac_dechire) ? '' : $sac_dechire; ?>" class="form-control" id="sac_dechire" placeholder="<?php echo lang('TYPE_TORN_BAGS'); ?>"/>
         </div>
     <?php endif ?>
 
     <?php if (isset($authorized_columns['poids_brut']) && $authorized_columns['poids_brut']) : ?>
         <div class="form-group">
-            <label for="poids_brut"><?php echo lang('GROSS_WEIGHT'); ?>:</label>
+            <label for="poids_brut"><?php echo lang('GROSS_WEIGHT'); if(isset($current_poids_brut)) echo " ($current_poids_brut)"; ?>:</label>
             <input type="text" name="poids_brut" value="<?php echo !isset($poids_brut) ? '' : $poids_brut; ?>" class="form-control" id="poids_brut" placeholder="<?php echo lang('TYPE_GROSS_WEIGHT'); ?>"/>
         </div>
     <?php endif ?>
 
     <?php if (isset($authorized_columns['poids_net']) && $authorized_columns['poids_net']) : ?>
         <div class="form-group">
-            <label for="poids_net"><?php echo lang('NET_WEIGHT'); ?>:</label>
+            <label for="poids_net"><?php echo lang('NET_WEIGHT'); if(isset($current_poids_net)) echo " ($current_poids_net)"; ?>:</label>
             <input type="text" name="poids_net" value="<?php echo !isset($poids_net) ? '' : $poids_net; ?>" class="form-control" id="poids_net" placeholder="<?php echo lang('TYPE_NET_WEIGHT'); ?>"/>
         </div>
     <?php endif ?>
 
     <?php if (isset($authorized_columns['poids_refracte']) && $authorized_columns['poids_refracte']) : ?>
         <div class="form-group">
-            <label for="poids_refracte"><?php echo lang('REFRACTED_WEIGHT_LABEL'); ?>:</label>
+            <label for="poids_refracte"><?php echo lang('REFRACTED_WEIGHT_LABEL'); if(isset($current_poids_refracte)) echo " ($current_poids_refracte)"; ?>:</label>
             <input type="text" name="poids_refracte" value="<?php echo !isset($poids_refracte) ? 0 : $poids_refracte; ?>" class="form-control" id="poids_refracte" placeholder="0"/>
         </div>
     <?php endif ?>
 
     <?php if (isset($authorized_columns['humidite']) && $authorized_columns['humidite']) : ?>
         <div class="form-group">
-            <label for="humitide"><?php echo lang('HUMIDITY'); ?>:</label>
+            <label for="humitide"><?php echo lang('HUMIDITY'); if(isset($current_humidite)) echo " ($current_humidite)"; ?>:</label>
             <input type="text" name="humidite" value="<?php echo !isset($humidite) ? '' : $humidite; ?>" class="form-control" id="humidite" placeholder="<?php echo lang('TYPE_HUMIDITY'); ?>"/>
         </div>
     <?php endif ?>
 
     <?php if (isset($authorized_columns['qualite']) && $authorized_columns['qualite']) : ?>
         <div class="form-group">
-            <label for="qualite"><?php echo lang('QUALITY'); ?>:</label>
+            <label for="qualite"><?php echo lang('QUALITY'); if(isset($current_qualite)) echo " ($current_qualite)"; ?>:</label>
             <input type="text" name="qualite" value="<?php echo !isset($qualite) ? 0 : $qualite; ?>" class="form-control" id="qualite" placeholder="<?php echo lang('TYPE_QUALITY'); ?>"/>
         </div>
     <?php endif ?>
 
     <?php if (isset($authorized_columns['prix']) && $authorized_columns['prix']) : ?>
         <div class="form-group">
-            <label for="prix"><?php echo lang('PRICE'); ?>:</label>
+            <label for="prix"><?php echo lang('PRICE'); if(isset($current_prix)) echo " ($current_prix)"; ?>:</label>
             <input type="text" name="prix" value="<?php echo !isset($prix) ? 0 : $prix; ?>" class="form-control" id="prix" placeholder="<?php echo lang('TYPE_PRICE'); ?>"/>
         </div>
     <?php endif ?>
 
     <?php if (isset($authorized_columns['total']) && $authorized_columns['total']) : ?>
         <div class="form-group">
-            <label for="total"><?php echo lang('TOTAL'); ?>:</label>
+            <label for="total"><?php echo lang('TOTAL_LABEL'); if(isset($current_total)) echo " ($current_total)"; ?>:</label>
             <input type="text" name="total" value="<?php echo !isset($total) ? 0 : $total; ?>" class="form-control" id="total" placeholder="<?php echo lang('TYPE_TOTAL'); ?>"/>
         </div>
     <?php endif ?>

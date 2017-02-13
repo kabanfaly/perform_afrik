@@ -51,7 +51,8 @@ class Dechargement extends Common_Controller
             'msg' => $msg,
             'error' => $error,
             'active' => 'dechargement',
-            'form_link' => site_url('dechargement/edit')
+            'form_link' => site_url('dechargement/edit'),
+            'transfert_link' => site_url('dechargement/transfert_form')
         );
     
         if ($data['unloadings'] !== NULL)
@@ -65,10 +66,7 @@ class Dechargement extends Common_Controller
         $this->display($data, 'dechargement/index');
     }
     /**
-     * get dechargement (unloading)
-     * 
-     * @param String $msg message to display
-     * @param boolean $error if $msg is an error message
+     * group and sum dechargement (unloading)
      */
     public function buying()
     {
@@ -137,6 +135,106 @@ class Dechargement extends Common_Controller
             $this->load->view('templates/form_header', $data);
             $this->load->view('dechargement/form', $data);
             $this->load->view('templates/form_footer', $data);
+        }
+    }
+    
+    /**
+     * Display transfert form
+     * @param type $id_dechargement
+     */
+    public function transfert_form($id_dechargement){
+         $data = array(
+            'title' => lang('TRANSFERT_UNLOADING'),
+            'form_action' => site_url('dechargement/transfert'),
+            'form_name' => 'transfert',
+            'shops' => $this->magasin_model->get_magasins(),
+            'trucks' => $this->camion_model->get_camions(),
+            'suppliers' => $this->fournisseur_model->get_fournisseurs(),
+            'products' => $this->produit_model->get_produits(),
+            'cities' => $this->ville_model->get_villes(),
+            'transfert' => true,
+            'id_dechargement' => $id_dechargement
+        );
+         //checks admin session
+        if (!$this->connected())
+        {
+            $data = array(
+                'title' => lang('CONNECTION')
+            );
+            $this->load->view('templates/header', $data);
+            $this->load->view('connexion/index', $data);
+            $this->load->view('templates/footer');
+        } else
+        {
+            //get unloading by id
+            $unloading = $this->dechargement_model->get_dechargements($id_dechargement);
+            $data['id_produit'] = $unloading['id_produit'];
+            $data['current_bon_sac'] = $unloading['bon_sac'];
+            $data['current_sac_dechire'] = $unloading['sac_dechire'];
+            $data['current_sac_total'] = $unloading['sac_total'];
+            $data['current_poids_brut'] = $unloading['poids_brut'];
+            $data['current_poids_net'] = $unloading['poids_net'];
+            $data['current_poids_refracte'] = $unloading['poids_refracte'];
+            $data['current_humidite'] = $unloading['humidite'];
+            $data['current_qualite'] = $unloading['qualite'];
+            $data['current_prix'] = $unloading['prix'];
+            $data['current_total'] = $unloading['total'];
+            
+            $this->load->view('templates/form_header', $data);
+            $this->load->view('dechargement/form', $data);
+            $this->load->view('templates/form_footer', $data);
+        }
+    }
+    /**
+     * apply transfert operation
+     */
+    public function transfert()
+    {
+        //checks session
+        if ($this->connected())
+        {
+            //get inputs
+            $data = $this->get_inputs();
+            $data['date'] = $this->mk_db_date(time());
+
+            $id_dechargement = $this->input->post('id_dechargement');
+            
+            //get unloading by id
+            $unloading = $this->dechargement_model->get_dechargements($id_dechargement);
+            
+            
+            $unloading['bon_sac'] -= $data['bon_sac'];
+            $unloading['sac_dechire'] -= $data['sac_dechire'];
+            $unloading['sac_total'] -= $data['sac_total'];
+            $unloading['poids_brut'] -= $data['poids_brut'];
+            $unloading['poids_net'] -= $data['poids_net'];
+            $unloading['poids_refracte'] -= $data['poids_refracte'];
+            $unloading['total'] -= $data['total'];
+            
+            // apply diff and update
+            $unloading_diff = array(
+                'bon_sac' => $unloading['bon_sac'],
+                'sac_dechire' => $unloading['sac_dechire'],
+                'sac_total' => $unloading['sac_total'],
+                'poids_brut' => $unloading['poids_brut'],
+                'poids_net' => $unloading['poids_net'],
+                'poids_refracte' => $unloading['poids_refracte'],
+                'total' => $unloading['total']
+            );
+            
+            $where = array(Dechargement_model::$PK => $id_dechargement);
+           
+            if ($this->dechargement_model->update($unloading_diff, $where) !== FALSE)
+            {
+                // save transfert as unloading
+                if ($this->dechargement_model->save($data) !== FALSE)
+                {
+                    redirect('dechargement/index/' . lang('SAVING_TRANSFERT_SUCCESS'));
+                } else
+                {
+                    redirect('dechargement/index/' . lang('SAVING_TRANSFERT_FAILED') . '/' . TRUE);
+                }
+            }
         }
     }
 
@@ -247,7 +345,7 @@ class Dechargement extends Common_Controller
                 redirect('dechargement/index/' . lang('SAVING_UNLOADING_SUCCESS'));
             } else
             {
-                redirect('dechargement/index/' . lang('SAVING_UNLOADING_FAILES') . '/' . TRUE);
+                redirect('dechargement/index/' . lang('SAVING_UNLOADING_FAILED') . '/' . TRUE);
             }
         }
     }
