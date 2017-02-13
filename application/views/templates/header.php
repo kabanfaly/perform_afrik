@@ -55,15 +55,16 @@
 
                         <ul class="nav navbar-nav side-nav">
                             <?php $user_profil = strtolower($_SESSION['user']['profil']); ?>
-                            <li class="<?php echo $active == 'dechargement' ? 'active' : '' ?>">
-                                <?php
-                                 $unloading_title = strpos($user_profil, 'compta') === 0 ? lang('BUYING') : lang('UNLOADINGS');
-                                ?>
-                                <a href="<?php echo site_url("dechargement"); ?>"><i class="fa fa-fw fa-download"></i>&nbsp;
-                                    <?php echo $unloading_title; ?></a>
-                            </li>
                             
-                             <?php if ((strpos($user_profil, 'compta') !== 0) && (strpos($user_profil, 'transit') !== 0)) : ?>                            
+                            <?php if ((strpos($user_profil, 'compta') === 0) || (strpos($user_profil, 'manager') === 0)) : ?>
+                                <li class="<?php echo $active == 'achat' ? 'active' : '' ?>">
+                                    <a href="<?php echo site_url("dechargement/buying"); ?>"><i class="fa fa-fw fa-download"></i>&nbsp;<?php echo lang('BUYING'); ?></a>
+                                </li>
+                            <?php endif ?>
+                             <?php if ((strpos($user_profil, 'compta') !== 0) && (strpos($user_profil, 'transit') !== 0)) : ?>
+                                <li class="<?php echo $active == 'dechargement' ? 'active' : '' ?>">
+                                    <a href="<?php echo site_url("dechargement"); ?>"><i class="fa fa-fw fa-download"></i>&nbsp;<?php echo lang('UNLOADINGS'); ?></a>
+                                </li>
                                 <li  class="<?php echo $active == 'produit' ? 'active' : '' ?>">
                                     <a href="<?php echo site_url("produit"); ?>"><i class="fa fa-fw fa-square"></i>&nbsp;<?php echo lang('PRODUCTS'); ?></a>
                                 </li>

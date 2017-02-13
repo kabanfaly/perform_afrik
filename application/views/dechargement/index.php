@@ -15,7 +15,7 @@ if (!empty($_SESSION['user']['authorized_operations']))
     <thead>
         <tr>
             <th class="number"><?php echo lang('NO'); ?></th>
-            <?php if (isset($authorized_columns['date']) && $authorized_columns['date']) : ?>
+            <?php if (!isset($configuration) && isset($authorized_columns['date']) && $authorized_columns['date']) : ?>
                 <th><?php echo lang('DATE'); ?></th>
             <?php endif ?>
                 
@@ -23,7 +23,7 @@ if (!empty($_SESSION['user']['authorized_operations']))
                 <th><?php echo lang('SHOP'); ?></th>
             <?php endif ?>
 
-            <?php if (isset($authorized_columns['id_fournisseur']) && $authorized_columns['id_fournisseur']) : ?>
+            <?php if (!isset($configuration) && isset($authorized_columns['id_fournisseur']) && $authorized_columns['id_fournisseur']) : ?>
                 <th><?php echo lang('SUPPLIER'); ?></th>
             <?php endif ?>
                 
@@ -31,11 +31,11 @@ if (!empty($_SESSION['user']['authorized_operations']))
                 <th><?php echo lang('PRODUCT'); ?></th>
             <?php endif ?>
 
-            <?php if (isset($authorized_columns['id_ville']) && $authorized_columns['id_ville']) : ?>
+            <?php if (!isset($configuration) && isset($authorized_columns['id_ville']) && $authorized_columns['id_ville']) : ?>
                 <th><?php echo lang('CITY_FROM'); ?></th>
             <?php endif ?>
 
-            <?php if (isset($authorized_columns['id_camion']) && $authorized_columns['id_camion']) : ?>
+            <?php if (!isset($configuration) && isset($authorized_columns['id_camion']) && $authorized_columns['id_camion']) : ?>
                 <th><?php echo lang('TRUCK'); ?></th>
             <?php endif ?>
 
@@ -79,7 +79,9 @@ if (!empty($_SESSION['user']['authorized_operations']))
                 <th><?php echo lang('TOTAL'); ?></th>
             <?php endif ?>
 
-            <?php if ((isset($authorized_operations['edit']) && $authorized_operations['edit']) || (isset($authorized_operations['delete']) && $authorized_operations['delete'])) : ?>
+            <?php if (!isset($configuration) && ((isset($authorized_operations['edit']) && $authorized_operations['edit']) 
+                    || (isset($authorized_operations['delete']) && $authorized_operations['delete'])
+                    || (isset($authorized_operations['transfert']) && $authorized_operations['transfert']))) : ?>
                 <th class="option"><?php echo lang('OPERATIONS'); ?></th>
             <?php endif ?>
         </tr>
@@ -89,14 +91,14 @@ if (!empty($_SESSION['user']['authorized_operations']))
         <?php foreach ($unloadings as $unloading): ?>
             <tr>
                 <td><?php echo $no++; ?></td>
-                <?php if (isset($authorized_columns['date']) && $authorized_columns['date']) : ?>
+                <?php if (!isset($configuration) && isset($authorized_columns['date']) && $authorized_columns['date']) : ?>
                     <td><?php echo $unloading['date']; ?></td>
                 <?php endif ?>
                 <?php if (isset($authorized_columns['id_magasin']) && $authorized_columns['id_magasin']) : ?>
                     <td><?php echo $unloading['magasin']; ?></td>
                 <?php endif ?>
 
-                <?php if (isset($authorized_columns['id_fournisseur']) && $authorized_columns['id_fournisseur']) : ?>
+                <?php if (!isset($configuration) && isset($authorized_columns['id_fournisseur']) && $authorized_columns['id_fournisseur']) : ?>
                     <td><?php echo $unloading['fournisseur']; ?></td>
                 <?php endif ?>
                     
@@ -104,11 +106,11 @@ if (!empty($_SESSION['user']['authorized_operations']))
                     <td><?php echo $unloading['produit']; ?></td>
                 <?php endif ?>
 
-                <?php if (isset($authorized_columns['id_ville']) && $authorized_columns['id_ville']) : ?>
+                <?php if (!isset($configuration) && isset($authorized_columns['id_ville']) && $authorized_columns['id_ville']) : ?>
                     <td><?php echo $unloading['ville']; ?></td>
                 <?php endif ?>
 
-                <?php if (isset($authorized_columns['id_camion']) && $authorized_columns['id_camion']) : ?>
+                <?php if (!isset($configuration) && isset($authorized_columns['id_camion']) && $authorized_columns['id_camion']) : ?>
                     <td><?php echo $unloading['camion']; ?></td>
                 <?php endif ?>
 
@@ -152,8 +154,15 @@ if (!empty($_SESSION['user']['authorized_operations']))
                     <td><?php echo $unloading['total']; ?></td>
                 <?php endif ?>
                 
-                <?php if ((isset($authorized_operations['edit']) && $authorized_operations['edit']) || (isset($authorized_operations['delete']) && $authorized_operations['delete'])) : ?>
+                <?php if (!isset($configuration) && ((isset($authorized_operations['edit']) && $authorized_operations['edit']) 
+                        || (isset($authorized_operations['delete']) && $authorized_operations['delete'])
+                        || (isset($authorized_operations['transfert']) && $authorized_operations['transfert']))) : ?>
                     <td align="center">
+                        <?php if (isset($authorized_operations['transfert']) && $authorized_operations['transfert']) : ?>
+                            <a href="#" title="<?php echo lang('TRANSFERT');  ?>" onclick="loadForm('<?php echo $form_link . '/' . $unloading['id_dechargement']; ?>')" data-toggle="modal" data-target="#form-content">
+                                <span class="fa fa-fw fa-mail-forward"></span>
+                            </a>
+                        <?php endif ?>
                         <?php if (isset($authorized_operations['edit']) && $authorized_operations['edit']) : ?>
                             <a href="#" title="<?php echo lang('EDIT');  ?>" onclick="loadForm('<?php echo $form_link . '/' . $unloading['id_dechargement']; ?>')" data-toggle="modal" data-target="#form-content">
                                 <span class="fa fa-fw fa-pencil"></span>

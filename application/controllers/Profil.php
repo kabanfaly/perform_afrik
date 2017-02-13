@@ -44,7 +44,8 @@ class Profil extends Common_Controller
     public static $OPERATIONS_RIGHTS = array(
       'add' => false,
       'edit' => false,
-      'delete' => false
+      'delete' => false,
+      'transfert' => false
     );
     public function __construct()
     {

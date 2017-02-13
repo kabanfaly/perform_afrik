@@ -64,6 +64,31 @@ class Dechargement extends Common_Controller
 
         $this->display($data, 'dechargement/index');
     }
+    /**
+     * get dechargement (unloading)
+     * 
+     * @param String $msg message to display
+     * @param boolean $error if $msg is an error message
+     */
+    public function buying()
+    {
+        // Get user shop id 
+        $id_magasin = false;
+         if ($this->connected())
+        {
+             
+             $id_magasin = empty($_SESSION['user']['id_magasin']) ? false: $_SESSION['user']['id_magasin'];
+        }
+                
+        $data = array(
+            'unloadings' => $this->dechargement_model->get_sum_dechargements($id_magasin),
+            'title' => lang('UNLOADING_MANAGEMENT'),
+            'active' => 'achat',
+            'configuration' => true
+        );
+
+        $this->display($data, 'dechargement/index');
+    }
 
     /**
      * Displays a form to add or edit an unloading
