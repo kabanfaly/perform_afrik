@@ -19,7 +19,7 @@
         </div>
         <div class="form-group">
             <label for="ADDRESS"><?php echo lang('ADDRESS'); ?>:</label>
-            <textarea name="ADDRESS" class="form-control" id="adresse" placeholder="<?php echo lang('TYPE_ADDRESS'); ?>"><?php echo isset($_SESSION['parameters']['FAX']) ? $_SESSION['parameters']['ADDRESS'] : ''; ?>
+            <textarea name="ADDRESS" class="form-control" id="adresse" placeholder="<?php echo lang('TYPE_ADDRESS'); ?>"><?php echo isset($_SESSION['parameters']['ADDRESS']) ? $_SESSION['parameters']['ADDRESS'] : ''; ?>
             </textarea>
         </div>
     </div>
