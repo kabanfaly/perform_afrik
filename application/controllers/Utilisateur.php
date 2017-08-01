@@ -250,7 +250,7 @@ class Utilisateur extends Common_Controller
 
             //check user password
             $utilisateur = $this->user->get_users($id_utilisateur);
-            if ($utilisateur['mot_de_passe'] === md5($data['mot_de_passe']))
+            if ($utilisateur['mot_de_passe'] === $data['mot_de_passe'])
             {
                 if (!$this->update_user_info($id_utilisateur, $data, lang('UPDATING_USER_LOGIN_OK')))
                 {
