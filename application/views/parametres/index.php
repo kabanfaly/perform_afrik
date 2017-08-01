@@ -15,7 +15,7 @@
         </div>
         <div class="form-group">
             <label for="EMAIL"><?php echo lang('EMAIL'); ?>:</label>
-            <input type="email" name="EMAIL" value="<?php echo isset($_SESSION['parameters']['FAX']) ? $_SESSION['parameters']['EMAIL'] : ''; ?>"class="form-control" id="telephone" placeholder="<?php echo lang('TYPE_EMAIL'); ?>">
+            <input type="email" name="EMAIL" value="<?php echo isset($_SESSION['parameters']['EMAIL']) ? $_SESSION['parameters']['EMAIL'] : ''; ?>"class="form-control" id="telephone" placeholder="<?php echo lang('TYPE_EMAIL'); ?>">
         </div>
         <div class="form-group">
             <label for="ADDRESS"><?php echo lang('ADDRESS'); ?>:</label>
