@@ -31,7 +31,7 @@
     </div>
     <div class="form-group">
         <label for="profil"><?php echo lang('PROFILES'); ?>*:</label>
-        <select type="text" name="id_profil" class="form-control" id="supplier" required >
+        <select type="text" name="id_profil" class="form-control" id="id_profil" required >
             <option value=""><?php echo lang('SELECT_PROFILE'); ?></option>
             <?php
             foreach ($profiles as $profile)
