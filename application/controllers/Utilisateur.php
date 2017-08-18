@@ -226,8 +226,8 @@ class Utilisateur extends Common_Controller
         //checks session
         if ($this->connected())
         {
-            $data['nom'] = ucfirst(strtolower(trim($this->input->post('nom'))));
-            $data['prenom'] = ucfirst(strtolower(trim($this->input->post('prenom'))));
+            $data['nom'] = trim($this->input->post('nom'));
+            $data['prenom'] = trim($this->input->post('prenom'));
 
             $id_utilisateur = $this->input->post('id_utilisateur');
 
@@ -337,8 +337,8 @@ class Utilisateur extends Common_Controller
     {
 
         // get input values
-        $data['nom'] = ucfirst(strtolower(trim($this->input->post('nom'))));
-        $data['prenom'] = ucfirst(strtolower(trim($this->input->post('prenom'))));
+        $data['nom'] = trim($this->input->post('nom'));
+        $data['prenom'] = trim($this->input->post('prenom'));
         $data['login'] = trim($this->input->post('login'));
         $pwd = $this->input->post('mot_de_passe');
         if (!empty($pwd))

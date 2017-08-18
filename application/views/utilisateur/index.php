@@ -17,8 +17,8 @@
         
         <tr style="<?php if ($user['statut'] == 0) { echo 'color: red' ; }?>">
                 <td><?php echo $no++;   ?></td>
-                <td><?php echo $user['nom']; ?></td>
                 <td><?php echo $user['prenom']; ?></td>
+                <td><?php echo $user['nom']; ?></td>
                 <td><?php echo $user['login']; ?></td>
                 <td><?php echo $user['profil']; ?></td>
                 <td><?php echo empty($user['magasin']) ?  lang('ALL_SHOPS'): $user['magasin']; ?></td>
